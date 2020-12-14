@@ -9,7 +9,7 @@ function createWindow() {
         }
     });
 
-    window.loadFile("app/index.html");
+    window.loadFile("app/home.html");
 }
 
 app.whenReady().then(createWindow);
