@@ -222,6 +222,17 @@
                                                         <input type="text" class="form-control"
                                                             placeholder="Vehicle Model" id="vehicle_model" readonly>
                                                     </div>
+                                                    <div class="col-md-4">
+                                                        <button class="btn btn-sm btn-info mt-1" id="vehicle_model_edit">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-success mt-1" id="vehicle_model_save" style="display: none;">
+                                                            <i class="fas fa-save"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-danger mt-1 ml-2" id="vehicle_model_cancel" style="display: none;">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <!-- End of Vehicle Model -->
 
@@ -254,6 +265,18 @@
                                                 </div>
                                                 <!-- End of Policy Number -->
 
+                                                <!-- Policy Start Date -->
+                                                <div class="form-group row">
+                                                    <div class="col-md-2 col-form-label">
+                                                        <label for="policy_start_date">Policy Start Date</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="date" class="form-control" placeholder="dd/mm/yyyy"
+                                                            id="policy_start_date">
+                                                    </div>
+                                                </div>
+                                                <!-- End of Policy Start Date -->
+
                                                 <!-- Policy End Date -->
                                                 <div class="form-group row">
                                                     <div class="col-md-2 col-form-label">
@@ -261,7 +284,7 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <input type="date" class="form-control" placeholder="dd/mm/yyyy"
-                                                            id="policy_end_date" readonly>
+                                                            id="policy_end_date">
                                                     </div>
                                                 </div>
                                                 <!-- End of Policy End Date -->
@@ -289,10 +312,14 @@
                                                         <label class="required-field" for="insurance_company">Insurance
                                                             Company</label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-3">
                                                         <select class="form-control" id="insurance_company" required>
                                                             <option value="select">Insurance Company</option>
+                                                            <option value="others">Others</option>
                                                         </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" placeholder="Please Specify" id="insurance_company_others" style="display: none;">
                                                     </div>
                                                 </div>
                                                 <!-- End of Insurance Company -->
@@ -366,5 +393,44 @@
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
 </body>
+<script>
+    var vehicle_model = document.getElementById('vehicle_model');
+    var edit_button = document.getElementById('vehicle_model_edit');
+    var save_button = document.getElementById('vehicle_model_save');
+    var cancel_button = document.getElementById('vehicle_model_cancel');
+    var vehicle_model_text;
+    edit_button.onclick = function() {
+        vehicle_model_text = vehicle_model.value;
+        this.style.display = "none";
+        save_button.style.display = "inline-block";
+        cancel_button.style.display = "inline-block";
+        vehicle_model.readOnly = false;        
+    };
+    save_button.onclick = function() {
+        this.style.display = "none";
+        cancel_button.style.display = "none";
+        edit_button.style.display = "inline-block";
+        vehicle_model.readOnly = true;
+    };
+    cancel_button.onclick = function() {
+        vehicle_model.value = vehicle_model_text;
+        this.style.display = "none";
+        save_button.style.display = "none";
+        edit_button.style.display = "inline-block";
+        vehicle_model.readOnly = true;
+    };
+</script>
+<script>
+    document.getElementById('insurance_company').onchange = function() {
+        if(this.value === 'others') {
+            document.getElementById('insurance_company_others').style.display = "block";
+            document.getElementById('insurance_company_others').required = true;
+        }
+        else {
+            document.getElementById('insurance_company_others').style.display = "none";
+            document.getElementById('insurance_company_others').required = false;
 
+        }
+    };
+</script>
 </html>
