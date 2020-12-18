@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <title>Tata Motors</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -26,6 +27,10 @@
     .required-field::after {
         content: "*";
         color: red;
+    }
+    .btn-table {
+        height: 25px;
+        padding-top: 2px;
     }
 </style>
 
@@ -351,8 +356,46 @@
                                         </div>
                                         <div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel"
                                             aria-labelledby="custom-tabs-four-settings-tab">
-                                            <div class="container" style="margin-top: 20px;">
-
+                                            <div class="container">
+                                                <div class="card">
+                                                    <div class="card-body table-responsive p-0">
+                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap" id="parts_table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Part Number</th>
+                                                                    <th>Part Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Amount</th>
+                                                                    <th style="width: 2vw;"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr id="G542488506301">
+                                                                    <td>G542488506301</td>
+                                                                    <td>Front Bumper Skin</td>
+                                                                    <td>1</td>
+                                                                    <td>2,692.00</td>
+                                                                    <td>
+                                                                        <button class="btn btn-sm btn-danger btn-table">
+                                                                            <i class="fas fa-times"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id="54248810011721">
+                                                                    <td>54248810011721</td>
+                                                                    <td>Assy Fender Comp LH</td>
+                                                                    <td>1</td>
+                                                                    <td>2,822.00</td>
+                                                                    <td>
+                                                                        <button class="btn btn-sm btn-danger btn-table">
+                                                                            <i class="fas fa-times"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -386,7 +429,7 @@
     </script>
 
     <script>
-        require('../renderer.js');
+        //require('../renderer.js');
     </script>
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -397,8 +440,6 @@
     <!-- daterangepicker -->
     <script src="plugins/moment/moment.min.js"></script>
     <script src="plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Summernote -->
-    <script src="plugins/summernote/summernote-bs4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
@@ -443,6 +484,12 @@
 
         }
     };
+</script>
+<script>
+    $('.btn-table').on("click", function() {
+        var id = $(this).parent().parent().attr("id");
+        $('#'+id).remove();
+    });
 </script>
 <!-- Insert this line after script imports -->
 <script>
