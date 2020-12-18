@@ -4,12 +4,14 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^11.0.4"
+    "electron": "^11.0.4",
+    "nodemon": "^2.0.6"
   },
   "dependencies": {
     "express": "^4.17.1"

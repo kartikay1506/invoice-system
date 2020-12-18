@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval';" />
     <title>Tata Motors</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -76,6 +76,14 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="./test.html" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Test
                                 </p>
                             </a>
                         </li>
@@ -420,16 +428,15 @@
     </div>
     <!-- ./wrapper -->
 
+    <script>
+        require('../renderer.js');
+    </script>
     <!-- Insert this line above script imports  -->
     <script>
         if (typeof module === 'object') {
             window.module = module;
             module = undefined;
         }
-    </script>
-
-    <script>
-        //require('../renderer.js');
     </script>
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -444,6 +451,8 @@
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
+    <!-- Custom JS for fetching data -->
+    <!-- <script src="dist/js/data.js"></script> -->
 </body>
 <script>
     var vehicle_model = document.getElementById('vehicle_model');
@@ -486,10 +495,10 @@
     };
 </script>
 <script>
-    $('.btn-table').on("click", function() {
+    /* $('.btn-table').on("click", function() {
         var id = $(this).parent().parent().attr("id");
         $('#'+id).remove();
-    });
+    }); */
 </script>
 <!-- Insert this line after script imports -->
 <script>

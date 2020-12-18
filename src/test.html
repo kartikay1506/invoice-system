@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Sheet Test</title>
+</head>
+<body>
+    <h1>Excel Sheet Test Page</h1>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
+<!-- <script>
+    var path = "http://localhost:5000/get-master-data";
+    var req = new XMLHttpRequest();
+    req.open("GET", path, true);
+    req.responseType = "arraybuffer";
+
+    req.onload = function(event) {
+        var arraybuffer = req.response;
+        var data = new Uint8Array(arraybuffer);
+        var arr = new Array();
+        for(var i=0;i<data.length;i++) {
+            arr[i] = String.fromCharCode(data[i]);
+        }
+        var str = arr.join("");
+
+        var workbook = XLSX.read(str, {
+            type: "binary"
+        });
+
+        var sheet_name = workbook.SheetNames[0];
+
+        var worksheet = workbook.Sheets[sheet_name];
+        console.log(XLSX.utils.sheet_to_json(worksheet, {
+            raw: true
+        }));
+    };
+
+    req.send();
+</script> -->
+
+<script>
+    fetch("http://localhost:5000/get-master-data")
+    .then(res => res.json())
+    .then(json => {
+        console.log(json);
+    });
+</script>
+</html>
