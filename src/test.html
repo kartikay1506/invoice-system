@@ -12,7 +12,7 @@
     fetch("http://localhost:5000/get-master-data")
     .then(res => res.json())
     .then(json => {
-        console.log(json);
+        console.log(JSON.stringify(json));
     });
 </script>
 </html>
