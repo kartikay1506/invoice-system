@@ -545,10 +545,10 @@
         timer: 3000
     });
     $('#add_part').on("click", function () {
-        if ($('#parts_input input[type=text]').is(':empty')) {
-            var fields = $('#parts_input input').filter(function () {
-                return !this.value;
-            });
+        var fields = $('#parts_input input').filter(function () {
+            return !this.value;
+        });
+        if (fields.length) {
             Toast.fire({
                 icon: 'error',
                 title: 'Please input the details'
