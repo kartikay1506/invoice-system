@@ -18,9 +18,9 @@ app.get('/get-master-data', (req, resp) => {
     var path = __dirname + "/src/test_sheet.xlsx";
     const result = excelToJson({
         sourceFile: path,
-        header: {
+        /* header: {
             rows: 1
-        }
+        } */
     });
     if(result) {
         resp.send(result);

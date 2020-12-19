@@ -80,10 +80,10 @@
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="./test.html" class="nav-link">
+                            <a href="./parts.html" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Test
+                                    All Parts
                                 </p>
                             </a>
                         </li>
@@ -366,6 +366,24 @@
                                             aria-labelledby="custom-tabs-four-settings-tab">
                                             <div class="container">
                                                 <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="form-group row" id="parts_input">
+                                                            <div class="col-md-4">
+                                                                <input type="text" class="form-control" placeholder="Part Number" id="add_part_number">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="text" class="form-control" placeholder="Part Description" id="add_part_description">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input type="number" class="form-control" placeholder="Quantity" id="add_part_quantity">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <button class="btn btn-primary" id="add_part">
+                                                                    <i class="fas fa-plus mr-2"></i>Add Part
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="card-body table-responsive p-0">
                                                         <table class="table table-sm table-hover table-head-fxed text-nowrap" id="parts_table">
                                                             <thead>
@@ -377,7 +395,7 @@
                                                                     <th style="width: 2vw;"></th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            <tbody id="parts_table_body">
                                                                 <tr id="G542488506301">
                                                                     <td>G542488506301</td>
                                                                     <td>Front Bumper Skin</td>
@@ -429,7 +447,7 @@
     <!-- ./wrapper -->
 
     <script>
-        require('../renderer.js');
+        //require('../renderer.js');
     </script>
     <!-- Insert this line above script imports  -->
     <script>
@@ -452,7 +470,7 @@
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
     <!-- Custom JS for fetching data -->
-    <!-- <script src="dist/js/data.js"></script> -->
+    <script src="dist/js/data.js"></script>
 </body>
 <script>
     var vehicle_model = document.getElementById('vehicle_model');
@@ -495,10 +513,17 @@
     };
 </script>
 <script>
-    /* $('.btn-table').on("click", function() {
+    $('#add_part').on("click", function() {
+        var parts_data = '<tr id="' + $('#add_part_number').val() +'">';
+        var amount = "2,692.00";
+        parts_data = parts_data + '<td>' + $('#add_part_number').val() + '</td><td>' + $('#add_part_description').val() + '</td><td>' + $('#add_part_quantity').val() + '</td><td>' +  amount + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+        $("#parts_table_body").append(parts_data);
+        $('#parts_input input').val("");
+    });
+    $(document).on("click", "button.btn-table", function() {
         var id = $(this).parent().parent().attr("id");
         $('#'+id).remove();
-    }); */
+    });
 </script>
 <!-- Insert this line after script imports -->
 <script>
