@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
@@ -30,7 +28,6 @@
         content: "*";
         color: red;
     }
-
     .btn-table {
         height: 25px;
         padding-top: 2px;
@@ -79,14 +76,6 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item menu-open">
-                            <a href="./index-alternate.html" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Alternative Dashboard
                                 </p>
                             </a>
                         </li>
@@ -247,16 +236,13 @@
                                                             placeholder="Vehicle Model" id="vehicle_model" readonly>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <button class="btn btn-sm btn-info mt-1"
-                                                            id="vehicle_model_edit">
+                                                        <button class="btn btn-sm btn-info mt-1" id="vehicle_model_edit">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </button>
-                                                        <button class="btn btn-sm btn-success mt-1"
-                                                            id="vehicle_model_save" style="display: none;">
+                                                        <button class="btn btn-sm btn-success mt-1" id="vehicle_model_save" style="display: none;">
                                                             <i class="fas fa-save"></i>
                                                         </button>
-                                                        <button class="btn btn-sm btn-danger mt-1 ml-2"
-                                                            id="vehicle_model_cancel" style="display: none;">
+                                                        <button class="btn btn-sm btn-danger mt-1 ml-2" id="vehicle_model_cancel" style="display: none;">
                                                             <i class="fas fa-times"></i>
                                                         </button>
                                                     </div>
@@ -346,9 +332,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Please Specify" id="insurance_company_others"
-                                                            style="display: none;">
+                                                        <input type="text" class="form-control" placeholder="Please Specify" id="insurance_company_others" style="display: none;">
                                                     </div>
                                                 </div>
                                                 <!-- End of Insurance Company -->
@@ -382,33 +366,9 @@
                                             aria-labelledby="custom-tabs-four-settings-tab">
                                             <div class="container">
                                                 <div class="card">
-                                                    <div class="card-header">
-                                                        <div class="form-group row" id="parts_input">
-                                                            <div class="col-md-4">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Part Number" id="add_part_number">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Part Description"
-                                                                    id="add_part_description">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Quantity" id="add_part_quantity">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <button class="btn btn-sm btn-primary mt-1"
-                                                                    id="add_part">
-                                                                    <i class="fas fa-plus mr-2"></i>Add Part
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="card-body table-responsive p-0">
-                                                        <table
-                                                            class="table table-sm table-hover table-head-fxed text-nowrap"
-                                                            id="parts_table">
+                                                        <!-- Part Table -->
+                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap" id="parts_table">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Part Number</th>
@@ -443,6 +403,16 @@
                                                                 </tr>
                                                             </tbody>
                                                         </table>
+                                                        <!-- End of Parts Table -->
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <div class="row" id="parts_input">
+                                                            <div class="col-md-2 ml-auto">
+                                                                <button class="btn btn-sm btn-primary" id="add_part">
+                                                                    <i class="fas fa-plus mr-2"></i>Add Part
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -488,8 +458,6 @@
     <!-- daterangepicker -->
     <script src="plugins/moment/moment.min.js"></script>
     <script src="plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
@@ -503,20 +471,20 @@
     var save_button = document.getElementById('vehicle_model_save');
     var cancel_button = document.getElementById('vehicle_model_cancel');
     var vehicle_model_text;
-    edit_button.onclick = function () {
+    edit_button.onclick = function() {
         vehicle_model_text = vehicle_model.value;
         this.style.display = "none";
         save_button.style.display = "inline-block";
         cancel_button.style.display = "inline-block";
-        vehicle_model.readOnly = false;
+        vehicle_model.readOnly = false;        
     };
-    save_button.onclick = function () {
+    save_button.onclick = function() {
         this.style.display = "none";
         cancel_button.style.display = "none";
         edit_button.style.display = "inline-block";
         vehicle_model.readOnly = true;
     };
-    cancel_button.onclick = function () {
+    cancel_button.onclick = function() {
         vehicle_model.value = vehicle_model_text;
         this.style.display = "none";
         save_button.style.display = "none";
@@ -525,8 +493,8 @@
     };
 </script>
 <script>
-    document.getElementById('insurance_company').onchange = function () {
-        if (this.value === 'others') {
+    document.getElementById('insurance_company').onchange = function() {
+        if(this.value === 'others') {
             document.getElementById('insurance_company_others').style.display = "block";
             document.getElementById('insurance_company_others').required = true;
         }
@@ -538,52 +506,20 @@
     };
 </script>
 <script>
-    var Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000
+    $('#add_part').on("click", function() {
+        var parts_data = '<tr id="' + $('#add_part_number').val() +'">';
+        var amount = "2,692.00";
+        parts_data = parts_data + '<td>' + $('#add_part_number').val() + '</td><td>' + $('#add_part_description').val() + '</td><td>' + $('#add_part_quantity').val() + '</td><td>' +  amount + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+        $("#parts_table_body").append(parts_data);
+        $('#parts_input input').val("");
     });
-    $('#add_part').on("click", function () {
-        if ($('#parts_input input[type=text]').is(':empty')) {
-            var fields = $('#parts_input input').filter(function () {
-                return !this.value;
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'Please input the details'
-            });
-            Object.entries(fields).forEach(element => {
-                $('#' + element[1]["id"]).addClass("is-invalid");;
-            });
-        }
-        else {
-            var parts_data = '<tr id="' + $('#add_part_number').val() + '">';
-            var amount = "2,692.00";
-            parts_data = parts_data + '<td>' + $('#add_part_number').val() + '</td><td>' + $('#add_part_description').val() + '</td><td>' + $('#add_part_quantity').val() + '</td><td>' + amount + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
-            $("#parts_table_body").append(parts_data);
-            $('#parts_input input').val("");
-        }
-    });
-    $(document).on("click", "button.btn-table", function () {
+    $(document).on("click", "button.btn-table", function() {
         var id = $(this).parent().parent().attr("id");
-        $('#' + id).remove();
-    });
-</script>
-<script>
-    $('#add_part_number').on("focus", function () {
-        $(this).removeClass("is-invalid");
-    });
-    $('#add_part_description').on("focus", function () {
-        $(this).removeClass("is-invalid");
-    });
-    $('#add_part_quantity').on("focus", function() {
-        $(this).removeClass("is-invalid");
+        $('#'+id).remove();
     });
 </script>
 <!-- Insert this line after script imports -->
 <script>
     if (window.module) module = window.module;
 </script>
-
 </html>
