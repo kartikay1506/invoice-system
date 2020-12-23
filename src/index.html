@@ -389,9 +389,13 @@
                                                                     placeholder="Part Number" id="add_part_number">
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <input type="text" class="form-control"
+                                                                <input list="part_descriptions" class="form-control"
                                                                     placeholder="Part Description"
                                                                     id="add_part_description">
+                                                                <datalist id="part_descriptions">
+                                                                    <option value="Front Bumper Skin">Front Bumper Skin</option>
+                                                                    <option value="Assy Fender Comp LH">Assy Fender Comp LH</option>
+                                                                </datalist>
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <input type="number" class="form-control"
@@ -538,6 +542,15 @@
     };
 </script>
 <script>
+    fetch("http://localhost:5000/get-parts")
+    .then(res => res.json())
+    .then(json => {
+        var data = '';
+        Object.entries(json).forEach(element => {
+            console.log(element[1]);
+        });
+    });
+
     var Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
