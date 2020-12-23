@@ -422,30 +422,7 @@
                                                                     <th style="width: 2vw;"></th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody id="parts_table_body">
-                                                                <tr id="G542488506301">
-                                                                    <td>G542488506301</td>
-                                                                    <td>Front Bumper Skin</td>
-                                                                    <td>1</td>
-                                                                    <td>2,692.00</td>
-                                                                    <td>
-                                                                        <button class="btn btn-sm btn-danger btn-table">
-                                                                            <i class="fas fa-times"></i>
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr id="54248810011721">
-                                                                    <td>54248810011721</td>
-                                                                    <td>Assy Fender Comp LH</td>
-                                                                    <td>1</td>
-                                                                    <td>2,822.00</td>
-                                                                    <td>
-                                                                        <button class="btn btn-sm btn-danger btn-table">
-                                                                            <i class="fas fa-times"></i>
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
+                                                            <tbody id="parts_table_body"></tbody>
                                                         </table>
                                                     </div>
                                                 </div>
@@ -542,16 +519,34 @@
     };
 </script>
 <script>
+
+    //Generate part description dropdown from data received from the server
     fetch("http://localhost:5000/get-parts")
     .then(res => res.json())
     .then(json => {
         var data = '';
-        Object.entries(json).forEach(element => {
-            data = data + '<option id="'+ element[1]["row"]["1"] +'" value="'+ element[1]["row"]["2"] +'">' + element[1]["row"]["2"] + '</option>';
+        Object.entries(json).forEach(function(element, i) {
+            if(i != 0) {
+                data = data + '<option id="'+ element[1][i+1][1] +'" value="'+ element[1][i+1][2] +'">' + element[1][i+1][2] + '</option>';
+            }
         });
         $('#part_descriptions').empty();
         $('#part_descriptions').append(data);
     });
+
+    //Auto-fill part number if part description is selected
+    $('#add_part_description').on("change", function() {
+        $('#add_part_number').val($('#part_descriptions option[value="'+ $(this).val() +'"]').attr("id"));
+    });
+
+    //Auto-fill part description if part number is entered
+    $('#add_part_number').on("input", function() {
+       var id = $(this).val();
+        $('#add_part_description').val($('#part_descriptions option').filter(function() {
+            return ($(this).attr("id") == id);
+        }).val());
+    });
+
 
     var Toast = Swal.mixin({
         toast: true,

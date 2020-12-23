@@ -45,7 +45,7 @@ app.get('/get-parts', (req, resp) => {
             row.eachCell({ includeEmpty: true }, function(cell, colNumber) {
                 rowData[colNumber] = cell.value;
             });
-            data.push({ row: rowData });
+            data.push({ [rowNumber]: rowData });
         });
         resp.send(data);
     });
