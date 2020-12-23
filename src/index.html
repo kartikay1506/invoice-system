@@ -547,8 +547,10 @@
     .then(json => {
         var data = '';
         Object.entries(json).forEach(element => {
-            console.log(element[1]);
+            data = data + '<option id="'+ element[1]["row"]["1"] +'" value="'+ element[1]["row"]["2"] +'">' + element[1]["row"]["2"] + '</option>';
         });
+        $('#part_descriptions').empty();
+        $('#part_descriptions').append(data);
     });
 
     var Toast = Swal.mixin({
