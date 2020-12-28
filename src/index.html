@@ -448,14 +448,43 @@
                                         <!-- Mechanical Labour Tab -->
                                         <div class="tab-pane fade" id="custom-tabs-four-mech-labour" role="tabpanel"
                                             aria-labelledby="custom-tabs-four-mech-labour-tab">
-                                            <div class="container" style="margin-top: 20px;">
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label for=""></label>
+                                            <div class="container">
+                                                <div class="container">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="form-group row" id="labour_input">
+                                                                <div class="col-md-6">
+                                                                    <input class="form-control"
+                                                                        placeholder="Description"
+                                                                        id="add_labour_description">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="Amount" id="add_labour_amount">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                        id="add_labour">
+                                                                        <i class="fas fa-plus mr-2"></i>Add
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body table-responsive p-0">
+                                                            <table
+                                                                class="table table-sm table-hover table-head-fxed text-nowrap"
+                                                                id="labour_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th>Amount</th>
+                                                                        <th style="width: 2vw;"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="labour_table_body"></tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="" id="">
-                                                    </div> 
                                                 </div>
                                             </div>
                                         </div>
@@ -629,6 +658,43 @@
         $(this).removeClass("is-invalid");
     });
     $('#add_part_quantity').on("focus", function() {
+        $(this).removeClass("is-invalid");
+    });
+</script>
+<script>
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    $('#add_labour').on("click", function () {
+        var fields = $('#labour_input input').filter(function () {
+            return !this.value;
+        });
+        if (fields.length) {
+            Toast.fire({
+                icon: 'error',
+                title: 'Please input the details'
+            });
+            Object.entries(fields).forEach(element => {
+                $('#' + element[1]["id"]).addClass("is-invalid");;
+            });
+        }
+        else {
+            var id = Math.floor(100000 + Math.random() * 900000);
+            var labour_data = '<tr id="'+ id +'">';
+            labour_data = labour_data + '<td>' + $('#add_labour_description').val() + '</td><td>' + $('#add_labour_amount').val() + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+            $("#labour_table_body").append(labour_data);
+            $('#labour_input input').val("");
+
+        }
+    });
+
+    $('#add_labour_description').on("focus", function() {
+        $(this).removeClass("is-invalid");
+    });
+    $('#add_labour_amount').on("focus", function() {
         $(this).removeClass("is-invalid");
     });
 </script>
