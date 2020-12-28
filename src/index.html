@@ -158,10 +158,16 @@
                                                 aria-controls="custom-tabs-four-settings"
                                                 aria-selected="false">Parts</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-four-mech-labour-tab" data-toggle="pill"
+                                                href="#custom-tabs-four-mech-labour" role="tab"
+                                                aria-controls="custom-tabs-four-mech-labour" aria-selected="false">Mechanical Labour</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
                                     <div class="tab-content" id="custom-tabs-four-tabContent">
+                                        <!-- Personal Details Tab -->
                                         <div class="tab-pane fade show active" id="custom-tabs-four-home"
                                             role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
                                             <div class="container" style="margin-top: 20px;">
@@ -207,6 +213,9 @@
                                                 <!-- End of Email -->
                                             </div>
                                         </div>
+                                        <!-- End of Personal Details Tab -->
+
+                                        <!-- Vehicle Details Tab -->
                                         <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
                                             aria-labelledby="custom-tabs-four-profile-tab">
                                             <div class="container" style="margin-top: 20px;">
@@ -276,6 +285,9 @@
                                                 <!-- End of Estimate/Job Number -->
                                             </div>
                                         </div>
+                                        <!-- End of Vehicle Details Tab -->
+
+                                        <!-- Policy Details Tab -->
                                         <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel"
                                             aria-labelledby="custom-tabs-four-messages-tab">
                                             <div class="container" style="margin-top: 20px;">
@@ -378,6 +390,9 @@
                                                 <!-- End of Service Advisor -->
                                             </div>
                                         </div>
+                                        <!-- End of Policy Details Tab -->
+
+                                        <!-- Parts Tab -->
                                         <div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel"
                                             aria-labelledby="custom-tabs-four-settings-tab">
                                             <div class="container">
@@ -428,6 +443,23 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- End of Parts Tab -->
+
+                                        <!-- Mechanical Labour Tab -->
+                                        <div class="tab-pane fade" id="custom-tabs-four-mech-labour" role="tabpanel"
+                                            aria-labelledby="custom-tabs-four-mech-labour-tab">
+                                            <div class="container" style="margin-top: 20px;">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2 col-form-label">
+                                                        <label for=""></label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" placeholder="" id="">
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End of Mechanical Labour Tab -->
                                     </div>
                                 </div>
                                 <!-- /.card -->
@@ -519,9 +551,18 @@
     };
 </script>
 <script>
+    var vehicle_id;
+
+    //Get Model Number for fetching parts from the server
+    $('#vehicle_model').on("change", function() {
+        //alert($(this).val());
+        vehicle_id = $(this).val();
+    });
+
+    var url = "http://localhost:5000/get-parts/?id=" + vehicle_id;
 
     //Generate part description dropdown from data received from the server
-    fetch("http://localhost:5000/get-parts")
+    fetch(url)
     .then(res => res.json())
     .then(json => {
         var data = '';
