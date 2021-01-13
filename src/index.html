@@ -163,6 +163,11 @@
                                                 href="#custom-tabs-four-mech-labour" role="tab"
                                                 aria-controls="custom-tabs-four-mech-labour" aria-selected="false">Mechanical Labour</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-four-paint-tab" data-toggle="pill"
+                                                href="#custom-tabs-four-paint" role="tab"
+                                                aria-controls="custom-tabs-four-paint" aria-selected="false">Paint Schedule</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
@@ -489,6 +494,51 @@
                                             </div>
                                         </div>
                                         <!-- End of Mechanical Labour Tab -->
+
+                                        <!-- Paint Schedule -->
+                                        <div class="tab-pane fade" id="custom-tabs-four-paint" role="tabpanel"
+                                            aria-labelledby="custom-tabs-four-paint-tab">
+                                            <div class="container">
+                                                <div class="container">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="form-group row" id="paint_input">
+                                                                <div class="col-md-6">
+                                                                    <input class="form-control"
+                                                                        placeholder="Description"
+                                                                        id="add_paint_description">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="Amount" id="add_paint_amount">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                        id="add_paint">
+                                                                        <i class="fas fa-plus mr-2"></i>Add
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body table-responsive p-0">
+                                                            <table
+                                                                class="table table-sm table-hover table-head-fxed text-nowrap"
+                                                                id="paint_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th>Amount</th>
+                                                                        <th style="width: 2vw;"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="paint_table_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End of Paint Schedule -->
                                     </div>
                                 </div>
                                 <!-- /.card -->
@@ -684,9 +734,46 @@
         else {
             var id = Math.floor(100000 + Math.random() * 900000);
             var labour_data = '<tr id="'+ id +'">';
-            labour_data = labour_data + '<td>' + $('#add_labour_description').val() + '</td><td>' + $('#add_labour_amount').val() + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+            labour_data = labour_data + '<td>' + $('#add_labour_description').val() + '</td><td>' + parseFloat($('#add_labour_amount').val()).toFixed(2) + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
             $("#labour_table_body").append(labour_data);
             $('#labour_input input').val("");
+
+        }
+    });
+
+    $('#add_labour_description').on("focus", function() {
+        $(this).removeClass("is-invalid");
+    });
+    $('#add_labour_amount').on("focus", function() {
+        $(this).removeClass("is-invalid");
+    });
+</script>
+<script>
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    $('#add_paint').on("click", function () {
+        var fields = $('#paint_input input').filter(function () {
+            return !this.value;
+        });
+        if (fields.length) {
+            Toast.fire({
+                icon: 'error',
+                title: 'Please input the details'
+            });
+            Object.entries(fields).forEach(element => {
+                $('#' + element[1]["id"]).addClass("is-invalid");;
+            });
+        }
+        else {
+            var id = Math.floor(200000 + Math.random() * 900000);
+            var labour_data = '<tr id="'+ id +'">';
+            labour_data = labour_data + '<td>' + $('#add_paint_description').val() + '</td><td>' + parseFloat($('#add_paint_amount').val()).toFixed(2) + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+            $("#paint_table_body").append(labour_data);
+            $('#paint_input input').val("");
 
         }
     });
