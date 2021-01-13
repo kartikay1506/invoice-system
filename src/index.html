@@ -168,6 +168,11 @@
                                                 href="#custom-tabs-four-paint" role="tab"
                                                 aria-controls="custom-tabs-four-paint" aria-selected="false">Paint Schedule</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-four-extras-tab" data-toggle="pill"
+                                                href="#custom-tabs-four-extras" role="tab"
+                                                aria-controls="custom-tabs-four-extras" aria-selected="false">Extras</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
@@ -539,6 +544,51 @@
                                             </div>
                                         </div>
                                         <!-- End of Paint Schedule -->
+
+                                        <!-- Extras -->
+                                        <div class="tab-pane fade" id="custom-tabs-four-extras" role="tabpanel"
+                                            aria-labelledby="custom-tabs-four-extras-tab">
+                                            <div class="container">
+                                                <div class="container">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="form-group row" id="extras_input">
+                                                                <div class="col-md-6">
+                                                                    <input class="form-control"
+                                                                        placeholder="Description"
+                                                                        id="add_extras_description">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="Amount" id="add_extras_amount">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                        id="add_extras">
+                                                                        <i class="fas fa-plus mr-2"></i>Add
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body table-responsive p-0">
+                                                            <table
+                                                                class="table table-sm table-hover table-head-fxed text-nowrap"
+                                                                id="extras_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th>Amount</th>
+                                                                        <th style="width: 2vw;"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="extras_table_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End of Extras -->
                                     </div>
                                 </div>
                                 <!-- /.card -->
@@ -748,6 +798,7 @@
         $(this).removeClass("is-invalid");
     });
 </script>
+<!-- Script for Paint Section -->
 <script>
     var Toast = Swal.mixin({
         toast: true,
@@ -778,10 +829,48 @@
         }
     });
 
-    $('#add_labour_description').on("focus", function() {
+    $('#add_paint_description').on("focus", function() {
         $(this).removeClass("is-invalid");
     });
-    $('#add_labour_amount').on("focus", function() {
+    $('#add_paint_amount').on("focus", function() {
+        $(this).removeClass("is-invalid");
+    });
+</script>
+<!-- End of script for Paint Section -->
+<script>
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    $('#add_extras').on("click", function () {
+        var fields = $('#extras_input input').filter(function () {
+            return !this.value;
+        });
+        if (fields.length) {
+            Toast.fire({
+                icon: 'error',
+                title: 'Please input the details'
+            });
+            Object.entries(fields).forEach(element => {
+                $('#' + element[1]["id"]).addClass("is-invalid");;
+            });
+        }
+        else {
+            var id = Math.floor(300000 + Math.random() * 900000);
+            var labour_data = '<tr id="'+ id +'">';
+            labour_data = labour_data + '<td>' + $('#add_extras_description').val() + '</td><td>' + parseFloat($('#add_extras_amount').val()).toFixed(2) + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+            $("#extras_table_body").append(labour_data);
+            $('#extras_input input').val("");
+
+        }
+    });
+
+    $('#add_extras_description').on("focus", function() {
+        $(this).removeClass("is-invalid");
+    });
+    $('#add_extras_amount').on("focus", function() {
         $(this).removeClass("is-invalid");
     });
 </script>
