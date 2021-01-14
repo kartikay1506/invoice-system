@@ -1,9 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const Excel = require('exceljs');
 const excelToJson = require('convert-excel-to-json');
 const path = require('path');
 const app = express();
+
+//Bodyparser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: '1024mb', extended:true }));
 
 //app.use(cors);
 
@@ -33,19 +38,24 @@ app.get('/get-master-data', (req, resp) => {
 
 //Get parts corresponding to a particular vehicle model
 app.get('/get-parts', (req, resp) => {
+    const { part_id } = req.query;
     resp.setHeader('Access-Control-Allow-Origin', '*');
-    var filename = __dirname + "/src/test_sheet.xlsx";
+    var filename = __dirname + "/src/PRICE LIST 17 NOV2020.xlsx";
+    //var filename = __dirname + "/src/test_sheet.xlsx";
     var workbook = new Excel.Workbook();
+    var pattern = "^" + part_id;
     workbook.xlsx.readFile(filename)
     .then(function() {
         var data = [];
-        var worksheet = workbook.getWorksheet("Sheet1");
+        var worksheet = workbook.getWorksheet(1);
         worksheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
             var rowData = {};
-            row.eachCell({ includeEmpty: true }, function(cell, colNumber) {
-                rowData[colNumber] = cell.value;
-            });
-            data.push({ [rowNumber]: rowData });
+            if(row.getCell(1).text.match(pattern)) {
+                row.eachCell({ includeEmpty: true }, function(cell, colNumber) {
+                    rowData[colNumber] = cell.value;
+                });
+                data.push({ [rowNumber]: rowData });
+            }
         });
         resp.send(data);
     });
