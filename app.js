@@ -20,8 +20,8 @@ app.get('/', (req, resp) => {
 //Get all the data from the master sheet
 app.get('/get-master-data', (req, resp) => {
     resp.setHeader('Access-Control-Allow-Origin', '*');
-    //var path = __dirname + "/src/PRICE LIST 17 NOV2020.xlsx";
-    var path = __dirname + "/src/test_sheet.xlsx";
+    var path = __dirname + "/src/PRICE LIST 17 NOV2020.xlsx";
+    //var path = __dirname + "/src/test_sheet.xlsx";
     const result = excelToJson({
         sourceFile: path,
         /* header: {
