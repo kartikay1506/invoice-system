@@ -54,7 +54,8 @@ app.get('/get-parts', (req, resp) => {
                 row.eachCell({ includeEmpty: true }, function(cell, colNumber) {
                     rowData[colNumber] = cell.value;
                 });
-                data.push({ [rowNumber]: rowData });
+                //data.push({ [rowNumber]: rowData });
+                data.push(rowData);
             }
         });
         resp.send(data);
