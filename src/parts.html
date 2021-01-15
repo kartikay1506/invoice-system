@@ -179,7 +179,6 @@
     .then(res => res.json())
     .then(json => {
       var sheet_name = Object.keys(json)[0];
-      console.log(sheet_name);
       var data = json[sheet_name].slice(1);
       var tableHead = '<tr>';
       tableHead = tableHead + '<th>' + json[sheet_name][0]["A"] + '</th><th>' + json[sheet_name][0]["B"] + '</th>';
