@@ -682,6 +682,15 @@
 <script>
     var vehicle_id;
 
+    $('#chasis_number').on("change", function() {
+        var url = "http://localhost:5000/get-model/?chassis_no=" + $(this).val();
+        fetch(url)
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+        });
+    });
+
     //Get Model Number for fetching parts from the server
     $('#vehicle_model').on("change", function() {
         //alert($(this).val());
@@ -696,7 +705,6 @@
     .then(res => res.json())
     .then(json => {
         var data = '';
-        //alert(json[0][1]);
         Object.entries(json).forEach(function(element, i) {
             console.log(element[1]);
             data = data + '<option id="'+ element[1][1] +'" value="'+ element[1][2] +'" amount="'+ element[1][4] +'">' + element[1][2] + '</option>';
