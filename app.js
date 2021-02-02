@@ -44,10 +44,12 @@ app.get('/', (req, resp) => {
 
 //Get car model based on chassis number
 app.get('/get-model', (req, resp) => {
+    resp.setHeader('Access-Control-Allow-Origin', '*');
     const { chassis_no } = req.query;
     var modelNo = chassis_no.substring(3, 6);
     var subModelNo = chassis_no.substring(6, 9);
-    resp.send(models[modelNo][subModelNo]);
+    var model = models[modelNo][subModelNo];
+    resp.send(model);
 });
 
 //Get all the data from the master sheet

@@ -680,15 +680,35 @@
     };
 </script>
 <script>
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
     var vehicle_id;
 
+    //Get Car Model based on chassis number from the server
     $('#chasis_number').on("change", function() {
-        var url = "http://localhost:5000/get-model/?chassis_no=" + $(this).val();
-        fetch(url)
-        .then(res => res.json())
-        .then(json => {
-            console.log(json);
-        });
+        if($(this).val() == "") {
+            Toast.fire({
+                icon: 'error',
+                title: 'Please input chassis number'
+            });
+        }
+        else {
+            var url = "http://localhost:5000/get-model/?chassis_no=" + $(this).val();
+            fetch(url)
+            .then(res =>  res.text())
+            .then(text => {
+                if(!text) {
+                    $('#vehicle_model').val("");
+                }
+                else {
+                    $('#vehicle_model').val(text);
+                }
+            });
+        }
     });
 
     //Get Model Number for fetching parts from the server
@@ -697,7 +717,7 @@
         vehicle_id = $(this).val();
     });
 
-    vehicle_id = 5438;
+    //vehicle_id = 5438;
     var url = "http://localhost:5000/get-parts/?part_id=" + vehicle_id;
 
     //Generate part description dropdown from data received from the server
@@ -727,12 +747,7 @@
     });
 
 
-    var Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000
-    });
+    
     $('#add_part').on("click", function () {
         var fields = $('#parts_input input').filter(function () {
             return !this.value;
