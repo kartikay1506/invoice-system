@@ -4,6 +4,7 @@ const cors = require('cors');
 const Excel = require('exceljs');
 const excelToJson = require('convert-excel-to-json');
 const path = require('path');
+const multer = require('multer');
 const app = express();
 
 //Bodyparser
@@ -36,6 +37,33 @@ const models =  {
     
     "624": { "004": "Zest XE QJT 75PS", "031": "Zest XM QJT 75PS", "051": "Zest XT QJT 90PS" }
 };
+
+
+//File Upload
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, "uploads");
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + "-" + Date.now() + ".xlsx");
+    }
+});
+
+var upload = multer({
+    storage: storage,
+    limits: { fileSize: 1*1000*1000 },
+    fileFilter: function(req, file, cb) {
+        var filetypes = /xls|xlsx/;
+        var mimetype = filetypes.test(file.mimetype);
+
+        var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+        if(mimetype && extname) {
+            return cb(null, true);
+        }
+        cb("Error: file upload only supports the following filetypes - " + filetypes);
+    }
+}).single("customFile");
 
 //Default route
 app.get('/', (req, resp) => {
@@ -94,6 +122,18 @@ app.get('/get-parts', (req, resp) => {
             }
         });
         resp.send(data);
+    });
+});
+
+//upload file to the server
+app.post('file-upload', (req, resp) => {
+    upload(req, resp, function(err) {
+        if(err) {
+            resp.send(err);
+        }
+        else {
+            resp.send("File Uploaded successfully");
+        }
     });
 });
 
