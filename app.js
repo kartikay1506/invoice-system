@@ -38,6 +38,18 @@ const models =  {
     "624": { "004": "Zest XE QJT 75PS", "031": "Zest XM QJT 75PS", "051": "Zest XT QJT 90PS" }
 };
 
+const part_number = {
+    "632": ["5442"],
+    "631": ["5412"],
+    "627": ["5438"],
+    "626": ["5424"],
+    "629": ["5425"],
+    "614": ["2870"],
+    "617": ["5407", "5408"],
+    "446": ["2698"],
+    "624": ["5422"]
+};
+
 
 //File Upload
 var storage = multer.diskStorage({
@@ -77,7 +89,11 @@ app.get('/get-model', (req, resp) => {
     var modelNo = chassis_no.substring(3, 6);
     var subModelNo = chassis_no.substring(6, 9);
     var model = models[modelNo][subModelNo];
-    resp.send(model);
+    var part_id = part_number[modelNo];
+    var result = {};
+    result["model"] = model;
+    result["part_id"] = part_id;
+    resp.send(result);
 });
 
 //Get all the data from the master sheet
@@ -103,13 +119,13 @@ app.get('/get-master-data', (req, resp) => {
 app.get('/get-parts', (req, resp) => {
     const { part_id } = req.query;
     resp.setHeader('Access-Control-Allow-Origin', '*');
+    console.log(part_id);
     var filename = __dirname + "/src/PRICE LIST 17 NOV2020.xlsx";
-    //var filename = __dirname + "/src/test_sheet.xlsx";
     var workbook = new Excel.Workbook();
-    var pattern = "^" + part_id;
     workbook.xlsx.readFile(filename)
     .then(function() {
         var data = [];
+        var pattern = "^" + part_id;
         var worksheet = workbook.getWorksheet(1);
         worksheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
             var rowData = {};
@@ -117,7 +133,6 @@ app.get('/get-parts', (req, resp) => {
                 row.eachCell({ includeEmpty: true }, function(cell, colNumber) {
                     rowData[colNumber] = cell.value;
                 });
-                //data.push({ [rowNumber]: rowData });
                 data.push(rowData);
             }
         });
