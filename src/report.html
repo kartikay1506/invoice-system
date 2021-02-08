@@ -11,6 +11,10 @@
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- iCheck -->
@@ -65,13 +69,13 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="nav-item menu-open">
-                <a href="./index.html" class="nav-link active">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Dashboard
-                    </p>
-                </a>
+            <li class="nav-item menu-open">
+              <a href="./index.html" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Dashboard
+                </p>
+              </a>
             </li>
             <li class="nav-item menu-open">
                 <a href="./files.html" class="nav-link">
@@ -82,20 +86,20 @@
                 </a>
             </li>
             <li class="nav-item menu-open">
-              <a href="./report.html" class="nav-link">
-                  <i class="nav-icon fas fa-file-excel"></i>
-                  <p>
-                      Reports
-                  </p>
-              </a>
-          </li>
-            <li class="nav-item menu-open">
-                <a href="./parts.html" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                <a href="./report.html" class="nav-link">
+                    <i class="nav-icon fas fa-file-excel"></i>
                     <p>
-                        All Parts
+                        Reports
                     </p>
                 </a>
+            </li>
+            <li class="nav-item menu-open">
+              <a href="./parts.html" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  All Parts
+                </p>
+              </a>
             </li>
           </ul>
         </nav>
@@ -111,12 +115,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Files</h1>
+              <h1 class="m-0">Dashboard</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Files</li>
+                <li class="breadcrumb-item active">Dashboard v1</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -132,24 +136,18 @@
             <div class="col-12">
               <div class="card card-primary card-outline shadow">
                 <div class="card-header">
-                  <h3 class="card-title">Files</h3>
+                  <h3 class="card-title">Report</h3>
+                  <div class="card-tools">
+                      <button type="button" class="btn btn-info btn-sm" style="width: 5vw;">
+                          <i class="fas fa-download"></i>
+                      </button>
+                  </div>
                 </div>
                 <div class="card-body" id="table_load">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <form action="/file-upload" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile" name="inputFile">
-                            <label class="custom-file-label" for="customFile">Choose File</label>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <button class="btn btn-success" type="submit">Submit</button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
+                  <table class="table table-sm table-head-fxed table-bordered table-hover" id="reports_table">
+                    <thead id="table_header"></thead>
+                    <tbody id="table_body"></tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -182,6 +180,17 @@
   <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <!-- daterangepicker -->
   <script src="plugins/moment/moment.min.js"></script>
   <script src="plugins/daterangepicker/daterangepicker.js"></script>
@@ -190,5 +199,38 @@
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
 </body>
+<script>
+  let loader = '<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>';
+  $('#table_load').append(loader);
+  fetch("http://localhost:5000/get-report")
+    .then(res => res.json())
+    .then(json => {
+      var sheet_name = Object.keys(json)[0];
+      var data = json[sheet_name].slice(1);
+      var tableHead = '<tr>';
+      tableHead = tableHead + '<th>' + json[sheet_name][0]["A"] + '</th><th>' + json[sheet_name][0]["B"] + '</th>';
+      tableHead = tableHead + '</tr>';
+      $('#table_header').empty();
+      $('#table_header').append(tableHead);
+
+      var tableData = '';
+      data.forEach(element => {
+        tableData = tableData + '<tr><td>' + element["A"] + '</td><td>' + element["B"] + '</td></tr>';
+      });
+      $('#table_body').empty();
+      $('#table_body').append(tableData);
+
+      $("#parts_table").DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": false,
+        "searching":true,
+        "processing": true,
+        "lengthMenu": [ 100, 200, 500, 1000 ],
+    });
+
+    $('#table_load .overlay').remove();
+    });
+</script>
 
 </html>
