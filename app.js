@@ -119,7 +119,6 @@ app.get('/get-master-data', (req, resp) => {
 app.get('/get-parts', (req, resp) => {
     const { part_id } = req.query;
     resp.setHeader('Access-Control-Allow-Origin', '*');
-    console.log(part_id);
     var filename = __dirname + "/src/PRICE LIST 17 NOV2020.xlsx";
     var workbook = new Excel.Workbook();
     workbook.xlsx.readFile(filename)
@@ -140,6 +139,40 @@ app.get('/get-parts', (req, resp) => {
     });
 });
 
+//generate report
+app.post('/invoice', (req, resp) => {
+    //const {  } = req.body;
+    const workbook = new Excel.Workbook();
+    const worksheet = workbook.addWorksheet("Invoice Data");
+
+    worksheet.columns = [
+        {header: 'Registration Number', key: 'registration_number', width: 32},
+        {header: 'Chassis Number', key: 'chassis_number', width: 32}, 
+        {header: 'Customer Name', key: 'customer_name', width: 10},
+        {header: 'Contact Number', key: 'contact_number', width: 10},
+        {header: 'Model', key: 'model', width: 15},
+        {header: 'Estimate Date', key: 'estimate_date', width: 15},
+        {header: 'Policy Number', key: 'policy_number', width: 15},
+        {header: 'Policy Start', key: 'policy_start', width: 15},
+        {header: 'policy_end', key: 'policy_end', width: 15},
+    ];
+
+    worksheet.addRow({
+        registration_number: registration_number,
+        chassis_number: chassis_number,
+        customer_name: customer_name,
+        contact_number: contact_number,
+        model: model,
+        estimate_date: estimate_date,
+        policy_number: policy_number,
+        policy_start: policy_start,
+        policy_end: policy_end
+    });
+
+    workbook.xlsx.writeFile('/upload/report.xlsx');
+    resp.send("Ok");
+});
+
 //upload file to the server
 app.post('file-upload', (req, resp) => {
     upload(req, resp, function(err) {
@@ -150,6 +183,12 @@ app.post('file-upload', (req, resp) => {
             resp.send("File Uploaded successfully");
         }
     });
+});
+
+//Get report
+app.get('/get-report', (req, resp) => {
+    resp.setHeader('Access-Control-Allow-Origin', '*');
+    resp.send("Ok");
 });
 
 const port = process.env.PORT || 5000;
