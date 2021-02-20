@@ -66,7 +66,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                <li class="nav-item menu-open">
-                <a href="./index.html" class="nav-link active">
+                <a href="./index.html" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                         Dashboard
@@ -74,7 +74,7 @@
                 </a>
             </li>
             <li class="nav-item menu-open">
-                <a href="./files.html" class="nav-link">
+                <a href="./files.html" class="nav-link active">
                     <i class="nav-icon fas fa-folder"></i>
                     <p>
                         Files
@@ -131,11 +131,8 @@
           <div class="row">
             <div class="col-12">
               <div class="card card-primary card-outline shadow">
-                <div class="card-header">
-                  <h3 class="card-title">Files</h3>
-                </div>
-                <div class="card-body" id="table_load">
-                  <div class="row">
+                <div class="card-body table-responsive" id="table_load">
+                  <!-- <div class="row">
                     <div class="col-md-6">
                       <form action="/file-upload" method="post" enctype="multipart/form-data">
                         <div class="form-group">
@@ -149,13 +146,57 @@
                         </div>
                       </form>
                     </div>
-                  </div>
+                  </div> -->
+
+                  <table class="table table-hover table-bordered text-nowrap" style="display: none;">
+                    <thead>
+                      <tr>
+                        <th>File Name</th>
+                        <th style="width: 25vw">Uploaded On</th>
+                        <th style="width: 10vw"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="table_body"></tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
           <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
+
+        <div class="modal fade" id="modal-files">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Upload File</h4>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+              </div>
+              <div class="modal-body">
+                <form action="http://localhost:5000/file-upload" method="post" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFile" name="inputFile">
+                      <label class="custom-file-label" for="customFile">Choose File</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-success float-right" type="submit">Submit</button>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-success">Save changes</button> -->
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
       </section>
       <!-- /.content -->
     </div>
@@ -189,6 +230,28 @@
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
-</body>
+  <!-- Insert this line after script imports -->
 
+  <script>
+    let loader = '<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>';
+    $('#table_load').append(loader);
+    fetch("http://localhost:5000/get-files")
+    .then(res => res.json())
+    .then(json => {
+      var data = '';
+      for(k in json) {
+        var fileName = Object.keys(json[k]);
+        var date = Object.values(json[k]);
+        data = data + '<tr><td>' + fileName + '</td><td>' + date + '</td><td><button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-files"><i class="fas fa-upload"></i></button><button class="btn btn-success btn-sm ml-2"><i class="fas fa-download"></i></button></td></tr>';
+      }
+      $('#table_body').empty();
+      $('#table_body').append(data);
+      $('table').show();
+    });
+    $('#table_load .overlay').remove();
+  </script>
+<script>
+  if (window.module) module = window.module;
+</script>
+</body>
 </html>

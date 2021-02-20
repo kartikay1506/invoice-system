@@ -4,6 +4,7 @@ const cors = require('cors');
 const Excel = require('exceljs');
 const excelToJson = require('convert-excel-to-json');
 const path = require('path');
+const fs = require('fs');
 const multer = require('multer');
 const app = express();
 
@@ -181,6 +182,31 @@ app.post('file-upload', (req, resp) => {
         }
         else {
             resp.send("File Uploaded successfully");
+        }
+    });
+});
+
+//get all files
+app.get('/get-files', (req, resp) => {
+    resp.setHeader('Access-Control-Allow-Origin', '*');
+    const directoryPath = path.join(__dirname, "uploads");
+    fs.readdir(directoryPath, (err, files) => {
+        if(err) {
+            console.log("Unable to fetch files");
+            resp.send("Unable to fetch files");
+        }
+        else {
+            var fileInfo = [];
+            files.forEach(file => {
+                var fileName = file.substr(0, file.lastIndexOf('.'));
+                var filePath = path.join("./uploads/" + file);
+                var info = {};
+                var stat = fs.statSync(filePath);
+                var date = new Date(stat.birthtime);
+                info[fileName] = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+                fileInfo.push(info);
+            });
+            resp.send(fileInfo);
         }
     });
 });

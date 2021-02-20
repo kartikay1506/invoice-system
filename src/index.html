@@ -35,6 +35,16 @@
         height: 25px;
         padding-top: 2px;
     }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+    -moz-appearance: textfield;
+    }
 </style>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -125,7 +135,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
+                                <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -181,6 +191,11 @@
                                                 href="#custom-tabs-four-extras" role="tab"
                                                 aria-controls="custom-tabs-four-extras" aria-selected="false">Extras</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-four-preview-tab" data-toggle="pill"
+                                                href="#custom-tabs-four-preview" role="tab"
+                                                aria-controls="custom-tabs-four-preview" aria-selected="false">Preview</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
@@ -195,13 +210,9 @@
                                                         <label class="required-field" for="customer_name">Name of
                                                             Owner</label>
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <input type="text" class="form-control" placeholder="First Name"
-                                                            id="customer_first_name" required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <input type="text" class="form-control" placeholder="Last Name"
-                                                            id="customer_last_name" required>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" placeholder="Full Name"
+                                                            id="customer_name" required>
                                                     </div>
                                                 </div>
                                                 <!-- End of Customer Name -->
@@ -223,7 +234,7 @@
                                                     <div class="col-md-2 col-form-label">
                                                         <label class="required-field" for="customer_email">Email</label>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6">
                                                         <input type="email" class="form-control" placeholder="Email"
                                                             id="customer_email" required>
                                                     </div>
@@ -467,41 +478,39 @@
                                         <div class="tab-pane fade" id="custom-tabs-four-mech-labour" role="tabpanel"
                                             aria-labelledby="custom-tabs-four-mech-labour-tab">
                                             <div class="container">
-                                                <div class="container">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <div class="form-group row" id="labour_input">
-                                                                <div class="col-md-6">
-                                                                    <input class="form-control"
-                                                                        placeholder="Description"
-                                                                        id="add_labour_description">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="Amount" id="add_labour_amount">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <button class="btn btn-sm btn-primary mt-1"
-                                                                        id="add_labour">
-                                                                        <i class="fas fa-plus mr-2"></i>Add
-                                                                    </button>
-                                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="form-group row" id="labour_input">
+                                                            <div class="col-md-6">
+                                                                <input class="form-control"
+                                                                    placeholder="Description"
+                                                                    id="add_labour_description">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input type="number" class="form-control"
+                                                                    placeholder="Amount" id="add_labour_amount">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <button class="btn btn-sm btn-primary mt-1"
+                                                                    id="add_labour">
+                                                                    <i class="fas fa-plus mr-2"></i>Add
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                        <div class="card-body table-responsive p-0">
-                                                            <table
-                                                                class="table table-sm table-hover table-head-fxed text-nowrap"
-                                                                id="labour_table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Description</th>
-                                                                        <th>Amount</th>
-                                                                        <th style="width: 2vw;"></th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="labour_table_body"></tbody>
-                                                            </table>
-                                                        </div>
+                                                    </div>
+                                                    <div class="card-body table-responsive p-0">
+                                                        <table
+                                                            class="table table-sm table-hover table-head-fxed text-nowrap"
+                                                            id="labour_table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Description</th>
+                                                                    <th>Amount</th>
+                                                                    <th style="width: 2vw;"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="labour_table_body"></tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
@@ -512,41 +521,39 @@
                                         <div class="tab-pane fade" id="custom-tabs-four-paint" role="tabpanel"
                                             aria-labelledby="custom-tabs-four-paint-tab">
                                             <div class="container">
-                                                <div class="container">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <div class="form-group row" id="paint_input">
-                                                                <div class="col-md-6">
-                                                                    <input class="form-control"
-                                                                        placeholder="Description"
-                                                                        id="add_paint_description">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="Amount" id="add_paint_amount">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <button class="btn btn-sm btn-primary mt-1"
-                                                                        id="add_paint">
-                                                                        <i class="fas fa-plus mr-2"></i>Add
-                                                                    </button>
-                                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="form-group row" id="paint_input">
+                                                            <div class="col-md-6">
+                                                                <input class="form-control"
+                                                                    placeholder="Description"
+                                                                    id="add_paint_description">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input type="number" class="form-control"
+                                                                    placeholder="Amount" id="add_paint_amount">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <button class="btn btn-sm btn-primary mt-1"
+                                                                    id="add_paint">
+                                                                    <i class="fas fa-plus mr-2"></i>Add
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                        <div class="card-body table-responsive p-0">
-                                                            <table
-                                                                class="table table-sm table-hover table-head-fxed text-nowrap"
-                                                                id="paint_table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Description</th>
-                                                                        <th>Amount</th>
-                                                                        <th style="width: 2vw;"></th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="paint_table_body"></tbody>
-                                                            </table>
-                                                        </div>
+                                                    </div>
+                                                    <div class="card-body table-responsive p-0">
+                                                        <table
+                                                            class="table table-sm table-hover table-head-fxed text-nowrap"
+                                                            id="paint_table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Description</th>
+                                                                    <th>Amount</th>
+                                                                    <th style="width: 2vw;"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="paint_table_body"></tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
@@ -557,46 +564,132 @@
                                         <div class="tab-pane fade" id="custom-tabs-four-extras" role="tabpanel"
                                             aria-labelledby="custom-tabs-four-extras-tab">
                                             <div class="container">
-                                                <div class="container">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <div class="form-group row" id="extras_input">
-                                                                <div class="col-md-6">
-                                                                    <input class="form-control"
-                                                                        placeholder="Description"
-                                                                        id="add_extras_description">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="Amount" id="add_extras_amount">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <button class="btn btn-sm btn-primary mt-1"
-                                                                        id="add_extras">
-                                                                        <i class="fas fa-plus mr-2"></i>Add
-                                                                    </button>
-                                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="form-group row" id="extras_input">
+                                                            <div class="col-md-6">
+                                                                <input class="form-control"
+                                                                    placeholder="Description"
+                                                                    id="add_extras_description">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input type="number" class="form-control"
+                                                                    placeholder="Amount" id="add_extras_amount">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <button class="btn btn-sm btn-primary mt-1"
+                                                                    id="add_extras">
+                                                                    <i class="fas fa-plus mr-2"></i>Add
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                        <div class="card-body table-responsive p-0">
-                                                            <table
-                                                                class="table table-sm table-hover table-head-fxed text-nowrap"
-                                                                id="extras_table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Description</th>
-                                                                        <th>Amount</th>
-                                                                        <th style="width: 2vw;"></th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="extras_table_body"></tbody>
-                                                            </table>
-                                                        </div>
+                                                    </div>
+                                                    <div class="card-body table-responsive p-0">
+                                                        <table
+                                                            class="table table-sm table-hover table-head-fxed text-nowrap"
+                                                            id="extras_table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Description</th>
+                                                                    <th>Amount</th>
+                                                                    <th style="width: 2vw;"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="extras_table_body"></tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- End of Extras -->
+
+                                        <!-- Preview -->
+                                        <div class="tab-pane fade" id="custom-tabs-four-preview" role="tabpanel"
+                                            aria-labelledby="custom-tabs-four-preview-tab">
+                                            <div class="container">
+                                                <div class="card card-secondary card-outline">
+                                                    <div class="card-body">
+                                                        <dl class="row">
+                                                            <dt class="col-sm-2">Name of Owner</dt>
+                                                        </dl>
+                                                        <dl class="row">
+                                                            <dt class="col-sm-2">Phone</dt>
+                                                        </dl>
+                                                        <dl class="row">
+                                                            <dt class="col-sm-2">Email</dt>
+                                                        </dl>
+                                                    </div> 
+                                                </div>
+
+                                                <div class="card card-secondary card-outline">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Parts</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table></table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card card-secondary card-outline">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Panel/Mechanical Labour</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap" id="labour_table_preview">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Description</th>
+                                                                    <th style="width: 10vw;">Amount</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="labour_table_preview_body"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card card-secondary card-outline">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Tata Paint Schedule</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap" id="paint_table_preview">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Description</th>
+                                                                    <th style="width: 10vw;">Amount</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="paint_table_preview_body"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card card-secondary card-outline">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Extras</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap" id="extras_table_preview">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Description</th>
+                                                                    <th  style="width: 10vw;">Amount</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="extras_table_preview_body"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card card-secondary card-outline">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Estimate Summary</h3>
+                                                    </div>
+                                                    <div class="card-body"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End of Preview -->
                                     </div>
                                 </div>
                                 <!-- /.card -->
@@ -714,6 +807,7 @@
                 else {
                     $('#vehicle_model').val(json["model"]);
                     var url = "http://localhost:5000/get-parts/?part_id=" + json["part_id"];
+
                     //Generate part description dropdown from data received from the server
                     fetch(url)
                     .then(res => res.json())
@@ -806,8 +900,13 @@
         else {
             var id = Math.floor(100000 + Math.random() * 900000);
             var labour_data = '<tr id="'+ id +'">';
+            var labour_data_preview = '<tr id="'+ id +'">';
             labour_data = labour_data + '<td>' + $('#add_labour_description').val() + '</td><td>' + parseFloat($('#add_labour_amount').val()).toFixed(2) + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+
+            labour_data_preview = labour_data_preview + '<td>' + $('#add_labour_description').val() + '</td><td>' + parseFloat($('#add_labour_amount').val()).toFixed(2) + '</td></tr>';
+
             $("#labour_table_body").append(labour_data);
+            $("#labour_table_preview_body").append(labour_data_preview);
             $('#labour_input input').val("");
 
         }
@@ -843,9 +942,15 @@
         }
         else {
             var id = Math.floor(200000 + Math.random() * 900000);
-            var labour_data = '<tr id="'+ id +'">';
-            labour_data = labour_data + '<td>' + $('#add_paint_description').val() + '</td><td>' + parseFloat($('#add_paint_amount').val()).toFixed(2) + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
-            $("#paint_table_body").append(labour_data);
+            var paint_data = '<tr id="'+ id +'">';
+            var paint_data_preview = '<tr id="'+ id +'">';
+
+            paint_data = paint_data + '<td>' + $('#add_paint_description').val() + '</td><td>' + parseFloat($('#add_paint_amount').val()).toFixed(2) + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+            
+            paint_data_preview = paint_data_preview + '<td>' + $('#add_paint_description').val() + '</td><td>' + parseFloat($('#add_paint_amount').val()).toFixed(2) + '</td></tr>';
+
+            $("#paint_table_body").append(paint_data);
+            $("#paint_table_preview_body").append(paint_data_preview);
             $('#paint_input input').val("");
 
         }
@@ -881,9 +986,15 @@
         }
         else {
             var id = Math.floor(300000 + Math.random() * 900000);
-            var labour_data = '<tr id="'+ id +'">';
-            labour_data = labour_data + '<td>' + $('#add_extras_description').val() + '</td><td>' + parseFloat($('#add_extras_amount').val()).toFixed(2) + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
-            $("#extras_table_body").append(labour_data);
+            var extras_data = '<tr id="'+ id +'">';
+            var extras_data_preview = '<tr id="'+ id +'">';
+
+            extras_data = extras_data + '<td>' + $('#add_extras_description').val() + '</td><td>' + parseFloat($('#add_extras_amount').val()).toFixed(2) + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+
+            extras_data_preview = extras_data_preview + '<td>' + $('#add_extras_description').val() + '</td><td>' + parseFloat($('#add_extras_amount').val()).toFixed(2) + '</td></tr>';
+
+            $("#extras_table_body").append(extras_data);
+            $("#extras_table_preview_body").append(extras_data_preview);
             $('#extras_input input').val("");
 
         }
