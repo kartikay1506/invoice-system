@@ -633,9 +633,14 @@
                                                 <div class="card card-secondary card-outline">
                                                     <div class="card-header">
                                                         <h3 class="card-title">Panel/Mechanical Labour</h3>
+                                                        <div class="card-tools">
+                                                            <button class="btn btn-tool" id="labour-tab">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                     <div class="card-body">
-                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap" id="labour_table_preview">
+                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap preview_table" id="labour_table_preview">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Description</th>
@@ -650,9 +655,14 @@
                                                 <div class="card card-secondary card-outline">
                                                     <div class="card-header">
                                                         <h3 class="card-title">Tata Paint Schedule</h3>
+                                                        <div class="card-tools">
+                                                            <button class="btn btn-tool" id="paint-tab">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                     <div class="card-body">
-                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap" id="paint_table_preview">
+                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap preview_table" id="paint_table_preview">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Description</th>
@@ -667,9 +677,14 @@
                                                 <div class="card card-secondary card-outline">
                                                     <div class="card-header">
                                                         <h3 class="card-title">Extras</h3>
+                                                        <div class="card-tools">
+                                                            <button class="btn btn-tool" id="extras-tab">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                     <div class="card-body">
-                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap" id="extras_table_preview">
+                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap preview_table" id="extras_table_preview">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Description</th>
@@ -864,6 +879,7 @@
     $(document).on("click", "button.btn-table", function () {
         var id = $(this).parent().parent().attr("id");
         $('#' + id).remove();
+        $('.preview_table #'+id).remove();
     });
 </script>
 <script>

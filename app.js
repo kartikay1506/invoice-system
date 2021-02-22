@@ -1,4 +1,6 @@
 const express = require('express');
+const ejs = require('ejs');
+const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const Excel = require('exceljs');
@@ -8,11 +10,21 @@ const fs = require('fs');
 const multer = require('multer');
 const app = express();
 
+//EJS
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
+
 //Bodyparser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: '1024mb', extended:true }));
 
 //app.use(cors);
+
+//Routes
+app.use('/', require('./routes/index'));
+
+//For Static Files
+app.use(express.static(__dirname + '/assets'));
 
 const models =  {
     //do again from the sheet
@@ -80,7 +92,8 @@ var upload = multer({
 
 //Default route
 app.get('/', (req, resp) => {
-    resp.send("Welcome to the server!");
+    //resp.send("Welcome to the server!");
+    resp.render('index');
 });
 
 //Get car model based on chassis number

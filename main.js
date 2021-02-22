@@ -1,4 +1,5 @@
 const { app, Tray, BrowserWindow } = require('electron');
+const server = require('./app');
 
 function createWindow() {
     const window = new BrowserWindow({
@@ -9,7 +10,7 @@ function createWindow() {
         }
     });
 
-    window.loadFile("src/index.html");
+    window.loadURL("http://localhost:5000/");
 }
 
 app.whenReady().then(createWindow);;
