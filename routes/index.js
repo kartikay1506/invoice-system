@@ -3,11 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, resp) => {
-    resp.render('invoice');
+    resp.render('estimate');
 });
 
-router.get('/invoice', (req, resp) => {
-    resp.render('invoice');
+router.get('/estimate', (req, resp) => {
+    resp.render('estimate');
 });
 
 router.get('/files', (req, resp) => {
