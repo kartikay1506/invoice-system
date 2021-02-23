@@ -188,7 +188,7 @@ app.post('/invoice', (req, resp) => {
 });
 
 //upload file to the server
-app.post('file-upload', (req, resp) => {
+app.post('/file-upload', (req, resp) => {
     upload(req, resp, function(err) {
         if(err) {
             resp.send(err);

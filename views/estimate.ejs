@@ -520,7 +520,19 @@
                                                         <h3 class="card-title">Parts</h3>
                                                     </div>
                                                     <div class="card-body">
-                                                        <table></table>
+                                                        <table
+                                                            class="table table-sm table-hover table-head-fxed text-nowrap preview_table"
+                                                            id="parts_table_preview">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Part Number</th>
+                                                                    <th>Part Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Amount</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="parts_table_preview_body"></tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
 
@@ -765,9 +777,14 @@
             }
             else {
                 var parts_data = '<tr id="' + $('#add_part_number').val() + '">';
+                var parts_data_preview = '<tr id="' + $('#add_part_number').val() + '">';
                 var amount = $('#part_descriptions option[value="'+ $('#add_part_description').val() +'"]').attr("amount");
                 parts_data = parts_data + '<td>' + $('#add_part_number').val() + '</td><td>' + $('#add_part_description').val() + '</td><td>' + $('#add_part_quantity').val() + '</td><td>' + amount + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+                parts_data_preview = parts_data_preview + '<td>' + $('#add_part_number').val() + '</td><td>' + $('#add_part_description').val() + '</td><td>' + $('#add_part_quantity').val() + '</td><td>' + amount + '</td></tr>';
+
+
                 $("#parts_table_body").append(parts_data);
+                $("#parts_table_preview_body").append(parts_data_preview);
                 $('#parts_input input').val("");
             }
         });
