@@ -1,8 +1,8 @@
 const { app } = require('electron');
 const express = require('express');
+const Excel = require('exceljs');
 const multer = require('multer');
 const path = require('path');
-const { nextTick } = require('process');
 const router = express.Router();
 
 router.get('/', (req, resp) => {
@@ -27,6 +27,33 @@ router.get('/parts', (req, resp) => {
 
 router.get('/test', (req, resp) => {
     resp.render('test');
+});
+
+router.post('/login', (req, resp) => {
+    const { username, password } = req.body;
+
+    var filename = "./uploads/Credentials.xlsx";
+    var workbook = new Excel.Workbook();
+    workbook.xlsx.readFile(filename)
+    .then(function() {
+        var worksheet = workbook.getWorksheet(1);
+        worksheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
+            var rowData = {};
+            if(rowNumber > 1) {
+                if(row.getCell(1).text == username) {
+                    if(row.getCell(2).text == password) {
+                        resp.redirect('/estimate?success=Authentication');
+                    }
+                    else {
+                        resp.redirect('/?error=IncorrectPassword');
+                    }
+                }
+                else {
+                    resp.redirect('/?error=UserNotFound');
+                }
+            }
+        });
+    });
 });
 
 //File Upload

@@ -90,12 +90,6 @@ var upload = multer({
     }
 }).single("customFile");
 
-//Default route
-app.get('/', (req, resp) => {
-    //resp.send("Welcome to the server!");
-    resp.render('index');
-});
-
 //Get car model based on chassis number
 app.get('/get-model', (req, resp) => {
     resp.setHeader('Access-Control-Allow-Origin', '*');
