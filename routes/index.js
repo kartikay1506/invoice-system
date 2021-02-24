@@ -6,7 +6,7 @@ const { nextTick } = require('process');
 const router = express.Router();
 
 router.get('/', (req, resp) => {
-    resp.render('estimate');
+    resp.render('login');
 });
 
 router.get('/estimate', (req, resp) => {
