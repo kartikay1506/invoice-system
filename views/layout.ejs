@@ -51,6 +51,40 @@
 <body>
     <%- body%>
 </body>
+<!-- SweetAlert2 -->
+<script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+<script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var type = urlParams.toString().split('=');
+    if(type[0] == 'error') {
+        if(type[1] == 'IncorrectPassword') {
+            Swal.fire({
+                icon: 'error',
+                title: "Wrong Password !",
+                text: "Please enter correct password"
+            });
+        }
+        else if(type[1] == 'UserNotFound') {
+            Swal.fire({
+                icon: 'error',
+                title: "User Not Found",
+                text: "Please check the username again."
+            });
+        }
+    }
+    else if(type[0] == 'success') {
+        if(type[1] == 'Authentication') {
+            Swal.fire({
+                icon: 'success',
+                title: "Authentication Successful",
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    window.history.pushState({}, document.title, "/estimate");
+                }
+            });
+        }
+    }
+</script>
 <script>
     var url = window.location.pathname;
     url = url.substr(1);
