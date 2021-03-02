@@ -2,6 +2,8 @@ const { app } = require('electron');
 const express = require('express');
 const Excel = require('exceljs');
 const multer = require('multer');
+const excelToJson = require('convert-excel-to-json');
+const fs = require('fs');
 const path = require('path');
 const router = express.Router();
 
@@ -66,7 +68,7 @@ router.get('/parts', (req, resp) => {
 });
 
 router.get('/test', (req, resp) => {
-    resp.render('test');
+    resp.render('estimate-print');
 });
 
 router.post('/login', (req, resp) => {
@@ -188,6 +190,74 @@ router.post('/file-upload', (req, resp) => {
             resp.send("File Uploaded successfully");
         }
     });
+});
+
+
+//generate report
+router.post('/invoice', (req, resp) => {
+    //const {  } = req.body;
+    const workbook = new Excel.Workbook();
+    const worksheet = workbook.addWorksheet("Invoice Data");
+
+    worksheet.columns = [
+        {header: 'Registration Number', key: 'registration_number', width: 32},
+        {header: 'Chassis Number', key: 'chassis_number', width: 32}, 
+        {header: 'Customer Name', key: 'customer_name', width: 10},
+        {header: 'Contact Number', key: 'contact_number', width: 10},
+        {header: 'Model', key: 'model', width: 15},
+        {header: 'Estimate Date', key: 'estimate_date', width: 15},
+        {header: 'Policy Number', key: 'policy_number', width: 15},
+        {header: 'Policy Start', key: 'policy_start', width: 15},
+        {header: 'policy_end', key: 'policy_end', width: 15},
+    ];
+
+    worksheet.addRow({
+        registration_number: registration_number,
+        chassis_number: chassis_number,
+        customer_name: customer_name,
+        contact_number: contact_number,
+        model: model,
+        estimate_date: estimate_date,
+        policy_number: policy_number,
+        policy_start: policy_start,
+        policy_end: policy_end
+    });
+
+    workbook.xlsx.writeFile('/upload/report.xlsx');
+    resp.send("Ok");
+});
+
+
+//get all files
+router.get('/get-files', (req, resp) => {
+    resp.setHeader('Access-Control-Allow-Origin', '*');
+    const directoryPath = path.join(__dirname, "../uploads");
+    fs.readdir(directoryPath, (err, files) => {
+        if(err) {
+            console.log("Unable to fetch files");
+            resp.send("Unable to fetch files");
+        }
+        else {
+            var fileInfo = [];
+            files.forEach(file => {
+                var fileName = file.substr(0, file.lastIndexOf('.'));
+                var filePath = path.join("./uploads/" + file);
+                var info = {};
+                var stat = fs.statSync(filePath);
+                var date = new Date(stat.birthtime);
+                info[fileName] = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+                fileInfo.push(info);
+            });
+            resp.send(fileInfo);
+        }
+    });
+});
+
+
+//Get report
+router.get('/get-report', (req, resp) => {
+    resp.setHeader('Access-Control-Allow-Origin', '*');
+    resp.send("Ok");
 });
 
 module.exports = router;
