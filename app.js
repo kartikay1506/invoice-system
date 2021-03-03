@@ -15,6 +15,13 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: '1024mb', extended:true }));
 
+//Sessions
+app.use(session({
+    secret: "Oberai Motors",
+    resave: true,
+    saveUninitialized: true
+}));
+
 //app.use(cors);
 
 //Routes

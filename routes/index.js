@@ -8,6 +8,23 @@ const path = require('path');
 const router = express.Router();
 
 
+var authenticate = function(req, resp, next) {
+    var isAuthenticated;
+    if(typeof req.session.username === "undefined") {
+        isAuthenticated = false;
+    }
+    else {
+        isAuthenticated = true;
+    }
+    if(isAuthenticated) {
+        next();
+    }
+    else {
+        resp.redirect('/?error=Login');
+    }
+}
+
+
 const models =  {
     //do again from the sheet
     "632": {"101": "Altroz XE 1.2 P", "138": "Altroz XE 1.2 P Rhytm", "105": "Altroz XM 1.2 P", "137": "Altroz XM 1.2 P Rhytm", "135": "Altroz XM 1.2 P Rhytm+Style", "103": "Altroz XT 1.2 P", "115": "Altroz XZ 1.2 P"},
@@ -51,23 +68,23 @@ router.get('/', (req, resp) => {
     resp.render('login');
 });
 
-router.get('/estimate', (req, resp) => {
+router.get('/estimate', authenticate, (req, resp) => {
     resp.render('estimate');
 });
 
-router.get('/files', (req, resp) => {
+router.get('/files', authenticate, (req, resp) => {
     resp.render('files');
 });
 
-router.get('/reports', (req, resp) => {
+router.get('/reports', authenticate, (req, resp) => {
     resp.render('report');
 });
 
-router.get('/parts', (req, resp) => {
+router.get('/parts', authenticate, (req, resp) => {
     resp.render('parts');
 });
 
-router.get('/test', (req, resp) => {
+router.get('/test', authenticate, (req, resp) => {
     resp.render('estimate-print');
 });
 
@@ -84,6 +101,7 @@ router.post('/login', (req, resp) => {
             if(rowNumber > 1) {
                 if(row.getCell(1).text == username) {
                     if(row.getCell(2).text == password) {
+                        req.session.username = username;
                         resp.redirect('/estimate?success=Authentication');
                     }
                     else {
@@ -95,6 +113,18 @@ router.post('/login', (req, resp) => {
                 }
             }
         });
+    });
+});
+
+router.get('/logout', (req, resp) => {
+    req.session.destroy(function(err) {
+        if(err) {
+            console.log("Error while destroying session");
+        }
+        else {
+            console.log("Session Destroyed");
+            resp.redirect('/');
+        }
     });
 });
 
