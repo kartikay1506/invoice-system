@@ -123,7 +123,7 @@ router.get('/logout', (req, resp) => {
         }
         else {
             console.log("Session Destroyed");
-            resp.redirect('/');
+            resp.redirect('/?success=Logout');
         }
     });
 });
