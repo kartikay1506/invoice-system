@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const ejs = require('ejs');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');

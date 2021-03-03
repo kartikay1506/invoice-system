@@ -3,61 +3,110 @@
         padding: 2px 0 2px 20px;
         background-color: #d9d9d9;
     }
+    .estimate-header-logo {
+        height: 75px;
+        border: 1.5px solid #000;
+        padding: 3px;
+        margin-bottom: 12px;
+    }
+    .estimate-header-icon {
+        height: 75px;
+        padding: 3px;
+        margin-bottom: 12px;
+    }
 </style>
 <body>
     <div class="wrapper">
         <!-- Main content -->
         <section class="invoice">
           <!-- title row -->
-          <div class="row">
+          <div class="row" style="border-bottom: 1.75px solid #000;">
             <div class="col-3">
               <h2 class="page-header">
-                <i class="fas fa-globe"></i> Oberai Motors
+                <img class="estimate-header-icon" src="/images/OM_LOGO_icon.png" alt=""> Oberai Motors
               </h2>
             </div>
-            <div class="col-6" style="text-align: center;">
-                <h4 class="page-header">
+            <div class="col-6" style="text-align: center; margin-top: 5px;">
+                <h5 class="page-header" style="margin-bottom: 0;">
                     <strong>Tata - M/S OBERAI MOTORS - DEHRADUN</strong>
-                </h4>
-                <p>PO Majra Saharanpur Road, Dehradun, Uttarakhand</p>
-                <p>Dehradun - 248001</p>
+                </h5>
+                <p style="margin-bottom: 0; font-size: 14px;">PO Majra Saharanpur Road, Dehradun, Uttarakhand</p>
+                <p style="margin-bottom: 0; font-size: 14px;">Dehradun - 248001</p>
             </div>
             <div class="col-3">
                 <h2 class="page-header">
-                    <small class="float-right">Tata Motors Limited</small>
+                    <small class="float-right"><img class="estimate-header-logo" src="/images/tata_motors_services-copy.jpg"></small>
                 </h2>
             </div>
             <!-- /.col -->
           </div>
 
-          <div class="row">
+          <div class="row mt-1">
               <div class="col-12">
-                  <h4 class="page-header">
-                      Registration No: UK07DR4401
+                  <h5>
+                      <strong>Registration No: UK07DR4401</strong>
                       <small class="float-right">Created: 12/07/2020</small>
-                  </h4>
+                  </h5>
               </div>
           </div>
-          <!-- info row -->
+          <!-- info card -->
           <div class="card" style="border: 1.5px solid #000; padding: 5px">
-              <div class="row">
-                  <div class="col-7">
-                      <h6><strong>Name of Owner:</strong> JITENDER DUTT</h6>
-                      <h6><strong>Phone:</strong></h6>
-                      <h6><strong>Email:</strong></h6>
-                      <h6><strong>Vechicle Model:</strong></h6>
-                      <h6><strong>Chassis No:</strong></h6>
-                  </div>
-                  <div class="col-5">
+            <div class="row">
+                <div class="col-2">
+                    <h6><strong>Name of Owner:</strong></h6>
+                </div>
+                <div class="col-4" style="text-align: left;">JITENDER DUTT</div>
+                <div class="col-2">
                     <h6><strong>Insurance:</strong></h6>
+                </div>
+                <div class="col" style="text-align: left;"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <h6><strong>Phone:</strong></h6>
+                </div>
+                <div class="col-4" style="text-align: left;"></div>
+                <div class="col-2">
                     <h6><strong>Policy Number:</strong></h6>
+                </div>
+                <div class="col" style="text-align: left;"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <h6><strong>Email:</strong></h6>
+                </div>
+                <div class="col-4" style="text-align: left;"></div>
+                <div class="col-2">
                     <h6><strong>Policy Start Date:</strong></h6>
+                </div>
+                <div class="col" style="text-align: left;"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <h6><strong>Vechicle Model:</strong></h6>
+                </div>
+                <div class="col-4" style="text-align: left;"></div>
+                <div class="col-2">
                     <h6><strong>Policy End Date:</strong></h6>
+                </div>
+                <div class="col" style="text-align: left;"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <h6><strong>Chassis No:</strong></h6>
+                </div>
+                <div class="col-4" style="text-align: left;"></div>
+                <div class="col-2">
                     <h6><strong>Loss Date/Time:</strong></h6>
-                  </div>
-              </div>
+                </div>
+                <div class="col" style="text-align: left;"></div>
+            </div>
           </div>
-          <!-- /.row -->
+          <!-- /.card -->
       
         <div class="card">
               <div class="card-header estimate-header">
