@@ -93,7 +93,7 @@
                                                             Owner</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Full Name"
+                                                        <input type="text" class="form-control preview-control" placeholder="Full Name"
                                                             id="customer_name" required>
                                                     </div>
                                                 </div>
@@ -105,7 +105,7 @@
                                                         <label class="required-field" for="phone_number">Phone</label>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <input type="number" class="form-control" placeholder="Phone"
+                                                        <input type="number" class="form-control preview-control" placeholder="Phone"
                                                             id="phone_number" required>
                                                     </div>
                                                 </div>
@@ -117,7 +117,7 @@
                                                         <label class="required-field" for="customer_email">Email</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="email" class="form-control" placeholder="Email"
+                                                        <input type="email" class="form-control preview-control" placeholder="Email"
                                                             id="customer_email" required>
                                                     </div>
                                                 </div>
@@ -136,8 +136,8 @@
                                                         <label for="chasis_number">VIN</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Chasis Number" id="chasis_number">
+                                                        <input type="text" class="form-control preview-control"
+                                                            placeholder="Chassis Number" id="chasis_number">
                                                     </div>
                                                 </div>
                                                 <!-- End of Chasis Number -->
@@ -163,7 +163,7 @@
                                                         <label for="vehicle_model">Vehicle Model</label>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control preview-control"
                                                             placeholder="Vehicle Model" id="vehicle_model" readonly>
                                                     </div>
                                                     <div class="col-md-4">
@@ -209,7 +209,7 @@
                                                             Number</label>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control preview-control"
                                                             placeholder="Policy Number" id="policy_number" required>
                                                     </div>
                                                 </div>
@@ -221,7 +221,7 @@
                                                         <label for="policy_start_date">Policy Start Date</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="date" class="form-control" placeholder="dd/mm/yyyy"
+                                                        <input type="date" class="form-control preview-control" placeholder="dd/mm/yyyy"
                                                             id="policy_start_date">
                                                     </div>
                                                 </div>
@@ -233,7 +233,7 @@
                                                         <label for="policy_end_date">Policy End Date</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="date" class="form-control" placeholder="dd/mm/yyyy"
+                                                        <input type="date" class="form-control preview-control" placeholder="dd/mm/yyyy"
                                                             id="policy_end_date">
                                                     </div>
                                                 </div>
@@ -246,11 +246,11 @@
                                                             Date/Time</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="date" class="form-control" placeholder=""
+                                                        <input type="date" class="form-control preview-control" placeholder=""
                                                             id="loss_date" required>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="time" class="form-control" placeholder=""
+                                                        <input type="time" class="form-control preview-control" placeholder=""
                                                             id="loss_time" required>
                                                     </div>
                                                 </div>
@@ -263,7 +263,7 @@
                                                             Company</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <select class="form-control" id="insurance_company" required>
+                                                        <select class="form-control preview-control" id="insurance_company" required>
                                                             <option value="select">Insurance Company</option>
                                                             <option value="others">Others</option>
                                                         </select>
@@ -492,24 +492,77 @@
                                                 <div class="card card-secondary card-outline">
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col">
-                                                                <div class="row">
-                                                                    <dt class="col-sm-3">Name of Owner</dt>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <dt class="col-sm-3">Phone</dt>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <dt class="col-sm-3">Email</dt>
-                                                                </div>
+                                                            <div class="col-2">
+                                                                <h6><strong>Name of Owner:</strong></h6>
                                                             </div>
-                                                            <div class="col">
-                                                                <div class="row">
-                                                                    <dt class="col-sm-3">Vechicle Model</dt>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <dt class="col-sm-3">Chassis Number</dt>
-                                                                </div>
+                                                            <div class="col-4" style="text-align: left;">
+                                                                <h6 id="preview_customer_name"></h6>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <h6><strong>Insurance:</strong></h6>
+                                                            </div>
+                                                            <div class="col" style="text-align: left;">
+                                                                <h6 id="preview_insurance_company"></h6>
+                                                            </div>
+                                                        </div>
+                                            
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                <h6><strong>Phone:</strong></h6>
+                                                            </div>
+                                                            <div class="col-4" style="text-align: left;">
+                                                                <h6 id="preview_phone_number"></h6>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <h6><strong>Policy Number:</strong></h6>
+                                                            </div>
+                                                            <div class="col" style="text-align: left;">
+                                                                <h6 id="preview_policy_number"></h6>
+                                                            </div>
+                                                        </div>
+                                            
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                <h6><strong>Email:</strong></h6>
+                                                            </div>
+                                                            <div class="col-4" style="text-align: left;">
+                                                                <h6 id="preview_customer_email"></h6>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <h6><strong>Policy Start Date:</strong></h6>
+                                                            </div>
+                                                            <div class="col" style="text-align: left;">
+                                                                <h6 id="preview_policy_start_date"></h6>
+                                                            </div>
+                                                        </div>
+                                            
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                <h6><strong>Vechicle Model:</strong></h6>
+                                                            </div>
+                                                            <div class="col-4" style="text-align: left;">
+                                                                <h6 id="preview_vehicle_model"></h6>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <h6><strong>Policy End Date:</strong></h6>
+                                                            </div>
+                                                            <div class="col" style="text-align: left;">
+                                                                <h6 id="preview_policy_end_date"></h6>
+                                                            </div>
+                                                        </div>
+                                            
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                <h6><strong>Chassis No:</strong></h6>
+                                                            </div>
+                                                            <div class="col-4" style="text-align: left;">
+                                                                <h6 id="preview_chasis_number"></h6>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <h6><strong>Loss Date/Time:</strong></h6>
+                                                            </div>
+                                                            <div class="col" style="text-align: left;">
+                                                                <h6 id="preview_loss_date_time"></h6>
                                                             </div>
                                                         </div>
                                                     </div> 
@@ -608,6 +661,10 @@
                                                     </div>
                                                     <div class="card-body"></div>
                                                 </div>
+
+                                                <div class="float-right">
+                                                    <button class="btn btn-success" style="width: 15vw;"><i class="fas fa-print mr-2"></i> Print</button>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- End of Preview -->
@@ -661,6 +718,28 @@
     <!-- Custom JS for fetching data -->
     <script src="dist/js/data.js"></script>
 
+
+    <script>
+
+        window.addEventListener('beforeunload', function (e) {
+            // Cancel the event
+            e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+            // Chrome requires returnValue to be set
+            e.returnValue = "All data entered will be lost. Are you sure to continue?";
+        });
+
+        $('.preview-control').on("change", function() {
+            var id = $(this).attr("id");
+            if(id === 'loss_date' || id === 'loss_time') {
+                var value = $('#loss_date').val() + " " + $('#loss_time').val();
+                $('#preview_loss_date_time').text(value);
+                
+            }
+            else {
+            $('#preview_'+id).text($(this).val());
+            }
+        });
+    </script>
 
     <script>
         var vehicle_model = document.getElementById('vehicle_model');
