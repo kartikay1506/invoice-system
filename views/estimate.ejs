@@ -80,596 +80,600 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="card-body">
-                                    <div class="tab-content" id="custom-tabs-four-tabContent">
-                                        <!-- Personal Details Tab -->
-                                        <div class="tab-pane fade show active" id="custom-tabs-four-home"
-                                            role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                                            <div class="container" style="margin-top: 20px;">
-                                                <!-- Customer Name -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label class="required-field" for="customer_name">Name of
-                                                            Owner</label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control preview-control" placeholder="Full Name"
-                                                            id="customer_name" required>
-                                                    </div>
-                                                </div>
-                                                <!-- End of Customer Name -->
-
-                                                <!-- Phone -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label class="required-field" for="phone_number">Phone</label>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <input type="number" class="form-control preview-control" placeholder="Phone"
-                                                            id="phone_number" required>
-                                                    </div>
-                                                </div>
-                                                <!-- End of Phone -->
-
-                                                <!-- Email -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label class="required-field" for="customer_email">Email</label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="email" class="form-control preview-control" placeholder="Email"
-                                                            id="customer_email" required>
-                                                    </div>
-                                                </div>
-                                                <!-- End of Email -->
-                                            </div>
-                                        </div>
-                                        <!-- End of Personal Details Tab -->
-
-                                        <!-- Vehicle Details Tab -->
-                                        <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
-                                            aria-labelledby="custom-tabs-four-profile-tab">
-                                            <div class="container" style="margin-top: 20px;">
-                                                <!-- Chasis Number -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label for="chasis_number">VIN</label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control preview-control"
-                                                            placeholder="Chassis Number" id="chasis_number">
-                                                    </div>
-                                                </div>
-                                                <!-- End of Chasis Number -->
-
-                                                <!-- Registration Number -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label class="required-field"
-                                                            for="registation_number">Registration
-                                                            Number</label>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Registration Number" id="registation_number"
-                                                            required>
-                                                    </div>
-                                                </div>
-                                                <!-- End of Registration Number -->
-
-                                                <!-- Vehicle Model -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label for="vehicle_model">Vehicle Model</label>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <input type="text" class="form-control preview-control"
-                                                            placeholder="Vehicle Model" id="vehicle_model" readonly>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button class="btn btn-sm btn-info mt-1"
-                                                            id="vehicle_model_edit">
-                                                            <i class="fas fa-pencil-alt"></i>
-                                                        </button>
-                                                        <button class="btn btn-sm btn-success mt-1"
-                                                            id="vehicle_model_save" style="display: none;">
-                                                            <i class="fas fa-save"></i>
-                                                        </button>
-                                                        <button class="btn btn-sm btn-danger mt-1 ml-2"
-                                                            id="vehicle_model_cancel" style="display: none;">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <!-- End of Vehicle Model -->
-
-                                                <!-- Estimate/Job Number -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label for="estimate_number">Estimate/Job Number</label>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Estimate Number" id="estimate_number">
-                                                    </div>
-                                                </div>
-                                                <!-- End of Estimate/Job Number -->
-                                            </div>
-                                        </div>
-                                        <!-- End of Vehicle Details Tab -->
-
-                                        <!-- Policy Details Tab -->
-                                        <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel"
-                                            aria-labelledby="custom-tabs-four-messages-tab">
-                                            <div class="container" style="margin-top: 20px;">
-                                                <!-- Policy Number -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label class="required-field" for="policy_number">Policy
-                                                            Number</label>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <input type="text" class="form-control preview-control"
-                                                            placeholder="Policy Number" id="policy_number" required>
-                                                    </div>
-                                                </div>
-                                                <!-- End of Policy Number -->
-
-                                                <!-- Policy Start Date -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label for="policy_start_date">Policy Start Date</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="date" class="form-control preview-control" placeholder="dd/mm/yyyy"
-                                                            id="policy_start_date">
-                                                    </div>
-                                                </div>
-                                                <!-- End of Policy Start Date -->
-
-                                                <!-- Policy End Date -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label for="policy_end_date">Policy End Date</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="date" class="form-control preview-control" placeholder="dd/mm/yyyy"
-                                                            id="policy_end_date">
-                                                    </div>
-                                                </div>
-                                                <!-- End of Policy End Date -->
-
-                                                <!-- Loss Date -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label class="required-field" for="loss_date">Loss
-                                                            Date/Time</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="date" class="form-control preview-control" placeholder=""
-                                                            id="loss_date" required>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="time" class="form-control preview-control" placeholder=""
-                                                            id="loss_time" required>
-                                                    </div>
-                                                </div>
-                                                <!-- End of Loss Date -->
-
-                                                <!-- Insurance Company -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label class="required-field" for="insurance_company">Insurance
-                                                            Company</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <select class="form-control preview-control" id="insurance_company" required>
-                                                            <option value="select">Insurance Company</option>
-                                                            <option value="others">Others</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Please Specify" id="insurance_company_others"
-                                                            style="display: none;">
-                                                    </div>
-                                                </div>
-                                                <!-- End of Insurance Company -->
-
-                                                <!-- Claim Number -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label for="claim_number">Claim Number</label>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Claim Number" id="claim_number">
-                                                    </div>
-                                                </div>
-                                                <!-- End of Claim Number -->
-
-                                                <!-- Service Advisor -->
-                                                <div class="form-group row">
-                                                    <div class="col-md-2 col-form-label">
-                                                        <label for="service_advisor">Service Advisor Name</label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Full Name"
-                                                            id="service_advisor">
-                                                    </div>
-                                                </div>
-                                                <!-- End of Service Advisor -->
-                                            </div>
-                                        </div>
-                                        <!-- End of Policy Details Tab -->
-
-                                        <!-- Parts Tab -->
-                                        <div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel"
-                                            aria-labelledby="custom-tabs-four-settings-tab">
-                                            <div class="container">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <div class="form-group row" id="parts_input">
-                                                            <div class="col-md-4">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Part Number" id="add_part_number">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <input list="part_descriptions" class="form-control"
-                                                                    placeholder="Part Description"
-                                                                    id="add_part_description">
-                                                                <datalist id="part_descriptions">
-                                                                    <!-- <option value="Front Bumper Skin">Front Bumper Skin</option>
-                                                                    <option value="Assy Fender Comp LH">Assy Fender Comp LH</option> -->
-                                                                </datalist>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Quantity" id="add_part_quantity">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <button class="btn btn-sm btn-primary mt-1"
-                                                                    id="add_part">
-                                                                    <i class="fas fa-plus mr-2"></i>Add Part
-                                                                </button>
-                                                            </div>
+                                
+                                <form action="/invoice" method="post" enctype="multipart/form-data">
+                                    <div class="card-body">
+                                        <div class="tab-content" id="custom-tabs-four-tabContent">
+                                            <!-- Personal Details Tab -->
+                                            <div class="tab-pane fade show active" id="custom-tabs-four-home"
+                                                role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                                                <div class="container" style="margin-top: 20px;">
+                                                    <!-- Customer Name -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label class="required-field" for="customer_name">Name of
+                                                                Owner</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" class="form-control preview-control" placeholder="Full Name"
+                                                                id="customer_name" name="customer_name" required>
                                                         </div>
                                                     </div>
-                                                    <div class="card-body table-responsive p-0">
-                                                        <table
-                                                            class="table table-sm table-hover table-head-fxed text-nowrap"
-                                                            id="parts_table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Part Number</th>
-                                                                    <th>Part Name</th>
-                                                                    <th>Quantity</th>
-                                                                    <th>Amount</th>
-                                                                    <th style="width: 2vw;"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="parts_table_body"></tbody>
-                                                        </table>
+                                                    <!-- End of Customer Name -->
+    
+                                                    <!-- Phone -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label class="required-field" for="phone_number">Phone</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="number" class="form-control preview-control" placeholder="Phone"
+                                                                id="phone_number" name="phone_number" required>
+                                                        </div>
                                                     </div>
+                                                    <!-- End of Phone -->
+    
+                                                    <!-- Email -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label class="required-field" for="customer_email">Email</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="email" class="form-control preview-control" placeholder="Email"
+                                                                id="customer_email" name="customer_email" required>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End of Email -->
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- End of Parts Tab -->
-
-                                        <!-- Mechanical Labour Tab -->
-                                        <div class="tab-pane fade" id="custom-tabs-four-mech-labour" role="tabpanel"
-                                            aria-labelledby="custom-tabs-four-mech-labour-tab">
-                                            <div class="container">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <div class="form-group row" id="labour_input">
-                                                            <div class="col-md-6">
-                                                                <input class="form-control"
-                                                                    placeholder="Description"
-                                                                    id="add_labour_description">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Amount" id="add_labour_amount">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <button class="btn btn-sm btn-primary mt-1"
-                                                                    id="add_labour">
-                                                                    <i class="fas fa-plus mr-2"></i>Add
-                                                                </button>
-                                                            </div>
+                                            <!-- End of Personal Details Tab -->
+    
+                                            <!-- Vehicle Details Tab -->
+                                            <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
+                                                aria-labelledby="custom-tabs-four-profile-tab">
+                                                <div class="container" style="margin-top: 20px;">
+                                                    <!-- Chasis Number -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label for="chasis_number">VIN</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" class="form-control preview-control"
+                                                                placeholder="Chassis Number" id="chasis_number" name="chasis_number">
                                                         </div>
                                                     </div>
-                                                    <div class="card-body table-responsive p-0">
-                                                        <table
-                                                            class="table table-sm table-hover table-head-fxed text-nowrap"
-                                                            id="labour_table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Description</th>
-                                                                    <th>Amount</th>
-                                                                    <th style="width: 2vw;"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="labour_table_body"></tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End of Mechanical Labour Tab -->
-
-                                        <!-- Paint Schedule -->
-                                        <div class="tab-pane fade" id="custom-tabs-four-paint" role="tabpanel"
-                                            aria-labelledby="custom-tabs-four-paint-tab">
-                                            <div class="container">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <div class="form-group row" id="paint_input">
-                                                            <div class="col-md-6">
-                                                                <input class="form-control"
-                                                                    placeholder="Description"
-                                                                    id="add_paint_description">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Amount" id="add_paint_amount">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <button class="btn btn-sm btn-primary mt-1"
-                                                                    id="add_paint">
-                                                                    <i class="fas fa-plus mr-2"></i>Add
-                                                                </button>
-                                                            </div>
+                                                    <!-- End of Chasis Number -->
+    
+                                                    <!-- Registration Number -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label class="required-field"
+                                                                for="registation_number">Registration
+                                                                Number</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Registration Number" id="registation_number" name="registation_number"
+                                                                required>
                                                         </div>
                                                     </div>
-                                                    <div class="card-body table-responsive p-0">
-                                                        <table
-                                                            class="table table-sm table-hover table-head-fxed text-nowrap"
-                                                            id="paint_table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Description</th>
-                                                                    <th>Amount</th>
-                                                                    <th style="width: 2vw;"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="paint_table_body"></tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End of Paint Schedule -->
-
-                                        <!-- Extras -->
-                                        <div class="tab-pane fade" id="custom-tabs-four-extras" role="tabpanel"
-                                            aria-labelledby="custom-tabs-four-extras-tab">
-                                            <div class="container">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <div class="form-group row" id="extras_input">
-                                                            <div class="col-md-6">
-                                                                <input class="form-control"
-                                                                    placeholder="Description"
-                                                                    id="add_extras_description">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Amount" id="add_extras_amount">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <button class="btn btn-sm btn-primary mt-1"
-                                                                    id="add_extras">
-                                                                    <i class="fas fa-plus mr-2"></i>Add
-                                                                </button>
-                                                            </div>
+                                                    <!-- End of Registration Number -->
+    
+                                                    <!-- Vehicle Model -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label for="vehicle_model">Vehicle Model</label>
                                                         </div>
-                                                    </div>
-                                                    <div class="card-body table-responsive p-0">
-                                                        <table
-                                                            class="table table-sm table-hover table-head-fxed text-nowrap"
-                                                            id="extras_table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Description</th>
-                                                                    <th>Amount</th>
-                                                                    <th style="width: 2vw;"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="extras_table_body"></tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End of Extras -->
-
-                                        <!-- Preview -->
-                                        <div class="tab-pane fade" id="custom-tabs-four-preview" role="tabpanel"
-                                            aria-labelledby="custom-tabs-four-preview-tab">
-                                            <div class="container">
-                                                <div class="card card-secondary card-outline">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-2">
-                                                                <h6><strong>Name of Owner:</strong></h6>
-                                                            </div>
-                                                            <div class="col-4" style="text-align: left;">
-                                                                <h6 id="preview_customer_name"></h6>
-                                                            </div>
-                                                            <div class="col-2">
-                                                                <h6><strong>Insurance:</strong></h6>
-                                                            </div>
-                                                            <div class="col" style="text-align: left;">
-                                                                <h6 id="preview_insurance_company"></h6>
-                                                            </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" class="form-control preview-control"
+                                                                placeholder="Vehicle Model" id="vehicle_model" name="vehicle_model" readonly>
                                                         </div>
-                                            
-                                                        <div class="row">
-                                                            <div class="col-2">
-                                                                <h6><strong>Phone:</strong></h6>
-                                                            </div>
-                                                            <div class="col-4" style="text-align: left;">
-                                                                <h6 id="preview_phone_number"></h6>
-                                                            </div>
-                                                            <div class="col-2">
-                                                                <h6><strong>Policy Number:</strong></h6>
-                                                            </div>
-                                                            <div class="col" style="text-align: left;">
-                                                                <h6 id="preview_policy_number"></h6>
-                                                            </div>
-                                                        </div>
-                                            
-                                                        <div class="row">
-                                                            <div class="col-2">
-                                                                <h6><strong>Email:</strong></h6>
-                                                            </div>
-                                                            <div class="col-4" style="text-align: left;">
-                                                                <h6 id="preview_customer_email"></h6>
-                                                            </div>
-                                                            <div class="col-2">
-                                                                <h6><strong>Policy Start Date:</strong></h6>
-                                                            </div>
-                                                            <div class="col" style="text-align: left;">
-                                                                <h6 id="preview_policy_start_date"></h6>
-                                                            </div>
-                                                        </div>
-                                            
-                                                        <div class="row">
-                                                            <div class="col-2">
-                                                                <h6><strong>Vechicle Model:</strong></h6>
-                                                            </div>
-                                                            <div class="col-4" style="text-align: left;">
-                                                                <h6 id="preview_vehicle_model"></h6>
-                                                            </div>
-                                                            <div class="col-2">
-                                                                <h6><strong>Policy End Date:</strong></h6>
-                                                            </div>
-                                                            <div class="col" style="text-align: left;">
-                                                                <h6 id="preview_policy_end_date"></h6>
-                                                            </div>
-                                                        </div>
-                                            
-                                                        <div class="row">
-                                                            <div class="col-2">
-                                                                <h6><strong>Chassis No:</strong></h6>
-                                                            </div>
-                                                            <div class="col-4" style="text-align: left;">
-                                                                <h6 id="preview_chasis_number"></h6>
-                                                            </div>
-                                                            <div class="col-2">
-                                                                <h6><strong>Loss Date/Time:</strong></h6>
-                                                            </div>
-                                                            <div class="col" style="text-align: left;">
-                                                                <h6 id="preview_loss_date_time"></h6>
-                                                            </div>
-                                                        </div>
-                                                    </div> 
-                                                </div>
-
-                                                <div class="card card-secondary card-outline">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Parts</h3>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table
-                                                            class="table table-sm table-hover table-head-fxed text-nowrap preview_table"
-                                                            id="parts_table_preview">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Part Number</th>
-                                                                    <th>Part Name</th>
-                                                                    <th>Quantity</th>
-                                                                    <th>Amount</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="parts_table_preview_body"></tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-
-                                                <div class="card card-secondary card-outline">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Panel/Mechanical Labour</h3>
-                                                        <div class="card-tools">
-                                                            <button class="btn btn-tool" id="labour-tab">
-                                                                <i class="fas fa-edit"></i>
+                                                        <div class="col-md-4">
+                                                            <button type="button" class="btn btn-sm btn-info mt-1"
+                                                                id="vehicle_model_edit">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-sm btn-success mt-1"
+                                                                id="vehicle_model_save" style="display: none;">
+                                                                <i class="fas fa-save"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-sm btn-danger mt-1 ml-2"
+                                                                id="vehicle_model_cancel" style="display: none;">
+                                                                <i class="fas fa-times"></i>
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <div class="card-body">
-                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap preview_table" id="labour_table_preview">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Description</th>
-                                                                    <th style="width: 10vw;">Amount</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="labour_table_preview_body"></tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-
-                                                <div class="card card-secondary card-outline">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Tata Paint Schedule</h3>
-                                                        <div class="card-tools">
-                                                            <button class="btn btn-tool" id="paint-tab">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
+                                                    <!-- End of Vehicle Model -->
+    
+                                                    <!-- Estimate/Job Number -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label for="estimate_number">Estimate/Job Number</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Estimate Number" id="estimate_number">
                                                         </div>
                                                     </div>
-                                                    <div class="card-body">
-                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap preview_table" id="paint_table_preview">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Description</th>
-                                                                    <th style="width: 10vw;">Amount</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="paint_table_preview_body"></tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-
-                                                <div class="card card-secondary card-outline">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Extras</h3>
-                                                        <div class="card-tools">
-                                                            <button class="btn btn-tool" id="extras-tab">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table table-sm table-hover table-head-fxed text-nowrap preview_table" id="extras_table_preview">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Description</th>
-                                                                    <th  style="width: 10vw;">Amount</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="extras_table_preview_body"></tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-
-                                                <div class="card card-secondary card-outline">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Estimate Summary</h3>
-                                                    </div>
-                                                    <div class="card-body"></div>
-                                                </div>
-
-                                                <div class="float-right">
-                                                    <button class="btn btn-success" style="width: 15vw;"><i class="fas fa-print mr-2"></i> Print</button>
+                                                    <!-- End of Estimate/Job Number -->
                                                 </div>
                                             </div>
+                                            <!-- End of Vehicle Details Tab -->
+    
+                                            <!-- Policy Details Tab -->
+                                            <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel"
+                                                aria-labelledby="custom-tabs-four-messages-tab">
+                                                <div class="container" style="margin-top: 20px;">
+                                                    <!-- Policy Number -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label class="required-field" for="policy_number">Policy
+                                                                Number</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" class="form-control preview-control"
+                                                                placeholder="Policy Number" id="policy_number" required>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End of Policy Number -->
+    
+                                                    <!-- Policy Start Date -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label for="policy_start_date">Policy Start Date</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="date" class="form-control preview-control" placeholder="dd/mm/yyyy"
+                                                                id="policy_start_date">
+                                                        </div>
+                                                    </div>
+                                                    <!-- End of Policy Start Date -->
+    
+                                                    <!-- Policy End Date -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label for="policy_end_date">Policy End Date</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="date" class="form-control preview-control" placeholder="dd/mm/yyyy"
+                                                                id="policy_end_date">
+                                                        </div>
+                                                    </div>
+                                                    <!-- End of Policy End Date -->
+    
+                                                    <!-- Loss Date -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label class="required-field" for="loss_date">Loss
+                                                                Date/Time</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="date" class="form-control preview-control" placeholder=""
+                                                                id="loss_date" required>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="time" class="form-control preview-control" placeholder=""
+                                                                id="loss_time" required>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End of Loss Date -->
+    
+                                                    <!-- Insurance Company -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label class="required-field" for="insurance_company">Insurance
+                                                                Company</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <select class="form-control preview-control" id="insurance_company" required>
+                                                                <option value="select">Insurance Company</option>
+                                                                <option value="Oriental Insurance">Oriental Insurance</option>
+                                                                <option value="others">Others</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="text" class="form-control preview-control"
+                                                                placeholder="Please Specify" id="insurance_company_others"
+                                                                style="display: none;">
+                                                        </div>
+                                                    </div>
+                                                    <!-- End of Insurance Company -->
+    
+                                                    <!-- Claim Number -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label for="claim_number">Claim Number</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Claim Number" id="claim_number">
+                                                        </div>
+                                                    </div>
+                                                    <!-- End of Claim Number -->
+    
+                                                    <!-- Service Advisor -->
+                                                    <div class="form-group row">
+                                                        <div class="col-md-2 col-form-label">
+                                                            <label for="service_advisor">Service Advisor Name</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" class="form-control" placeholder="Full Name"
+                                                                id="service_advisor">
+                                                        </div>
+                                                    </div>
+                                                    <!-- End of Service Advisor -->
+                                                </div>
+                                            </div>
+                                            <!-- End of Policy Details Tab -->
+    
+                                            <!-- Parts Tab -->
+                                            <div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel"
+                                                aria-labelledby="custom-tabs-four-settings-tab">
+                                                <div class="container">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="form-group row" id="parts_input">
+                                                                <div class="col-md-4">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="Part Number" id="add_part_number">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <input list="part_descriptions" class="form-control"
+                                                                        placeholder="Part Description"
+                                                                        id="add_part_description">
+                                                                    <datalist id="part_descriptions">
+                                                                        <!-- <option value="Front Bumper Skin">Front Bumper Skin</option>
+                                                                        <option value="Assy Fender Comp LH">Assy Fender Comp LH</option> -->
+                                                                    </datalist>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="Quantity" id="add_part_quantity">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                        id="add_part">
+                                                                        <i class="fas fa-plus mr-2"></i>Add Part
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body table-responsive p-0">
+                                                            <table
+                                                                class="table table-sm table-hover table-head-fxed text-nowrap"
+                                                                id="parts_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Part Number</th>
+                                                                        <th>Part Name</th>
+                                                                        <th>Quantity</th>
+                                                                        <th>Amount</th>
+                                                                        <th style="width: 2vw;"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="parts_table_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Parts Tab -->
+    
+                                            <!-- Mechanical Labour Tab -->
+                                            <div class="tab-pane fade" id="custom-tabs-four-mech-labour" role="tabpanel"
+                                                aria-labelledby="custom-tabs-four-mech-labour-tab">
+                                                <div class="container">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="form-group row" id="labour_input">
+                                                                <div class="col-md-6">
+                                                                    <input class="form-control"
+                                                                        placeholder="Description"
+                                                                        id="add_labour_description">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="Amount" id="add_labour_amount">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                        id="add_labour">
+                                                                        <i class="fas fa-plus mr-2"></i>Add
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body table-responsive p-0">
+                                                            <table
+                                                                class="table table-sm table-hover table-head-fxed text-nowrap"
+                                                                id="labour_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th>Amount</th>
+                                                                        <th style="width: 2vw;"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="labour_table_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Mechanical Labour Tab -->
+    
+                                            <!-- Paint Schedule -->
+                                            <div class="tab-pane fade" id="custom-tabs-four-paint" role="tabpanel"
+                                                aria-labelledby="custom-tabs-four-paint-tab">
+                                                <div class="container">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="form-group row" id="paint_input">
+                                                                <div class="col-md-6">
+                                                                    <input class="form-control"
+                                                                        placeholder="Description"
+                                                                        id="add_paint_description">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="Amount" id="add_paint_amount">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                        id="add_paint">
+                                                                        <i class="fas fa-plus mr-2"></i>Add
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body table-responsive p-0">
+                                                            <table
+                                                                class="table table-sm table-hover table-head-fxed text-nowrap"
+                                                                id="paint_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th>Amount</th>
+                                                                        <th style="width: 2vw;"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="paint_table_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Paint Schedule -->
+    
+                                            <!-- Extras -->
+                                            <div class="tab-pane fade" id="custom-tabs-four-extras" role="tabpanel"
+                                                aria-labelledby="custom-tabs-four-extras-tab">
+                                                <div class="container">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="form-group row" id="extras_input">
+                                                                <div class="col-md-6">
+                                                                    <input class="form-control"
+                                                                        placeholder="Description"
+                                                                        id="add_extras_description">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="Amount" id="add_extras_amount">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                        id="add_extras">
+                                                                        <i class="fas fa-plus mr-2"></i>Add
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body table-responsive p-0">
+                                                            <table
+                                                                class="table table-sm table-hover table-head-fxed text-nowrap"
+                                                                id="extras_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th>Amount</th>
+                                                                        <th style="width: 2vw;"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="extras_table_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Extras -->
+    
+                                            <!-- Preview -->
+                                            <div class="tab-pane fade" id="custom-tabs-four-preview" role="tabpanel"
+                                                aria-labelledby="custom-tabs-four-preview-tab">
+                                                <div class="container">
+                                                    <div class="card card-secondary card-outline">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <h6><strong>Name of Owner:</strong></h6>
+                                                                </div>
+                                                                <div class="col-4" style="text-align: left;">
+                                                                    <h6 id="preview_customer_name"></h6>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <h6><strong>Insurance:</strong></h6>
+                                                                </div>
+                                                                <div class="col" style="text-align: left;">
+                                                                    <h6 id="preview_insurance_company"></h6>
+                                                                </div>
+                                                            </div>
+                                                
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <h6><strong>Phone:</strong></h6>
+                                                                </div>
+                                                                <div class="col-4" style="text-align: left;">
+                                                                    <h6 id="preview_phone_number"></h6>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <h6><strong>Policy Number:</strong></h6>
+                                                                </div>
+                                                                <div class="col" style="text-align: left;">
+                                                                    <h6 id="preview_policy_number"></h6>
+                                                                </div>
+                                                            </div>
+                                                
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <h6><strong>Email:</strong></h6>
+                                                                </div>
+                                                                <div class="col-4" style="text-align: left;">
+                                                                    <h6 id="preview_customer_email"></h6>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <h6><strong>Policy Start Date:</strong></h6>
+                                                                </div>
+                                                                <div class="col" style="text-align: left;">
+                                                                    <h6 id="preview_policy_start_date"></h6>
+                                                                </div>
+                                                            </div>
+                                                
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <h6><strong>Vechicle Model:</strong></h6>
+                                                                </div>
+                                                                <div class="col-4" style="text-align: left;">
+                                                                    <h6 id="preview_vehicle_model"></h6>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <h6><strong>Policy End Date:</strong></h6>
+                                                                </div>
+                                                                <div class="col" style="text-align: left;">
+                                                                    <h6 id="preview_policy_end_date"></h6>
+                                                                </div>
+                                                            </div>
+                                                
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <h6><strong>Chassis No:</strong></h6>
+                                                                </div>
+                                                                <div class="col-4" style="text-align: left;">
+                                                                    <h6 id="preview_chasis_number"></h6>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <h6><strong>Loss Date/Time:</strong></h6>
+                                                                </div>
+                                                                <div class="col" style="text-align: left;">
+                                                                    <h6 id="preview_loss_date_time"></h6>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+    
+                                                    <div class="card card-secondary card-outline">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Parts</h3>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table
+                                                                class="table table-sm table-hover table-head-fxed text-nowrap preview_table"
+                                                                id="parts_table_preview">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Part Number</th>
+                                                                        <th>Part Name</th>
+                                                                        <th>Quantity</th>
+                                                                        <th>Amount</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="parts_table_preview_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="card card-secondary card-outline">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Panel/Mechanical Labour</h3>
+                                                            <div class="card-tools">
+                                                                <button class="btn btn-tool" id="labour-tab">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table class="table table-sm table-hover table-head-fxed text-nowrap preview_table" id="labour_table_preview">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th style="width: 10vw;">Amount</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="labour_table_preview_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="card card-secondary card-outline">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Tata Paint Schedule</h3>
+                                                            <div class="card-tools">
+                                                                <button class="btn btn-tool" id="paint-tab">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table class="table table-sm table-hover table-head-fxed text-nowrap preview_table" id="paint_table_preview">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th style="width: 10vw;">Amount</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="paint_table_preview_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="card card-secondary card-outline">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Extras</h3>
+                                                            <div class="card-tools">
+                                                                <button class="btn btn-tool" id="extras-tab">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table class="table table-sm table-hover table-head-fxed text-nowrap preview_table" id="extras_table_preview">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th  style="width: 10vw;">Amount</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="extras_table_preview_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="card card-secondary card-outline">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Estimate Summary</h3>
+                                                        </div>
+                                                        <div class="card-body"></div>
+                                                    </div>
+    
+                                                    <div class="float-right">
+                                                        <button type="button" class="btn btn-success" style="width: 15vw;"><i class="fas fa-print mr-2"></i> Print</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Preview -->
                                         </div>
-                                        <!-- End of Preview -->
                                     </div>
-                                </div>
+                                </form>
                                 <!-- /.card -->
                             </div>
                         </div>
@@ -721,22 +725,24 @@
 
     <script>
 
-        window.addEventListener('beforeunload', function (e) {
+        /* window.addEventListener('beforeunload', function (e) {
             // Cancel the event
             e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
             // Chrome requires returnValue to be set
             e.returnValue = "All data entered will be lost. Are you sure to continue?";
-        });
+        }); */
 
         $('.preview-control').on("change", function() {
             var id = $(this).attr("id");
             if(id === 'loss_date' || id === 'loss_time') {
                 var value = $('#loss_date').val() + " " + $('#loss_time').val();
                 $('#preview_loss_date_time').text(value);
-                
+            }
+            else if(id === "insurance_company_others") {
+                $('#preview_insurance_company').text($(this).val());
             }
             else {
-            $('#preview_'+id).text($(this).val());
+                $('#preview_'+id).text($(this).val());
             }
         });
     </script>
@@ -762,6 +768,7 @@
         };
         cancel_button.onclick = function () {
             vehicle_model.value = vehicle_model_text;
+            $('#preview_vehicle_model').text(vehicle_model_text);
             this.style.display = "none";
             save_button.style.display = "none";
             edit_button.style.display = "inline-block";
@@ -804,9 +811,11 @@
                 .then(json => {
                     if(!json) {
                         $('#vehicle_model').val("");
+                        $('#preview_vehicle_model').text("");
                     }
                     else {
                         $('#vehicle_model').val(json["model"]);
+                        $('#preview_vehicle_model').text(json["model"]);
                         var url = "http://localhost:5000/get-parts/?part_id=" + json["part_id"];
     
                         //Generate part description dropdown from data received from the server
