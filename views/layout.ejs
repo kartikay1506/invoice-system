@@ -78,6 +78,17 @@
                 text: "Please login to access the dashboard."
             });
         }
+        else if(type[1] == "SavingError") {
+            Swal.fire({
+                icon: 'error',
+                title: "Error",
+                text: "There was some error saving file. Please try again."
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    window.history.pushState({}, document.title, "/estimate");
+                }
+            });
+        }
     }
     else if(type[0] == 'success') {
         if(type[1] == 'Authentication') {

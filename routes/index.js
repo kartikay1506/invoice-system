@@ -25,6 +25,28 @@ var authenticate = function(req, resp, next) {
 }
 
 
+function convertDate(date) {
+    var date = new Date(date);
+    var newDate;
+    if(String(date.getDate()).length < 2) {
+        newDate = '0' + date.getDate() + '/';
+    }
+    else {
+        newDate = date.getDate() + '/';
+    }
+    
+    if(String(date.getMonth()).length < 2) {
+        newDate += '0' + (date.getMonth() + 1);
+    }
+    else {
+        newDate += (date.getMonth() + 1);
+    }
+    newDate += '/' + date.getFullYear();
+
+    return newDate;
+}
+
+
 const models =  {
     //do again from the sheet
     "632": {"101": "Altroz XE 1.2 P", "138": "Altroz XE 1.2 P Rhytm", "105": "Altroz XM 1.2 P", "137": "Altroz XM 1.2 P Rhytm", "135": "Altroz XM 1.2 P Rhytm+Style", "103": "Altroz XT 1.2 P", "115": "Altroz XZ 1.2 P"},
@@ -84,7 +106,7 @@ router.get('/parts', authenticate, (req, resp) => {
     resp.render('parts');
 });
 
-router.get('/test', authenticate, (req, resp) => {
+router.get('/estimate-print', authenticate, (req, resp) => {
     resp.render('estimate-print');
 });
 
@@ -226,36 +248,91 @@ router.post('/file-upload', (req, resp) => {
 
 //generate report
 router.post('/invoice', (req, resp) => {
-    //const {  } = req.body;
+    const { customer_name, phone_number, customer_email, chasis_number, registration_number, vehicle_model, policy_number, policy_start_date, policy_end_date, loss_date, loss_time, insurance_company, insurance_company_others } = req.body;
+
     const workbook = new Excel.Workbook();
     const worksheet = workbook.addWorksheet("Invoice Data");
 
     worksheet.columns = [
-        {header: 'Registration Number', key: 'registration_number', width: 32},
-        {header: 'Chassis Number', key: 'chassis_number', width: 32}, 
-        {header: 'Customer Name', key: 'customer_name', width: 10},
-        {header: 'Contact Number', key: 'contact_number', width: 10},
-        {header: 'Model', key: 'model', width: 15},
+        {header: 'Registration Number', key: 'registration_number', width: 25},
+        {header: 'Chassis Number', key: 'chassis_number', width: 25}, 
+        {header: 'Customer Name', key: 'customer_name', width: 20},
+        {header: 'Contact Number', key: 'phone_number', width: 20},
+        {header: 'Model', key: 'vehicle_model', width: 20},
         {header: 'Estimate Date', key: 'estimate_date', width: 15},
-        {header: 'Policy Number', key: 'policy_number', width: 15},
-        {header: 'Policy Start', key: 'policy_start', width: 15},
-        {header: 'policy_end', key: 'policy_end', width: 15},
+        {header: 'Policy Number', key: 'policy_number', width: 20},
+        {header: 'Policy Start', key: 'policy_start_date', width: 15},
+        {header: 'Policy End', key: 'policy_end_date', width: 15},
     ];
+    
+    var insurance, loss_date_time;
+
+    var policyStartDate = convertDate(policy_start_date);
+    var policyEndDate =  convertDate(policy_end_date);
+    
+    var date = new Date();
+    var estimate_date = "";
+
+    if(String(date.getDate()).length < 2) {
+        estimate_date += '0' + date.getDate() + '/';
+    }
+    else {
+        estimate_date += date.getDate() + '/';
+    }
+
+    if(String(date.getMonth()).length < 2) {
+        estimate_date += '0' + (date.getMonth() + 1) + '/';
+    }
+    else {
+        estimate_date += (date.getMonth() + 1) + '/';
+    }
+
+    estimate_date += date.getFullYear();
+
+    if(insurance_company === "others") {
+        insurance = insurance_company_others;
+    }
+    else {
+        insurance = insurance_company;
+    }
+
+    loss_date_time = convertDate(loss_date) + " " + loss_time;
 
     worksheet.addRow({
         registration_number: registration_number,
-        chassis_number: chassis_number,
+        chassis_number: chasis_number,
         customer_name: customer_name,
-        contact_number: contact_number,
-        model: model,
+        phone_number: phone_number,
+        vehicle_model: vehicle_model,
         estimate_date: estimate_date,
         policy_number: policy_number,
-        policy_start: policy_start,
-        policy_end: policy_end
+        policy_start_date: policyStartDate,
+        policy_end_date: policyEndDate
     });
 
-    workbook.xlsx.writeFile('/upload/report.xlsx');
-    resp.send("Ok");
+    var respData = {
+        registration_number: registration_number,
+        estimate_date: estimate_date,
+        customer_name: customer_name,
+        phone_number: phone_number,
+        customer_email: customer_email,
+        vehicle_model: vehicle_model,
+        chassis_number: chasis_number,
+        insurance: insurance,
+        policy_number: policy_number,
+        policy_start: policyStartDate,
+        policy_end: policyEndDate,
+        loss_date_time: loss_date_time
+    };
+
+    workbook.xlsx.writeFile('./uploads/report.xlsx')
+    .then(() => {
+        resp.render('estimate-print', {data: respData});
+    })
+    .catch((err) => {
+        console.log(err);
+        resp.redirect('/estimate?error=SavingError');
+    });
 });
 
 

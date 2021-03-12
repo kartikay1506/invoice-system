@@ -81,7 +81,7 @@
                                     </ul>
                                 </div>
                                 
-                                <form action="/invoice" method="post" enctype="multipart/form-data">
+                                <form action="/invoice" method="post">
                                     <div class="card-body">
                                         <div class="tab-content" id="custom-tabs-four-tabContent">
                                             <!-- Personal Details Tab -->
@@ -148,12 +148,12 @@
                                                     <div class="form-group row">
                                                         <div class="col-md-2 col-form-label">
                                                             <label class="required-field"
-                                                                for="registation_number">Registration
+                                                                for="registration_number">Registration
                                                                 Number</label>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <input type="text" class="form-control"
-                                                                placeholder="Registration Number" id="registation_number" name="registation_number"
+                                                                placeholder="Registration Number" id="registration_number" name="registration_number"
                                                                 required>
                                                         </div>
                                                     </div>
@@ -212,7 +212,7 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <input type="text" class="form-control preview-control"
-                                                                placeholder="Policy Number" id="policy_number" required>
+                                                                placeholder="Policy Number" id="policy_number" name="policy_number" required>
                                                         </div>
                                                     </div>
                                                     <!-- End of Policy Number -->
@@ -224,7 +224,7 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <input type="date" class="form-control preview-control" placeholder="dd/mm/yyyy"
-                                                                id="policy_start_date">
+                                                                id="policy_start_date" name="policy_start_date">
                                                         </div>
                                                     </div>
                                                     <!-- End of Policy Start Date -->
@@ -236,7 +236,7 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <input type="date" class="form-control preview-control" placeholder="dd/mm/yyyy"
-                                                                id="policy_end_date">
+                                                                id="policy_end_date" name="policy_end_date">
                                                         </div>
                                                     </div>
                                                     <!-- End of Policy End Date -->
@@ -249,11 +249,11 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <input type="date" class="form-control preview-control" placeholder=""
-                                                                id="loss_date" required>
+                                                                id="loss_date" name="loss_date" required>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <input type="time" class="form-control preview-control" placeholder=""
-                                                                id="loss_time" required>
+                                                                id="loss_time" name="loss_time" required>
                                                         </div>
                                                     </div>
                                                     <!-- End of Loss Date -->
@@ -265,7 +265,7 @@
                                                                 Company</label>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <select class="form-control preview-control" id="insurance_company" required>
+                                                            <select class="form-control preview-control" id="insurance_company" name="insurance_company" required>
                                                                 <option value="select">Insurance Company</option>
                                                                 <option value="Oriental Insurance">Oriental Insurance</option>
                                                                 <option value="others">Others</option>
@@ -273,7 +273,7 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <input type="text" class="form-control preview-control"
-                                                                placeholder="Please Specify" id="insurance_company_others"
+                                                                placeholder="Please Specify" id="insurance_company_others" name="insurance_company_others"
                                                                 style="display: none;">
                                                         </div>
                                                     </div>
@@ -666,7 +666,7 @@
                                                     </div>
     
                                                     <div class="float-right">
-                                                        <button type="button" class="btn btn-success" style="width: 15vw;"><i class="fas fa-print mr-2"></i> Print</button>
+                                                        <button type="submit" class="btn btn-success" style="width: 15vw;"><i class="fas fa-print mr-2"></i> Print</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -745,6 +745,7 @@
                 $('#preview_'+id).text($(this).val());
             }
         });
+        
     </script>
 
     <script>

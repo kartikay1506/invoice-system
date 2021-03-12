@@ -12,8 +12,8 @@ app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
 //Bodyparser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ limit: '1024mb', extended:true }));
+app.use(express.json());
+app.use(express.urlencoded({ limit: '1024mb', extended:true }));
 
 //Sessions
 app.use(session({
