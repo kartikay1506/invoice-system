@@ -250,21 +250,6 @@ router.post('/file-upload', (req, resp) => {
 router.post('/invoice', (req, resp) => {
     const { customer_name, phone_number, customer_email, chasis_number, registration_number, vehicle_model, policy_number, policy_start_date, policy_end_date, loss_date, loss_time, insurance_company, insurance_company_others } = req.body;
 
-    const workbook = new Excel.Workbook();
-    const worksheet = workbook.addWorksheet("Invoice Data");
-
-    worksheet.columns = [
-        {header: 'Registration Number', key: 'registration_number', width: 25},
-        {header: 'Chassis Number', key: 'chassis_number', width: 25}, 
-        {header: 'Customer Name', key: 'customer_name', width: 20},
-        {header: 'Contact Number', key: 'phone_number', width: 20},
-        {header: 'Model', key: 'vehicle_model', width: 20},
-        {header: 'Estimate Date', key: 'estimate_date', width: 15},
-        {header: 'Policy Number', key: 'policy_number', width: 20},
-        {header: 'Policy Start', key: 'policy_start_date', width: 15},
-        {header: 'Policy End', key: 'policy_end_date', width: 15},
-    ];
-    
     var insurance, loss_date_time;
 
     var policyStartDate = convertDate(policy_start_date);
@@ -298,18 +283,6 @@ router.post('/invoice', (req, resp) => {
 
     loss_date_time = convertDate(loss_date) + " " + loss_time;
 
-    worksheet.addRow({
-        registration_number: registration_number,
-        chassis_number: chasis_number,
-        customer_name: customer_name,
-        phone_number: phone_number,
-        vehicle_model: vehicle_model,
-        estimate_date: estimate_date,
-        policy_number: policy_number,
-        policy_start_date: policyStartDate,
-        policy_end_date: policyEndDate
-    });
-
     var respData = {
         registration_number: registration_number,
         estimate_date: estimate_date,
@@ -325,14 +298,68 @@ router.post('/invoice', (req, resp) => {
         loss_date_time: loss_date_time
     };
 
-    workbook.xlsx.writeFile('./uploads/report.xlsx')
+    var filename = path.join(__dirname, "../uploads/report.xlsx");
+    if(fs.existsSync(filename)) {
+        const workbook = new Excel.Workbook();
+        workbook.xlsx.readFile(filename)
+        .then(function() {
+            var worksheet = workbook.getWorksheet('Invoice Data');
+            worksheet.addRow([ registration_number,chasis_number,customer_name,phone_number,vehicle_model,estimate_date,policy_number,policyStartDate, policyEndDate ]);
+
+            return workbook.xlsx.writeFile(filename);
+        })
+        .then(() => {
+            console.log("Data added successfully");
+            resp.render('estimate-print', {data: respData});
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+    else {
+        const workbook = new Excel.Workbook();
+        const worksheet = workbook.addWorksheet("Invoice Data");
+        worksheet.columns = [
+            {header: 'Registration Number', key: 'registration_number', width: 25},
+            {header: 'Chassis Number', key: 'chassis_number', width: 25}, 
+            {header: 'Customer Name', key: 'customer_name', width: 20},
+            {header: 'Contact Number', key: 'phone_number', width: 20},
+            {header: 'Model', key: 'vehicle_model', width: 20},
+            {header: 'Estimate Date', key: 'estimate_date', width: 15},
+            {header: 'Policy Number', key: 'policy_number', width: 20},
+            {header: 'Policy Start', key: 'policy_start_date', width: 15},
+            {header: 'Policy End', key: 'policy_end_date', width: 15},
+        ];
+
+        worksheet.addRow({
+            registration_number: registration_number,
+            chassis_number: chasis_number,
+            customer_name: customer_name,
+            phone_number: phone_number,
+            vehicle_model: vehicle_model,
+            estimate_date: estimate_date,
+            policy_number: policy_number,
+            policy_start_date: policyStartDate,
+            policy_end_date: policyEndDate
+        });
+
+        workbook.xlsx.writeFile('./uploads/report.xlsx')
+        .then(() => {
+            resp.render('estimate-print', {data: respData});
+        })
+        .catch((err) => {
+            console.log(err);
+            resp.redirect('/estimate?error=SavingError');
+        });
+    }
+    /* workbook.xlsx.writeFile('./uploads/report.xlsx')
     .then(() => {
         resp.render('estimate-print', {data: respData});
     })
     .catch((err) => {
         console.log(err);
         resp.redirect('/estimate?error=SavingError');
-    });
+    }); */
 });
 
 
