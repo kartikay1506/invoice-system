@@ -309,11 +309,11 @@ router.post('/invoice', (req, resp) => {
             return workbook.xlsx.writeFile(filename);
         })
         .then(() => {
-            console.log("Data added successfully");
             resp.render('estimate-print', {data: respData});
         })
         .catch((err) => {
             console.log(err);
+            resp.redirect('/estimate?error=SavingError');
         });
     }
     else {
@@ -352,14 +352,6 @@ router.post('/invoice', (req, resp) => {
             resp.redirect('/estimate?error=SavingError');
         });
     }
-    /* workbook.xlsx.writeFile('./uploads/report.xlsx')
-    .then(() => {
-        resp.render('estimate-print', {data: respData});
-    })
-    .catch((err) => {
-        console.log(err);
-        resp.redirect('/estimate?error=SavingError');
-    }); */
 });
 
 
