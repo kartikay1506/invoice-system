@@ -322,8 +322,6 @@
                                                                         placeholder="Part Description"
                                                                         id="add_part_description">
                                                                     <datalist id="part_descriptions">
-                                                                        <!-- <option value="Front Bumper Skin">Front Bumper Skin</option>
-                                                                        <option value="Assy Fender Comp LH">Assy Fender Comp LH</option> -->
                                                                     </datalist>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -331,7 +329,7 @@
                                                                         placeholder="Quantity" id="add_part_quantity">
                                                                 </div>
                                                                 <div class="col-md-2">
-                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                    <button class="btn btn-sm btn-primary mt-1" type="button"
                                                                         id="add_part">
                                                                         <i class="fas fa-plus mr-2"></i>Add Part
                                                                     </button>
@@ -339,6 +337,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-body table-responsive p-0">
+                                                            <input type="hidden" name="parts[]" id="partsData">
                                                             <table
                                                                 class="table table-sm table-hover table-head-fxed text-nowrap"
                                                                 id="parts_table">
@@ -376,7 +375,7 @@
                                                                         placeholder="Amount" id="add_labour_amount">
                                                                 </div>
                                                                 <div class="col-md-2">
-                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                    <button class="btn btn-sm btn-primary mt-1" type="button"
                                                                         id="add_labour">
                                                                         <i class="fas fa-plus mr-2"></i>Add
                                                                     </button>
@@ -384,6 +383,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-body table-responsive p-0">
+                                                            <input type="text" name="labour[]" id="labourData">
                                                             <table
                                                                 class="table table-sm table-hover table-head-fxed text-nowrap"
                                                                 id="labour_table">
@@ -419,7 +419,7 @@
                                                                         placeholder="Amount" id="add_paint_amount">
                                                                 </div>
                                                                 <div class="col-md-2">
-                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                    <button class="btn btn-sm btn-primary mt-1" type="button"
                                                                         id="add_paint">
                                                                         <i class="fas fa-plus mr-2"></i>Add
                                                                     </button>
@@ -427,6 +427,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-body table-responsive p-0">
+                                                            <input type="text" name="paint[]" id="paintData">
                                                             <table
                                                                 class="table table-sm table-hover table-head-fxed text-nowrap"
                                                                 id="paint_table">
@@ -462,7 +463,7 @@
                                                                         placeholder="Amount" id="add_extras_amount">
                                                                 </div>
                                                                 <div class="col-md-2">
-                                                                    <button class="btn btn-sm btn-primary mt-1"
+                                                                    <button class="btn btn-sm btn-primary mt-1" type="button"
                                                                         id="add_extras">
                                                                         <i class="fas fa-plus mr-2"></i>Add
                                                                     </button>
@@ -875,6 +876,7 @@
                 $("#parts_table_body").append(parts_data);
                 $("#parts_table_preview_body").append(parts_data_preview);
                 $('#parts_input input').val("");
+                $('#parts_table').trigger("partsUpdate");
             }
         });
         $(document).on("click", "button.btn-table", function () {
@@ -925,7 +927,7 @@
                 $("#labour_table_body").append(labour_data);
                 $("#labour_table_preview_body").append(labour_data_preview);
                 $('#labour_input input').val("");
-    
+                $('#labour_table').trigger("labourUpdate");
             }
         });
     
@@ -969,6 +971,7 @@
                 $("#paint_table_body").append(paint_data);
                 $("#paint_table_preview_body").append(paint_data_preview);
                 $('#paint_input input').val("");
+                $('#paint_table').trigger("paintUpdate");
     
             }
         });
@@ -1022,6 +1025,77 @@
         });
         $('#add_extras_amount').on("focus", function() {
             $(this).removeClass("is-invalid");
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $(document).on("partsUpdate", function() {
+                console.log("Parts Added");
+                var partsData = [];
+                $('#parts_table tbody tr').each(function(index, value) {
+                    var row =  GetPartsRow(index);
+                    partsData.push(row);
+                });
+                $('#partsData').val(JSON.stringify(partsData));
+                    // Read the row into an object
+                function GetPartsRow(rowNum)
+                {
+                    var row = $('#parts_table tbody tr').eq(rowNum);
+
+                    var myObject = {};
+
+                    myObject.PartNumber = row.find('td:eq(0)').text();
+                    myObject.PartName = row.find('td:eq(1)').text();
+                    myObject.Quantity = row.find('td:eq(2)').text();
+                    myObject.Amount = row.find('td:eq(3)').text();
+                    return myObject;
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $(document).on("labourUpdate", function() {
+                var labourData = [];
+                $('#labour_table tbody tr').each(function(index, value) {
+                    var row =  GetLabourRow(index);
+                    labourData.push(row);
+                });
+                $('#labourData').val(JSON.stringify(labourData));
+                    // Read the row into an object
+                function GetLabourRow(rowNum)
+                {
+                    var row = $('#labour_table tbody tr').eq(rowNum);
+
+                    var myObject = {};
+
+                    myObject.Description = row.find('td:eq(0)').text();
+                    myObject.Amount = row.find('td:eq(1)').text();
+                    return myObject;
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $(document).on("paintUpdate", function() {
+                var paintData = [];
+                $('#paint_table tbody tr').each(function(index, value) {
+                    var row =  GetPaintRow(index);
+                    paintData.push(row);
+                });
+                $('#paintData').val(JSON.stringify(paintData));
+                    // Read the row into an object
+                function GetPaintRow(rowNum)
+                {
+                    var row = $('#paint_table tbody tr').eq(rowNum);
+
+                    var myObject = {};
+
+                    myObject.Description = row.find('td:eq(0)').text();
+                    myObject.Amount = row.find('td:eq(1)').text();
+                    return myObject;
+                }
+            });
         });
     </script>
 </body>

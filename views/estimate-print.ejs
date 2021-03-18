@@ -122,6 +122,16 @@
                               <th>Amount (Rs.)</th>
                           </tr>
                       </thead>
+                      <tbody>
+                          <% for(var i = 0; i < Object.values(data)[12].length; i++) { %>
+                            <tr>
+                                <td><%= Object.values(data)[12][i].PartNumber %></td>
+                                <td><%= Object.values(data)[12][i].PartName %></td>
+                                <td><%= Object.values(data)[12][i].Quantity %></td>
+                                <td><%= Object.values(data)[12][i].Amount %></td>
+                            </tr>
+                          <% } %>
+                      </tbody>
                   </table>
               </div>
         </div>
@@ -138,6 +148,14 @@
                             <th>Labour Amount (Rs.)</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <% for(var i = 0; i < Object.values(data)[13].length; i++) { %>
+                            <tr>
+                                <td><%= Object.values(data)[13][i].Description %></td>
+                                <td><%= Object.values(data)[13][i].Amount %></td>
+                            </tr>
+                          <% } %>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -154,6 +172,14 @@
                             <th>Amount (Rs.)</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <% for(var i = 0; i < Object.values(data)[14].length; i++) { %>
+                            <tr>
+                                <td><%= Object.values(data)[14][i].Description %></td>
+                                <td><%= Object.values(data)[14][i].Amount %></td>
+                            </tr>
+                          <% } %>
+                    </tbody>
                 </table>
             </div>
         </div>

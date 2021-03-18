@@ -248,7 +248,7 @@ router.post('/file-upload', (req, resp) => {
 
 //generate report
 router.post('/invoice', (req, resp) => {
-    const { customer_name, phone_number, customer_email, chasis_number, registration_number, vehicle_model, policy_number, policy_start_date, policy_end_date, loss_date, loss_time, insurance_company, insurance_company_others } = req.body;
+    const { customer_name, phone_number, customer_email, chasis_number, registration_number, vehicle_model, policy_number, policy_start_date, policy_end_date, loss_date, loss_time, insurance_company, insurance_company_others, parts, labour, paint } = req.body;
 
     var insurance, loss_date_time;
 
@@ -280,7 +280,7 @@ router.post('/invoice', (req, resp) => {
     else {
         insurance = insurance_company;
     }
-
+    
     loss_date_time = convertDate(loss_date) + " " + loss_time;
 
     var respData = {
@@ -295,8 +295,13 @@ router.post('/invoice', (req, resp) => {
         policy_number: policy_number,
         policy_start: policyStartDate,
         policy_end: policyEndDate,
-        loss_date_time: loss_date_time
+        loss_date_time: loss_date_time,
+        partsData: JSON.parse(parts),
+        labourData: JSON.parse(labour),
+        paintData: JSON.parse(paint)
     };
+
+    console.log(JSON.parse(parts));
 
     var filename = path.join(__dirname, "../uploads/report.xlsx");
     if(fs.existsSync(filename)) {
