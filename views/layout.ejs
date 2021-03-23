@@ -89,6 +89,17 @@
                 }
             });
         }
+        else if(type[1] == "LIMIT_FILE_SIZE") {
+            Swal.fire({
+                icon: 'error',
+                title: "Error",
+                text: "File is too large. Please upload a file less than 20MB."
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    window.history.pushState({}, document.title, "/files");
+                }
+            });
+        }
     }
     else if(type[0] == 'success') {
         if(type[1] == 'Authentication') {
@@ -105,6 +116,12 @@
             Swal.fire({
                 icon: 'success',
                 title: "Logout Successful",
+            });
+        }
+        else if(type[1] == "FileUpload") {
+            Swal.fire({
+                icon: 'success',
+                title: "File Uploaded Successfully",
             });
         }
     }

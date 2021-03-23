@@ -188,7 +188,7 @@ router.get('/get-master-data', (req, resp) => {
 router.get('/get-parts', (req, resp) => {
     const { part_id } = req.query;
     resp.setHeader('Access-Control-Allow-Origin', '*');
-    var filename = path.join(__dirname, "../uploads/PRICE LIST 17 NOV2020.xlsx");
+    var filename = path.join(__dirname, "../uploads/input/PRICE LIST 17 NOV2020.xlsx");
     var workbook = new Excel.Workbook();
     workbook.xlsx.readFile(filename)
     .then(function() {
@@ -211,16 +211,21 @@ router.get('/get-parts', (req, resp) => {
 //File Upload
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, "uploads");
+        cb(null, "uploads/input");
     },
     filename: function(req, file, cb) {
-        cb(null, file.fieldname + "-" + Date.now() + ".xlsx");
+        if(req.body.fileType === "credentials") {
+            cb(null, "Credentials.xlsx");
+        }
+        else {
+            cb(null, "Parts.xlsx");
+        }
     }
 });
 
 var upload = multer({
     storage: storage,
-    limits: { fileSize: 1*1000*1000 },
+    limits: { fileSize: 20*1000*1000 },
     fileFilter: function(req, file, cb) {
         var filetypes = /\.(xlsx|xls)/;
         if(!file) {
@@ -237,10 +242,10 @@ var upload = multer({
 router.post('/file-upload', (req, resp) => {
     upload(req, resp, function(err) {
         if(err) {
-            resp.send(err);
+            resp.redirect("/files?error="+err.code);
         }
         else {
-            resp.send("File Uploaded successfully");
+            resp.redirect("/files?success=FileUpload");
         }
     });
 });
@@ -248,7 +253,7 @@ router.post('/file-upload', (req, resp) => {
 
 //generate report
 router.post('/invoice', (req, resp) => {
-    const { customer_name, phone_number, customer_email, chasis_number, registration_number, vehicle_model, policy_number, policy_start_date, policy_end_date, loss_date, loss_time, insurance_company, insurance_company_others, parts, labour, paint } = req.body;
+    const { customer_name, phone_number, customer_email, chasis_number, registration_number, vehicle_model, policy_number, policy_start_date, policy_end_date, loss_date, loss_time, insurance_company, insurance_company_others, parts, labour, paint, extras } = req.body;
 
     var insurance, loss_date_time;
 
@@ -298,12 +303,11 @@ router.post('/invoice', (req, resp) => {
         loss_date_time: loss_date_time,
         partsData: JSON.parse(parts),
         labourData: JSON.parse(labour),
-        paintData: JSON.parse(paint)
+        paintData: JSON.parse(paint),
+        extrasData: JSON.parse(extras)
     };
 
-    console.log(JSON.parse(parts));
-
-    var filename = path.join(__dirname, "../uploads/report.xlsx");
+    var filename = path.join(__dirname, "../uploads/output/report.xlsx");
     if(fs.existsSync(filename)) {
         const workbook = new Excel.Workbook();
         workbook.xlsx.readFile(filename)
@@ -363,7 +367,7 @@ router.post('/invoice', (req, resp) => {
 //get all files
 router.get('/get-files', (req, resp) => {
     resp.setHeader('Access-Control-Allow-Origin', '*');
-    const directoryPath = path.join(__dirname, "../uploads");
+    const directoryPath = path.join(__dirname, "../uploads/input");
     fs.readdir(directoryPath, (err, files) => {
         if(err) {
             console.log("Unable to fetch files");
@@ -373,7 +377,7 @@ router.get('/get-files', (req, resp) => {
             var fileInfo = [];
             files.forEach(file => {
                 var fileName = file.substr(0, file.lastIndexOf('.'));
-                var filePath = path.join("./uploads/" + file);
+                var filePath = path.join("./uploads/input/" + file);
                 var info = {};
                 var stat = fs.statSync(filePath);
                 var date = new Date(stat.birthtime);

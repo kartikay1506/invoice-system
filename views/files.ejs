@@ -51,9 +51,9 @@
                             </div>
                             <h3 class="profile-username text-center mt-3">Credentials</h3>
                             <div id="credentials-section" style="margin-top: 2vw;"></div>
-                            <p class="text-muted text-center" id="credentials-file">Software Engineer</p>
+                            <p class="text-muted text-center" id="credentials-file"></p>
                             <div style="text-align: center; margin-top: 4vw;">
-                              <button class="btn btn-primary w-25"><i class="fas fa-upload"></i></button>                            
+                              <button class="btn btn-primary w-25 button-file" id="credentialsFile" data-toggle="modal" data-target="#modal-files"><i class="fas fa-upload"></i></button>                            
                             </div>
                           </div>
                         </div>
@@ -66,40 +66,15 @@
                             </div>
                             <h3 class="profile-username text-center mt-3">Parts</h3>
                             <div id="parts-section" style="margin-top: 2vw;"></div>
-                            <p class="text-muted text-center" id="parts-file">Software Engineer</p>
+                            <p class="text-muted text-center" id="parts-file"></p>
                             <div style="text-align: center; margin-top: 4vw;">
-                              <button class="btn btn-primary w-25"><i class="fas fa-upload"></i></button>                            
+                              <button class="btn btn-primary w-25 button-file" id="partsFile" data-toggle="modal" data-target="#modal-files"><i class="fas fa-upload"></i></button>                            
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="row">
-                      <div class="col-md-6">
-                        <form action="/file-upload" method="post" enctype="multipart/form-data">
-                          <div class="form-group">
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="inputFile">
-                              <label class="custom-file-label" for="customFile">Choose File</label>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <button class="btn btn-success" type="submit">Submit</button>
-                          </div>
-                        </form>
-                      </div>
-                    </div> -->
-  
-                    <table class="table table-hover table-bordered text-nowrap" style="display: none;">
-                      <thead>
-                        <tr>
-                          <th>File Name</th>
-                          <th style="width: 25vw">Uploaded On</th>
-                          <th style="width: 10vw"></th>
-                        </tr>
-                      </thead>
-                      <tbody id="table_body"></tbody>
-                    </table>
+                    
                   </div>
                 </div>
               </div>
@@ -118,11 +93,15 @@
                   </button> -->
                 </div>
                 <div class="modal-body">
-                  <form action="http://localhost:5000/file-upload" method="post" enctype="multipart/form-data">
+                  <form action="http://localhost:5000/file-upload" method="post" enctype="multipart/form-data" id="fileUploadForm">
                     <div class="form-group">
-                      <div class="custom-file">
+                      <!-- <div class="custom-file">
                         <input type="file" class="custom-file-input" id="customFile" name="inputFile">
                         <label class="custom-file-label" for="customFile">Choose File</label>
+                      </div> -->
+                      <div class="form-group">
+                        <input type="text" name="fileType" id="fileType">
+                        <input type="file" name="inputFile" id="customFile">
                       </div>
                     </div>
                     <div class="form-group">
@@ -177,21 +156,37 @@
     <!-- Insert this line after script imports -->
   
     <script>
-      let loader = '<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>';
-      $('#table_load').append(loader);
       fetch("http://localhost:5000/get-files")
       .then(res => res.json())
       .then(json => {
         var data = '';
         for(k in json) {
           var fileName = Object.keys(json[k]);
-          var date = Object.values(json[k]);
-          data = data + '<tr><td>' + fileName + '</td><td>' + date + '</td><td><button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-files"><i class="fas fa-upload"></i></button><button class="btn btn-success btn-sm ml-2"><i class="fas fa-download"></i></button></td></tr>';
+          var date = "Last Modified on " + Object.values(json[k]);
+          if(fileName == "Credentials") {
+            $('#credentials-file').text(date);
+          }
+          else if(fileName == "Parts") {
+            $('#parts-file').text(date);
+          }
+          /* else {
+            $('#parts-file').text("No File Found");
+          } */
+          
         }
-        $('#table_body').empty();
-        $('#table_body').append(data);
-        $('table').show();
       });
-      $('#table_load .overlay').remove();
+    </script>
+    <script>
+      $('.button-file').on("click", function() {
+        if($(this).attr("id") == "credentialsFile") {
+          $('#fileType').val("credentials");
+        }
+        else if($(this).attr("id") == "partsFile") {
+          $('#fileType').val("parts");
+        }
+        else {
+          $('#fileType').val("");
+        }
+      });
     </script>
   </body>

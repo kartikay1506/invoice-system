@@ -471,6 +471,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-body table-responsive p-0">
+                                                            <input type="text" name="extras[]" id="extrasData">
                                                             <table
                                                                 class="table table-sm table-hover table-head-fxed text-nowrap"
                                                                 id="extras_table">
@@ -663,7 +664,50 @@
                                                         <div class="card-header">
                                                             <h3 class="card-title">Estimate Summary</h3>
                                                         </div>
-                                                        <div class="card-body"></div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <h6>PARTS</h6>
+                                                                </div>
+                                                                <div class="col-4" style="text-align: right; padding-right: 7vw;">
+                                                                    <h6 id="parts_total_preview"></h6>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <h6>BODY WORK LABOUR</h6>
+                                                                </div>
+                                                                <div class="col-4" style="text-align: right; padding-right: 7vw;">
+                                                                    <h6 id="labour_total_preview"></h6>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <h6>PAINT</h6>
+                                                                </div>
+                                                                <div class="col-4" style="text-align: right; padding-right: 7vw;">
+                                                                    <h6 id="paint_total_preview"></h6>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <h6>EXTRAS</h6>
+                                                                </div>
+                                                                <div class="col-4" style="text-align: right; padding-right: 7vw;">
+                                                                    <h6 id="extras_total_preview"></h6>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <h6><strong>TOTAL</strong></h6>
+                                                                </div>
+                                                                <div class="col-4" style="text-align: right; padding-right: 7vw;"></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
     
                                                     <div class="float-right">
@@ -869,7 +913,7 @@
                 var parts_data = '<tr id="' + $('#add_part_number').val() + '">';
                 var parts_data_preview = '<tr id="' + $('#add_part_number').val() + '">';
                 var amount = $('#part_descriptions option[value="'+ $('#add_part_description').val() +'"]').attr("amount");
-                parts_data = parts_data + '<td>' + $('#add_part_number').val() + '</td><td>' + $('#add_part_description').val() + '</td><td>' + $('#add_part_quantity').val() + '</td><td>' + amount + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+                parts_data = parts_data + '<td>' + $('#add_part_number').val() + '</td><td>' + $('#add_part_description').val() + '</td><td>' + $('#add_part_quantity').val() + '</td><td>' + amount + '</td><td><button type="button" class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
                 parts_data_preview = parts_data_preview + '<td>' + $('#add_part_number').val() + '</td><td>' + $('#add_part_description').val() + '</td><td>' + $('#add_part_quantity').val() + '</td><td>' + amount + '</td></tr>';
 
 
@@ -881,8 +925,18 @@
         });
         $(document).on("click", "button.btn-table", function () {
             var id = $(this).parent().parent().attr("id");
+            var tableType = $(this).parent().parent().parent().parent().attr("id");
             $('#' + id).remove();
             $('.preview_table #'+id).remove();
+            if(tableType == "parts_table") {
+                $('#parts_table').trigger("partsUpdate");
+            }
+            else if(tableType == "labour_table") {
+                $('#parts_table').trigger("labourUpdate");
+            }
+            else if(tableType == "paint_table") {
+                $('#parts_table').trigger("paintUpdate");
+            }
         });
     </script>
     <script>
@@ -920,7 +974,7 @@
                 var id = Math.floor(100000 + Math.random() * 900000);
                 var labour_data = '<tr id="'+ id +'">';
                 var labour_data_preview = '<tr id="'+ id +'">';
-                labour_data = labour_data + '<td>' + $('#add_labour_description').val() + '</td><td>' + parseFloat($('#add_labour_amount').val()).toFixed(2) + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+                labour_data = labour_data + '<td>' + $('#add_labour_description').val() + '</td><td>' + parseFloat($('#add_labour_amount').val()).toFixed(2) + '</td><td><button type="button" class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
     
                 labour_data_preview = labour_data_preview + '<td>' + $('#add_labour_description').val() + '</td><td>' + parseFloat($('#add_labour_amount').val()).toFixed(2) + '</td></tr>';
     
@@ -964,7 +1018,7 @@
                 var paint_data = '<tr id="'+ id +'">';
                 var paint_data_preview = '<tr id="'+ id +'">';
     
-                paint_data = paint_data + '<td>' + $('#add_paint_description').val() + '</td><td>' + parseFloat($('#add_paint_amount').val()).toFixed(2) + '</td><td><button class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
+                paint_data = paint_data + '<td>' + $('#add_paint_description').val() + '</td><td>' + parseFloat($('#add_paint_amount').val()).toFixed(2) + '</td><td><button type="button" class="btn btn-sm btn-danger btn-table"><i class="fas fa-times"></i></button></td></tr>';
                 
                 paint_data_preview = paint_data_preview + '<td>' + $('#add_paint_description').val() + '</td><td>' + parseFloat($('#add_paint_amount').val()).toFixed(2) + '</td></tr>';
     
@@ -1016,7 +1070,7 @@
                 $("#extras_table_body").append(extras_data);
                 $("#extras_table_preview_body").append(extras_data_preview);
                 $('#extras_input input').val("");
-    
+                $('#extras_table').trigger("extrasUpdate");
             }
         });
     
@@ -1031,13 +1085,15 @@
     <script>
         $(document).ready(function() {
             $(document).on("partsUpdate", function() {
-                console.log("Parts Added");
                 var partsData = [];
+                var partsTotal = 0;
                 $('#parts_table tbody tr').each(function(index, value) {
                     var row =  GetPartsRow(index);
                     partsData.push(row);
                 });
                 $('#partsData').val(JSON.stringify(partsData));
+                $('#parts_total_preview').text(partsTotal);
+                $(this).trigger("totalUpdate");
                     // Read the row into an object
                 function GetPartsRow(rowNum)
                 {
@@ -1045,30 +1101,38 @@
 
                     var myObject = {};
 
+                    var partCost = row.find('td:eq(3)').text();
+                    partCost = partCost.split(",").join("");
+                    partsTotal += parseFloat(partCost).toFixed(2);
+                    
                     myObject.PartNumber = row.find('td:eq(0)').text();
                     myObject.PartName = row.find('td:eq(1)').text();
                     myObject.Quantity = row.find('td:eq(2)').text();
                     myObject.Amount = row.find('td:eq(3)').text();
                     return myObject;
                 }
+
             });
         });
 
         $(document).ready(function() {
             $(document).on("labourUpdate", function() {
                 var labourData = [];
+                var labourTotal = 0;
                 $('#labour_table tbody tr').each(function(index, value) {
                     var row =  GetLabourRow(index);
                     labourData.push(row);
                 });
                 $('#labourData').val(JSON.stringify(labourData));
+                $('#labour_total_preview').text(labourTotal);
+                $(this).trigger("totalUpdate");
                     // Read the row into an object
                 function GetLabourRow(rowNum)
                 {
                     var row = $('#labour_table tbody tr').eq(rowNum);
 
                     var myObject = {};
-
+                    labourTotal += parseFloat(row.find('td:eq(1)').text());
                     myObject.Description = row.find('td:eq(0)').text();
                     myObject.Amount = row.find('td:eq(1)').text();
                     return myObject;
@@ -1079,22 +1143,56 @@
         $(document).ready(function() {
             $(document).on("paintUpdate", function() {
                 var paintData = [];
+                var paintTotal = 0;
                 $('#paint_table tbody tr').each(function(index, value) {
                     var row =  GetPaintRow(index);
                     paintData.push(row);
                 });
                 $('#paintData').val(JSON.stringify(paintData));
+                $('#paint_total_preview').text(paintTotal);
+                $(this).trigger("totalUpdate");
                     // Read the row into an object
                 function GetPaintRow(rowNum)
                 {
                     var row = $('#paint_table tbody tr').eq(rowNum);
 
                     var myObject = {};
-
+                    paintTotal += parseFloat(row.find('td:eq(1)').text());
                     myObject.Description = row.find('td:eq(0)').text();
                     myObject.Amount = row.find('td:eq(1)').text();
                     return myObject;
                 }
+            });
+        });
+
+        $(document).ready(function() {
+            $(document).on("extrasUpdate", function() {
+                var extrasData = [];
+                var extrasTotal = 0;
+                $('#extras_table tbody tr').each(function(index, value) {
+                    var row =  GetExtrasRow(index);
+                    extrasData.push(row);
+                });
+                $('#extrasData').val(JSON.stringify(extrasData));
+                $('#extras_total_preview').text(extrasTotal);
+                $(this).trigger("totalUpdate");
+                    // Read the row into an object
+                function GetExtrasRow(rowNum)
+                {
+                    var row = $('#extras_table tbody tr').eq(rowNum);
+
+                    var myObject = {};
+                    extrasTotal += parseFloat(row.find('td:eq(1)').text());
+                    myObject.Description = row.find('td:eq(0)').text();
+                    myObject.Amount = row.find('td:eq(1)').text();
+                    return myObject;
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $(document).on("totalUpdate", function() {
+                alert("Total Updated");
             });
         });
     </script>
