@@ -101,17 +101,16 @@
         fetch("http://localhost:5000/get-report")
           .then(res => res.json())
           .then(json => {
-            var sheet_name = Object.keys(json)[0];
-            var data = json[sheet_name].slice(1);
+            var data = json.slice(1);
             var tableHead = '<tr>';
-            tableHead = tableHead + '<th>' + json[sheet_name][0]["A"] + '</th><th>' + json[sheet_name][0]["B"] + '</th>';
+            tableHead = tableHead + '<th>' + json[0][1] + '</th><th>' + json[0][2] + '</th><th>' + json[0][3] + '</th><th>' + json[0][4] + '</th><th>' + json[0][5] + '</th><th>' + json[0][6] + '</th><th>' + json[0][7] + '</th><th>' + json[0][8] + '</th><th>' + json[0][9] + '</th>';
             tableHead = tableHead + '</tr>';
             $('#table_header').empty();
             $('#table_header').append(tableHead);
       
             var tableData = '';
             data.forEach(element => {
-              tableData = tableData + '<tr><td>' + element["A"] + '</td><td>' + element["B"] + '</td></tr>';
+              tableData = tableData + '<tr><td>' + element[1] + '</td><td>' + element[2] + '</td><td>' + element[3] + '</td><td>' + element[4] + '</td><td>' + element[5] + '</td><td>' + element[6] + '</td><td>' + element[7] + '</td><td>' + element[8] + '</td><td>' + element[9] + '</td></tr>';
             });
             $('#table_body').empty();
             $('#table_body').append(tableData);

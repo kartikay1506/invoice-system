@@ -352,7 +352,7 @@ router.post('/invoice', (req, resp) => {
             policy_end_date: policyEndDate
         });
 
-        workbook.xlsx.writeFile('./uploads/report.xlsx')
+        workbook.xlsx.writeFile('./uploads/output/report.xlsx')
         .then(() => {
             resp.render('estimate-print', {data: respData});
         })
@@ -393,7 +393,21 @@ router.get('/get-files', (req, resp) => {
 //Get report
 router.get('/get-report', (req, resp) => {
     resp.setHeader('Access-Control-Allow-Origin', '*');
-    resp.send("Ok");
+    var filename = path.join(__dirname, "../uploads/output/report.xlsx");
+    var workbook = new Excel.Workbook();
+    workbook.xlsx.readFile(filename)
+    .then(function() {
+        var data = [];
+        var worksheet = workbook.getWorksheet(1);
+        worksheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
+            var rowData = {};
+            row.eachCell({ includeEmpty: true }, function(cell, colNumber) {
+                rowData[colNumber] = cell.value;
+            });
+            data.push(rowData);
+        });
+        resp.send(data);
+    });
 });
 
 module.exports = router;
