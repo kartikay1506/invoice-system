@@ -168,10 +168,9 @@ router.get('/get-model', (req, resp) => {
 //Get all the data from the master sheet
 router.get('/get-master-data', (req, resp) => {
     resp.setHeader('Access-Control-Allow-Origin', '*');
-    var path = path.join(__dirname, "../uploads/PRICE LIST 17 NOV2020.xlsx");
-    //var path = __dirname + "/src/test_sheet.xlsx";
+    var filePath = path.join(__dirname, "../uploads/input/PRICE LIST 17 NOV2020.xlsx");
     const result = excelToJson({
-        sourceFile: path,
+        sourceFile: filePath,
         /* header: {
             rows: 1
         } */
@@ -408,6 +407,19 @@ router.get('/get-report', (req, resp) => {
         });
         resp.send(data);
     });
+});
+
+//Download Report File
+router.get('/get-report-file', (req, resp) => {
+    var filename = path.join(__dirname, "../uploads/output/report.xlsx");
+    var outputFileName = "Report " + convertDate(Date.now()) + ".xlsx";
+   if(fs.existsSync(filename)) {
+       resp.setHeader('Content-Disposition', 'attachment; filename="' + outputFileName + '"');
+       resp.sendFile(filename);
+   }
+   else {
+       resp.redirect("/reports?error=FileNotFound")
+   }
 });
 
 module.exports = router;

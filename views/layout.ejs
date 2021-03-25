@@ -100,6 +100,28 @@
                 }
             });
         }
+        else if(type[1] == "ReportDownload") {
+            Swal.fire({
+                icon: 'error',
+                title: "Error",
+                text: "There was some problem downloading the file. Please try again later."
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    window.history.pushState({}, document.title, "/reports");
+                }
+            });
+        }
+        else if(type[1] == "FileNotFound") {
+            Swal.fire({
+                icon: 'error',
+                title: "Error",
+                text: "The requested file could not be found."
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    window.history.pushState({}, document.title, "/reports");
+                }
+            });
+        }
     }
     else if(type[0] == 'success') {
         if(type[1] == 'Authentication') {

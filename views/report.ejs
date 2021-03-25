@@ -34,9 +34,11 @@
                   <div class="card-header">
                     <h3 class="card-title">Report</h3>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-info btn-sm" style="width: 5vw;">
+                      <a href="/get-report-file">
+                        <button type="button" class="btn btn-info btn-sm" id="excel-download" style="width: 5vw;">
                             <i class="fas fa-download"></i>
                         </button>
+                      </a>
                     </div>
                   </div>
                   <div class="card-body" id="table_load">
@@ -96,6 +98,7 @@
     <script src="dist/js/adminlte.js"></script>
 
     <script>
+      var table;
         let loader = '<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>';
         $('#table_load').append(loader);
         fetch("http://localhost:5000/get-report")
@@ -115,14 +118,14 @@
             $('#table_body').empty();
             $('#table_body').append(tableData);
       
-            $("#parts_table").DataTable({
+            $("#reports_table").DataTable({
               "responsive": true,
               "lengthChange": true,
               "autoWidth": false,
               "searching":true,
               "processing": true,
-              "lengthMenu": [ 100, 200, 500, 1000 ],
-          });
+              "lengthMenu": [ 10, 25, 50, 100 ],
+            });
       
           $('#table_load .overlay').remove();
           });
