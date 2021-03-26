@@ -162,17 +162,14 @@
         var data = '';
         for(k in json) {
           var fileName = Object.keys(json[k]);
-          var date = "Last Modified on " + Object.values(json[k]);
-          if(fileName == "Credentials") {
+          var temp = Object.values(json[k][fileName]);
+          var date = "Last Modified on " + temp[0];
+          if(temp[1] == "Credentials") {
             $('#credentials-file').text(date);
           }
-          else if(fileName == "Parts") {
+          else if(temp[1] == "Parts") {
             $('#parts-file').text(date);
           }
-          /* else {
-            $('#parts-file').text("No File Found");
-          } */
-          
         }
       });
     </script>

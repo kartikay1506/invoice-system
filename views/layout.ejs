@@ -144,6 +144,10 @@
             Swal.fire({
                 icon: 'success',
                 title: "File Uploaded Successfully",
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    window.history.pushState({}, document.title, "/files");
+                }
             });
         }
     }

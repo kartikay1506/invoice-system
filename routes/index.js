@@ -114,7 +114,7 @@ router.get('/estimate-print', authenticate, (req, resp) => {
 router.post('/login', (req, resp) => {
     const { username, password } = req.body;
 
-    var filename = "./uploads/Credentials.xlsx";
+    var filename = "./uploads/input/Credentials.xlsx";
     var workbook = new Excel.Workbook();
     workbook.xlsx.readFile(filename)
     .then(function() {
@@ -168,7 +168,7 @@ router.get('/get-model', (req, resp) => {
 //Get all the data from the master sheet
 router.get('/get-master-data', (req, resp) => {
     resp.setHeader('Access-Control-Allow-Origin', '*');
-    var filePath = path.join(__dirname, "../uploads/input/PRICE LIST 17 NOV2020.xlsx");
+    var filePath = path.join(__dirname, "../uploads/input/Parts.xlsx");
     const result = excelToJson({
         sourceFile: filePath,
         /* header: {
@@ -187,7 +187,7 @@ router.get('/get-master-data', (req, resp) => {
 router.get('/get-parts', (req, resp) => {
     const { part_id } = req.query;
     resp.setHeader('Access-Control-Allow-Origin', '*');
-    var filename = path.join(__dirname, "../uploads/input/PRICE LIST 17 NOV2020.xlsx");
+    var filename = path.join(__dirname, "../uploads/input/Parts.xlsx");
     var workbook = new Excel.Workbook();
     workbook.xlsx.readFile(filename)
     .then(function() {
@@ -379,8 +379,16 @@ router.get('/get-files', (req, resp) => {
                 var filePath = path.join("./uploads/input/" + file);
                 var info = {};
                 var stat = fs.statSync(filePath);
-                var date = new Date(stat.birthtime);
-                info[fileName] = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+                var date = new Date(stat.mtime);
+                var data = [];
+                data.push(date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear());
+                if(fileName == "Credentials") {
+                    data.push("Credentials");
+                }
+                else {
+                    data.push("Parts");
+                }
+                info[fileName] = data;
                 fileInfo.push(info);
             });
             resp.send(fileInfo);

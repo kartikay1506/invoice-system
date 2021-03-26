@@ -69,11 +69,20 @@
   <!-- /.card -->
 </div>
 <!-- /.login-box -->
-
+<!-- Insert this line above script imports  -->
+<script>
+  if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+  }
+</script>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<script>
+  if (window.module) module = window.module;
+</script>
 </body>
