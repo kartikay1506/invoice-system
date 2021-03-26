@@ -95,24 +95,20 @@
                 <div class="modal-body">
                   <form action="http://localhost:5000/file-upload" method="post" enctype="multipart/form-data" id="fileUploadForm">
                     <div class="form-group">
-                      <!-- <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" name="inputFile">
-                        <label class="custom-file-label" for="customFile">Choose File</label>
-                      </div> -->
-                      <div class="form-group">
-                        <input type="text" name="fileType" id="fileType">
-                        <input type="file" name="inputFile" id="customFile">
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="hidden" name="fileType" id="fileType">
+                          <input type="file" class="custom-file-input"  name="inputFile" id="customFile">
+                          <label class="custom-file-label" for="customFile">Choose File</label>
+                        </div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <button class="btn btn-success float-right" type="submit">Submit</button>
-                    </div>
-                  </form>
                 </div>
                 <div class="modal-footer justify-content-center">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <!-- <button type="button" class="btn btn-success">Save changes</button> -->
+                  <button class="btn btn-success float-right" type="submit">Submit</button>
                 </div>
+              </form>
               </div>
               <!-- /.modal-content -->
             </div>
