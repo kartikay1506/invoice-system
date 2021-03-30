@@ -192,16 +192,18 @@ router.get('/get-parts', (req, resp) => {
     workbook.xlsx.readFile(filename)
     .then(function() {
         var data = [];
-        var pattern = "^" + part_id;
-        var worksheet = workbook.getWorksheet(1);
-        worksheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
-            var rowData = {};
-            if(row.getCell(1).text.match(pattern)) {
-                row.eachCell({ includeEmpty: true }, function(cell, colNumber) {
-                    rowData[colNumber] = cell.value;
-                });
-                data.push(rowData);
-            }
+        part_id.split(',').forEach(function(key) {
+            var pattern = "^" + key;
+            var worksheet = workbook.getWorksheet(1);
+            worksheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
+                var rowData = {};
+                if(row.getCell(1).text.match(pattern)) {
+                    row.eachCell({ includeEmpty: true }, function(cell, colNumber) {
+                        rowData[colNumber] = cell.value;
+                    });
+                    data.push(rowData);
+                }
+            });
         });
         resp.send(data);
     });
