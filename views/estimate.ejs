@@ -409,7 +409,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-body table-responsive p-0">
-                                                            <input type="text" name="labour[]" id="labourData">
+                                                            <input type="hidden" name="labour[]" id="labourData">
                                                             <table
                                                                 class="table table-sm table-hover table-head-fxed text-nowrap"
                                                                 id="labour_table">
@@ -453,7 +453,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-body table-responsive p-0">
-                                                            <input type="text" name="paint[]" id="paintData">
+                                                            <input type="hidden" name="paint[]" id="paintData">
                                                             <table
                                                                 class="table table-sm table-hover table-head-fxed text-nowrap"
                                                                 id="paint_table">
@@ -497,7 +497,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-body table-responsive p-0">
-                                                            <input type="text" name="extras[]" id="extrasData">
+                                                            <input type="hidden" name="extras[]" id="extrasData">
                                                             <table
                                                                 class="table table-sm table-hover table-head-fxed text-nowrap"
                                                                 id="extras_table">
@@ -731,7 +731,9 @@
                                                                 <div class="col-8">
                                                                     <h6><strong>TOTAL</strong></h6>
                                                                 </div>
-                                                                <div class="col-4" style="text-align: right; padding-right: 7vw;"></div>
+                                                                <div class="col-4" style="text-align: right; padding-right: 7vw;">
+                                                                    <h6 id="estimate_total_preview" style="font-weight: bold;"></h6>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -949,6 +951,7 @@
                 $('#parts_table').trigger("partsUpdate");
             }
         });
+
         $(document).on("click", "button.btn-table", function () {
             var id = $(this).parent().parent().attr("id");
             var tableType = $(this).parent().parent().parent().parent().attr("id");
@@ -958,10 +961,13 @@
                 $('#parts_table').trigger("partsUpdate");
             }
             else if(tableType == "labour_table") {
-                $('#parts_table').trigger("labourUpdate");
+                $('#labour_table').trigger("labourUpdate");
             }
             else if(tableType == "paint_table") {
-                $('#parts_table').trigger("paintUpdate");
+                $('#paint_table').trigger("paintUpdate");
+            }
+            else if(tableType == "extras_table") {
+                $('#extras_table').trigger("extrasUpdate");
             }
         });
     </script>
@@ -1129,7 +1135,9 @@
 
                     var partCost = row.find('td:eq(3)').text();
                     partCost = partCost.split(",").join("");
-                    partsTotal += parseFloat(partCost).toFixed(2);
+                    var temp = Number(partCost);
+                    partsTotal = Number(partsTotal) + temp;
+                    partsTotal = partsTotal.toFixed(2);
                     
                     myObject.PartNumber = row.find('td:eq(0)').text();
                     myObject.PartName = row.find('td:eq(1)').text();
@@ -1158,7 +1166,10 @@
                     var row = $('#labour_table tbody tr').eq(rowNum);
 
                     var myObject = {};
-                    labourTotal += parseFloat(row.find('td:eq(1)').text());
+                    var labourCost = row.find('td:eq(1)').text();
+                    labourCost = Number(labourCost);
+                    labourTotal = Number(labourTotal) + labourCost;
+                    labourTotal = labourTotal.toFixed(2);
                     myObject.Description = row.find('td:eq(0)').text();
                     myObject.Amount = row.find('td:eq(1)').text();
                     return myObject;
@@ -1183,7 +1194,10 @@
                     var row = $('#paint_table tbody tr').eq(rowNum);
 
                     var myObject = {};
-                    paintTotal += parseFloat(row.find('td:eq(1)').text());
+                    var paintCost = row.find('td:eq(1)').text();
+                    paintCost = Number(paintCost);
+                    paintTotal = Number(paintTotal) + paintCost;
+                    paintTotal = paintTotal.toFixed(2);
                     myObject.Description = row.find('td:eq(0)').text();
                     myObject.Amount = row.find('td:eq(1)').text();
                     return myObject;
@@ -1208,7 +1222,10 @@
                     var row = $('#extras_table tbody tr').eq(rowNum);
 
                     var myObject = {};
-                    extrasTotal += parseFloat(row.find('td:eq(1)').text());
+                    var extrasCost = row.find('td:eq(1)').text();
+                    extrasCost = Number(extrasCost);
+                    extrasTotal = Number(extrasTotal) + extrasCost;
+                    extrasTotal = extrasTotal.toFixed(2);
                     myObject.Description = row.find('td:eq(0)').text();
                     myObject.Amount = row.find('td:eq(1)').text();
                     return myObject;
@@ -1218,7 +1235,13 @@
 
         $(document).ready(function() {
             $(document).on("totalUpdate", function() {
-                alert("Total Updated");
+                var partsTotal = $('#parts_total_preview').text();
+                var labourTotal = $('#labour_total_preview').text();
+                var paintTotal = $('#paint_total_preview').text();
+                var extrasTotal = $('#extras_total_preview').text();
+                var estimateTotal = Number(partsTotal) + Number(labourTotal) + Number(paintTotal) + Number(extrasTotal);
+                estimateTotal = estimateTotal.toFixed(2);
+                $('#estimate_total_preview').text(estimateTotal);
             });
         });
     </script>
