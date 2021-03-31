@@ -139,7 +139,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <input type="text" class="form-control preview-control"
-                                                                placeholder="Chassis Number" id="chasis_number" name="chasis_number">
+                                                                placeholder="Chassis Number" id="chasis_number" name="chasis_number" pattern="[a-zA-Z0-9]+">
                                                         </div>
                                                     </div>
                                                     <!-- End of Chasis Number -->
@@ -819,6 +819,78 @@
             }
         });
         
+    </script>
+
+    <script>
+        var today = new Date();
+        today = today.toISOString().split('T')[0];
+        $('#policy_start_date').attr("max", today);
+        $('#policy_end_date').attr("max", today);
+        $('#loss_date').attr("max", today);
+
+
+        $('#policy_start_date').on("change", function() {
+            var policyStartDate = $(this).val();
+            var policyEndDate = $('#policy_end_date').val();
+            if(policyEndDate != "" &&  policyStartDate > policyEndDate) {
+                Swal.fire({
+                    icon: 'error',
+                    title: "Invalid Policy Start and End Date!",
+                    text: "Policy Start Date cannot be greater than Policy End Date"
+                })
+                .then(() => {
+                    $(this).val("");
+                    $('#policy_end_date').val("");
+                });
+            }
+            
+        });
+
+        $('#policy_end_date').on("change", function() {
+            var policyEndDate = $(this).val();
+            var policyStartDate = $('#policy_start_date').val();
+            if(policyStartDate != "" &&  policyStartDate > policyEndDate) {
+                Swal.fire({
+                    icon: 'error',
+                    title: "Invalid Policy Start and End Date!",
+                    text: "Policy Start Date cannot be greater than Policy End Date"
+                })
+                .then(() => {
+                    $(this).val("");
+                    $('#policy_start_date').val("");
+                });
+            }
+        });
+
+        $('#loss_date').on("change", function() {
+            var lossDate = $(this).val();
+            var policyStartDate = $('#policy_start_date').val();
+            var policyEndDate = $('#policy_end_date').val();
+
+            if(policyStartDate != "" && policyStartDate > lossDate) {
+                Swal.fire({
+                    icon: 'error',
+                    title: "Invalid Loss Date!",
+                    text: "Policy Start Date cannot be greater than Loss Date"
+                })
+                .then(() => {
+                    $(this).val("");
+                    $('#policy_start_date').val("");
+                });
+            }
+
+            if(policyEndDate != "" && policyEndDate < lossDate) {
+                Swal.fire({
+                    icon: 'error',
+                    title: "Invalid Loss Date!",
+                    text: "Policy End Date cannot be less than Loss Date"
+                })
+                .then(() => {
+                    $(this).val("");
+                    $('#policy_end_date').val("");
+                });
+            }
+        });
     </script>
 
     <script>
