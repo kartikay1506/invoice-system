@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "build": "electron-packager . --overwrite"
   },
   "author": "",
   "license": "ISC",

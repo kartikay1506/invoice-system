@@ -10,6 +10,7 @@ const app = express();
 //EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
+app.set('views', __dirname + "/views");
 
 //Bodyparser
 app.use(express.json());
@@ -25,7 +26,7 @@ app.use(session({
 //app.use(cors);
 
 //Routes
-app.use('/', require('./routes/index'));
+app.use('/', require(path.join(__dirname + '/routes/index')));
 
 //For Static Files
 app.use(express.static(__dirname + '/assets'));

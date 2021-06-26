@@ -114,7 +114,7 @@ router.get('/estimate-print', authenticate, (req, resp) => {
 router.post('/login', (req, resp) => {
     const { username, password } = req.body;
 
-    var filename = "./uploads/input/Credentials.xlsx";
+    var filename = path.join(__dirname, "../uploads/input/Credentials.xlsx");
     var workbook = new Excel.Workbook();
     workbook.xlsx.readFile(filename)
     .then(function() {
@@ -378,7 +378,7 @@ router.get('/get-files', (req, resp) => {
             var fileInfo = [];
             files.forEach(file => {
                 var fileName = file.substr(0, file.lastIndexOf('.'));
-                var filePath = path.join("./uploads/input/" + file);
+                var filePath = path.join(__dirname, "../uploads/input/" + file);
                 var info = {};
                 var stat = fs.statSync(filePath);
                 var date = new Date(stat.mtime);
