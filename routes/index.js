@@ -10,12 +10,12 @@ const router = express.Router();
 
 var authenticate = function(req, resp, next) {
     var isAuthenticated = true;
-    /* if(typeof req.session.username === "undefined") {
+    if(typeof req.session.username === "undefined") {
         isAuthenticated = false;
     }
     else {
         isAuthenticated = true;
-    } */
+    }
     if(isAuthenticated) {
         next();
     }
@@ -91,7 +91,7 @@ router.get('/', (req, resp) => {
 });
 
 router.get('/home', authenticate, (req, resp) => {
-    resp.render('home');
+    resp.render('home', {user: req.session.name});
 });
 
 router.get('/estimate', authenticate, (req, resp) => {
@@ -126,10 +126,11 @@ router.post('/login', (req, resp) => {
         worksheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
             var rowData = {};
             if(rowNumber > 1) {
-                if(row.getCell(1).text == username) {
-                    if(row.getCell(2).text == password) {
+                if(row.getCell(2).text == username) {
+                    if(row.getCell(3).text == password) {
                         req.session.username = username;
-                        resp.redirect('/estimate?success=Authentication');
+                        req.session.name = row.getCell(1).text;
+                        resp.redirect('/home?success=Authentication');
                     }
                     else {
                         resp.redirect('/?error=IncorrectPassword');
