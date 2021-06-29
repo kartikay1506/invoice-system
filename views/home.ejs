@@ -1,0 +1,113 @@
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+     <!-- Sidebar -->
+     <%- include('sidebar.ejs'); %>
+     <!-- ./Sidebar -->
+  
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0"><img src="/images/OM_LOGO_icon.png" alt="OBERAI Motors" class="brand-image img-circle elevation-3 mr-3"
+                    style="opacity: .8; height: 12vh">OBERAI MOTORS</h1>
+              </div><!-- /.col -->
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                </ol>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+  
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+              <div class="col-12">
+                <div class="card card-primary card-outline shadow">
+                  <div class="card-body table-responsive" id="table_load">
+                    <div class="row">
+                      
+                      
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.row (main row) -->
+          </div><!-- /.container-fluid -->
+
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+      <footer class="main-footer">
+        <strong>Copyright &copy; 2020 <a href="#">Tata Motors</a>.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+          <b>Version</b> 1.1.0
+        </div>
+      </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- Insert this line above script imports  -->
+    <script>
+      if (typeof module === 'object') {
+          window.module = module;
+          module = undefined;
+      }
+  </script>
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="plugins/moment/moment.min.js"></script>
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.js"></script>
+    <!-- Insert this line after script imports -->
+  
+    <script>
+      fetch("http://localhost:5000/get-files")
+      .then(res => res.json())
+      .then(json => {
+        var data = '';
+        for(k in json) {
+          var fileName = Object.keys(json[k]);
+          var temp = Object.values(json[k][fileName]);
+          var date = "Last Modified on " + temp[0];
+          if(temp[1] == "Credentials") {
+            $('#credentials-file').text(date);
+          }
+          else if(temp[1] == "Parts") {
+            $('#parts-file').text(date);
+          }
+        }
+      });
+    </script>
+    <script>
+      $('.button-file').on("click", function() {
+        if($(this).attr("id") == "credentialsFile") {
+          $('#fileType').val("credentials");
+        }
+        else if($(this).attr("id") == "partsFile") {
+          $('#fileType').val("parts");
+        }
+        else {
+          $('#fileType').val("");
+        }
+      });
+    </script>
+  </body>

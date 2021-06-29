@@ -90,6 +90,10 @@ router.get('/', (req, resp) => {
     resp.render('login');
 });
 
+router.get('/home', authenticate, (req, resp) => {
+    resp.render('home');
+});
+
 router.get('/estimate', authenticate, (req, resp) => {
     resp.render('estimate');
 });
