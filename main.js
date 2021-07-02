@@ -3,6 +3,7 @@ const server = require('./app');
 
 function createWindow() {
     const window = new BrowserWindow({
+        icon: __dirname+'/assets/images/tata_motors_app_icon.ico',
         width: 1200,
         height: 800,
         webPreferences: {
