@@ -54,6 +54,47 @@
 <!-- SweetAlert2 -->
 <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
 <script>
+    function generateCode(length) {
+        var code = '';
+        var pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        for(var i=0;i<length;i++) {
+            code += pool.charAt(Math.floor(Math.random() * pool.length));
+        }
+
+        return code;
+    }
+
+    const start_date = new Date(2021, 06, 05);
+    const current_date = new Date();
+    var elapsed_time = current_date - start_date;
+    elapsed_time = elapsed_time / (1000 * 60 * 60);
+    if(elapsed_time > 168) {
+        Swal.fire({
+          //title: 'Activation Code',
+          input: 'text',
+          inputLabel: "Enter activation code to continue.",
+          inputPlaceholder: "Activation Code",
+          confirmButtonText: "Verify",
+          preConfirm: (activation_code) => {
+                code  = generateCode(16);
+                if(activation_code == code) {
+                    Swal.fire(`Application Activated Successfully`);
+                }
+                else {
+                    Swal.showValidationMessage(`Activation failed: Invalid Code!`)
+                }
+          },
+          inputValidator: (value) => {
+                if (!value) {
+                    return 'Activation code cannot be empty!'
+                }
+            },
+          allowEscapeKey: false,
+          allowOutsideClick: false  
+        });
+    }
+</script>
+<script>
     var urlParams = new URLSearchParams(window.location.search);
     var type = urlParams.toString().split('=');
     if(type[0] == 'error') {
