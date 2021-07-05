@@ -147,11 +147,14 @@
     <script src="plugins/daterangepicker/daterangepicker.js"></script>
     <!-- overlayScrollbars -->
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
     <!-- Insert this line after script imports -->
   
     <script>
+      bsCustomFileInput.init();
       fetch("http://localhost:5000/get-files")
       .then(res => res.json())
       .then(json => {
@@ -167,6 +170,11 @@
             $('#parts-file').text(date);
           }
         }
+      });
+    </script>
+    <script>
+      $('#modal-files').on("hidden.bs.modal", function() {
+        $('.custom-file label').text("Choose File");
       });
     </script>
     <script>

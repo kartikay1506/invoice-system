@@ -217,7 +217,7 @@ router.get('/get-parts', (req, resp) => {
 //File Upload
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, "uploads/input");
+        cb(null, path.join(__dirname, "../uploads/input"));
     },
     filename: function(req, file, cb) {
         if(req.body.fileType === "credentials") {
