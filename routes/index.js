@@ -46,6 +46,19 @@ function convertDate(date) {
     return newDate;
 }
 
+function convertTime(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+    var newTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+    return newTime;
+}
+
 
 const models =  {
     //do again from the sheet
@@ -387,8 +400,10 @@ router.get('/get-files', (req, resp) => {
                 var info = {};
                 var stat = fs.statSync(filePath);
                 var date = new Date(stat.mtime);
+                var time = convertTime(date);
                 var data = [];
                 data.push(date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear());
+                data.push(time);
                 if(fileName == "Credentials") {
                     data.push("Credentials");
                 }

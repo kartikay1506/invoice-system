@@ -1,6 +1,6 @@
 <style>
   .file-cards {
-    height: 25vw;
+    height: 28vw;
     width: 35vw;
   }
   .file-cards:hover {
@@ -52,7 +52,7 @@
                             <h3 class="profile-username text-center mt-3">Credentials</h3>
                             <div id="credentials-section" style="margin-top: 2vw;"></div>
                             <p class="text-muted text-center" id="credentials-file"></p>
-                            <div style="text-align: center; margin-top: 4vw;">
+                            <div style="text-align: center; margin-top: 3vw;">
                               <button class="btn btn-primary w-25 button-file" id="credentialsFile" data-toggle="modal" data-target="#modal-files"><i class="fas fa-upload"></i></button>                            
                             </div>
                           </div>
@@ -67,7 +67,7 @@
                             <h3 class="profile-username text-center mt-3">Parts</h3>
                             <div id="parts-section" style="margin-top: 2vw;"></div>
                             <p class="text-muted text-center" id="parts-file"></p>
-                            <div style="text-align: center; margin-top: 4vw;">
+                            <div style="text-align: center; margin-top: 3vw;">
                               <button class="btn btn-primary w-25 button-file" id="partsFile" data-toggle="modal" data-target="#modal-files"><i class="fas fa-upload"></i></button>                            
                             </div>
                           </div>
@@ -162,12 +162,12 @@
         for(k in json) {
           var fileName = Object.keys(json[k]);
           var temp = Object.values(json[k][fileName]);
-          var date = "Last Modified on " + temp[0];
-          if(temp[1] == "Credentials") {
-            $('#credentials-file').text(date);
+          var date = "Last Modified on <br>" + temp[0] + "<br>" + temp[1];
+          if(temp[2] == "Credentials") {
+            $('#credentials-file').html(date);
           }
-          else if(temp[1] == "Parts") {
-            $('#parts-file').text(date);
+          else if(temp[2] == "Parts") {
+            $('#parts-file').html(date);
           }
         }
       });
