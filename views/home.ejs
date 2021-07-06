@@ -45,7 +45,9 @@
                     <div class="row">
                         <h4>Welcome <%= user%></h1>
                     </div>
-                    
+                    <div class="row">
+                      <p id="session-timeout"> </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -87,36 +89,21 @@
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
     <!-- Insert this line after script imports -->
-  
     <script>
-      fetch("http://localhost:5000/get-files")
-      .then(res => res.json())
-      .then(json => {
-        var data = '';
-        for(k in json) {
-          var fileName = Object.keys(json[k]);
-          var temp = Object.values(json[k][fileName]);
-          var date = "Last Modified on " + temp[0];
-          if(temp[1] == "Credentials") {
-            $('#credentials-file').text(date);
-          }
-          else if(temp[1] == "Parts") {
-            $('#parts-file').text(date);
-          }
-        }
-      });
-    </script>
-    <script>
-      $('.button-file').on("click", function() {
-        if($(this).attr("id") == "credentialsFile") {
-          $('#fileType').val("credentials");
-        }
-        else if($(this).attr("id") == "partsFile") {
-          $('#fileType').val("parts");
+      var start_time = <%= startTime %>;
+      var timer = setInterval(function() {
+        var hours = Math.floor((start_time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((start_time % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((start_time % (1000 * 60)) / 1000);
+        if(start_time > 0) {
+          var data = 'Current session expires in: ' + hours + ' hrs ' + minutes + ' min ' + seconds + ' sec';
+          $('#session-timeout').html(data);
         }
         else {
-          $('#fileType').val("");
+          clearInterval(timer);
+          window.location.href = 'http://localhost:5000/logout';
         }
-      });
+        start_time -= 1000;
+      }, 1000);
     </script>
   </body>

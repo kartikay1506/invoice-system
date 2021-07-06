@@ -104,7 +104,7 @@ router.get('/', (req, resp) => {
 });
 
 router.get('/home', authenticate, (req, resp) => {
-    resp.render('home', {user: req.session.name});
+    resp.render('home', {user: req.session.name, startTime: req.session.cookie.maxAge});
 });
 
 router.get('/estimate', authenticate, (req, resp) => {

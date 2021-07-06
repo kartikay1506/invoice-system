@@ -20,7 +20,10 @@ app.use(express.urlencoded({ limit: '1024mb', extended:true }));
 app.use(session({
     secret: "Oberai Motors",
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 2 * 60 * 60 * 1000
+    }
 }));
 
 //app.use(cors);
