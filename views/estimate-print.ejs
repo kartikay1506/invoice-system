@@ -44,7 +44,7 @@
           <div class="row mt-1">
               <div class="col-12">
                   <h5>
-                      <strong>Registration No: <%- Object.values(data)[0] %></strong>
+                      <strong>Registration No: <%- Object.values(data) %></strong>
                       <small class="float-right">Created: <%- Object.values(data)[1] %></small>
                   </h5>
               </div>
@@ -196,6 +196,14 @@
                             <th>Amount (Rs.)</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <% for(var i = 0; i < Object.values(data)[15].length; i++) { %>
+                            <tr>
+                                <td><%= Object.values(data)[14][i].Description %></td>
+                                <td><%= Object.values(data)[14][i].Amount %></td>
+                            </tr>
+                          <% } %>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -205,11 +213,52 @@
                 <h3 class="card-title">Estimate Summary</h3>
             </div>
             <div class="card-body">
-                <h6>PARTS</h6>
-                <h6>BODY WORK LABOUR</h6>
-                <h6>PAINT</h6>
-                <h6>EXTRAS</h6>
-                <h6><strong>TOTAL</strong></h6>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <h6>PARTS</h6>
+                        </div>
+                        <div class="col-4" style="text-align: right; padding-right: 7vw;">
+                            <h6><%- Object.values(data)[16] %></h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <h6>BODY WORK LABOUR</h6>
+                        </div>
+                        <div class="col-4" style="text-align: right; padding-right: 7vw;">
+                            <h6><%- Object.values(data)[17] %></h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <h6>PAINT</h6>
+                        </div>
+                        <div class="col-4" style="text-align: right; padding-right: 7vw;">
+                            <h6><%- Object.values(data)[18] %></h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <h6>EXTRAS</h6>
+                        </div>
+                        <div class="col-4" style="text-align: right; padding-right: 7vw;">
+                            <h6><%- Object.values(data)[19] %></h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <h6><strong>TOTAL</strong></h6>
+                        </div>
+                        <div class="col-4" style="text-align: right; padding-right: 7vw;">
+                            <h6 style="font-weight: bold;"><%- Object.values(data)[20] %></h6>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

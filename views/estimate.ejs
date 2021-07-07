@@ -81,7 +81,7 @@
                                     </ul>
                                 </div>
                                 
-                                <form action="/invoice" method="post">
+                                <form action="/invoice" method="post" id="invoice-form">
                                     <div class="card-body">
                                         <div class="tab-content" id="custom-tabs-four-tabContent">
                                             <!-- Personal Details Tab -->
@@ -970,8 +970,8 @@
                         .then(json => {
                             var data = '';
                             Object.entries(json).forEach(function(element, i) {
-                                //console.log(element[1][4].substring(3));
-                                data = data + '<option id="'+ element[1][1] +'" value="'+ element[1][2] +'" amount="'+ element[1][4].substring(3) +'">' + element[1][2] + '</option>';
+                                //console.log(element[1][3]);
+                                data = data + '<option id="'+ element[1][1] +'" value="'+ element[1][3] +'" amount="'+ element[1][5].substring(3) +'">' + element[1][3] + '</option>';
                             });
                             $('#part_descriptions').empty();
                             $('#part_descriptions').append(data);
@@ -1315,6 +1315,23 @@
                 estimateTotal = estimateTotal.toFixed(2);
                 $('#estimate_total_preview').text(estimateTotal);
             });
+        });
+    </script>
+
+    <script>
+        $('#invoice-form').on("submit", function(event) {
+            event.preventDefault();
+            var formData = $(this).serializeArray();
+            var partsTotal = $('#parts_total_preview').text();
+            var labourTotal = $('#labour_total_preview').text();
+            var paintTotal = $('#paint_total_preview').text();
+            var extrasTotal = $('#extras_total_preview').text();
+            var estimateTotal = $('#estimate_total_preview').text();
+            formData.push({ name: "parts_total", value: partsTotal });
+            formData.push({ name: "labour_total", value: labourTotal });
+            formData.push({ name: "paint_total", value: paintTotal });
+            formData.push({ name: "extras_total", value: extrasTotal });
+            formData.push({ name: "estimate_total", value: estimateTotal });
         });
     </script>
 </body>

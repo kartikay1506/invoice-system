@@ -10,12 +10,12 @@ const router = express.Router();
 
 var authenticate = function(req, resp, next) {
     var isAuthenticated = true;
-    if(typeof req.session.username === "undefined") {
-        isAuthenticated = false;
-    }
-    else {
-        isAuthenticated = true;
-    }
+    // if(typeof req.session.username === "undefined") {
+    //     isAuthenticated = false;
+    // }
+    // else {
+    //     isAuthenticated = true;
+    // }
     if(isAuthenticated) {
         next();
     }
@@ -272,12 +272,12 @@ router.post('/file-upload', (req, resp) => {
 
 //generate report
 router.post('/invoice', (req, resp) => {
-    const { customer_name, phone_number, customer_email, chasis_number, registration_number, vehicle_model, policy_number, policy_start_date, policy_end_date, loss_date, loss_time, insurance_company, insurance_company_others, parts, labour, paint, extras } = req.body;
+    const { customer_name, phone_number, customer_email, chasis_number, registration_number, vehicle_model, policy_number, policy_start_date, policy_end_date, loss_date, loss_time, insurance_company, insurance_company_others, parts, labour, paint, extras, parts_total, labour_total, paint_total, extras_total, estimate_total } = req.body;
 
     var insurance, loss_date_time;
 
-    var policyStartDate = convertDate(policy_start_date);
-    var policyEndDate =  convertDate(policy_end_date);
+    var policyStartDate = policy_start_date != "" ? convertDate(policy_start_date) : "";
+    var policyEndDate = policy_end_date != "" ? convertDate(policy_end_date) : "";
     
     var date = new Date();
     var estimate_date = "";
@@ -320,10 +320,15 @@ router.post('/invoice', (req, resp) => {
         policy_start: policyStartDate,
         policy_end: policyEndDate,
         loss_date_time: loss_date_time,
-        partsData: JSON.parse(parts),
-        labourData: JSON.parse(labour),
-        paintData: JSON.parse(paint),
-        extrasData: JSON.parse(extras)
+        partsData: parts[0] != '' ? JSON.parse(parts) : "",
+        labourData: labour[0] != '' ? JSON.parse(labour) : "",
+        paintData: paint[0] != '' ? JSON.parse(paint) : "",
+        extrasData: extras[0] != '' ? JSON.parse(extras) : "",
+        parts_total: parts_total,
+        labour_total: labour_total,
+        paint_total: paint_total,
+        extras_total: extras_total,
+        estimate_total: estimate_total
     };
 
     var filename = path.join(__dirname, "../uploads/output/report.xlsx");
