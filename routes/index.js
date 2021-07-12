@@ -10,12 +10,12 @@ const router = express.Router();
 
 var authenticate = function(req, resp, next) {
     var isAuthenticated = true;
-    // if(typeof req.session.username === "undefined") {
-    //     isAuthenticated = false;
-    // }
-    // else {
-    //     isAuthenticated = true;
-    // }
+    if(typeof req.session.username === "undefined") {
+        isAuthenticated = false;
+    }
+    else {
+        isAuthenticated = true;
+    }
     if(isAuthenticated) {
         next();
     }
@@ -124,9 +124,10 @@ router.get('/parts', authenticate, (req, resp) => {
 });
 
 router.get('/estimate-print', authenticate, (req, resp) => {
-    resp.render('estimate-print');
+    var respData = req.session.estimate_data;
+    console.log(respData);
+    resp.render('estimate-print', {data: respData});
 });
-
 
 router.post('/login', (req, resp) => {
     const { username, password } = req.body;
@@ -272,7 +273,7 @@ router.post('/file-upload', (req, resp) => {
 
 //generate report
 router.post('/invoice', (req, resp) => {
-    const { customer_name, phone_number, customer_email, chasis_number, registration_number, vehicle_model, policy_number, policy_start_date, policy_end_date, loss_date, loss_time, insurance_company, insurance_company_others, parts, labour, paint, extras, parts_total, labour_total, paint_total, extras_total, estimate_total } = req.body;
+    const { customer_name, phone_number, customer_email, chasis_number, registration_number, vehicle_model, policy_number, policy_start_date, policy_end_date, loss_date, loss_time, insurance_company, insurance_company_others, parts, labour, paint, extras } = req.body;
 
     var insurance, loss_date_time;
 
@@ -306,6 +307,42 @@ router.post('/invoice', (req, resp) => {
     }
     
     loss_date_time = convertDate(loss_date) + " " + loss_time;
+
+    var parts_total = labour_total = paint_total = extras_total = estimate_total  = 0;
+
+    if(paint[0] != '') {
+        JSON.parse(parts).forEach((index) => {
+            var amount = index["Amount"].replace(',', '');
+            amount = parseFloat(amount);
+            parts_total += amount;
+        });
+    }
+
+    if(labour[0] != '') {
+        JSON.parse(labour).forEach((index) => {
+            var amount = index["Amount"].replace(',', '');
+            amount = parseFloat(amount);
+            labour_total += amount;
+        });
+    }
+    
+    if(paint[0] != '') {
+        JSON.parse(paint).forEach((index) => {
+            var amount = index["Amount"].replace(',', '');
+            amount = parseFloat(amount);
+            paint_total += amount;
+        });
+    }
+
+    if(extras[0] != '') {
+        JSON.parse(extras).forEach((index) => {
+            var amount = index["Amount"].replace(',', '');
+            amount = parseFloat(amount);
+            extras_total += amount;
+        });
+    }
+
+    estimate_total = parts_total + labour_total + paint_total + extras_total;  
 
     var respData = {
         registration_number: registration_number,
@@ -342,7 +379,9 @@ router.post('/invoice', (req, resp) => {
             return workbook.xlsx.writeFile(filename);
         })
         .then(() => {
-            resp.render('estimate-print', {data: respData});
+            req.session.estimate_data = respData;
+            resp.redirect('estimate-print');
+            //resp.render('estimate-print', {data: respData});
         })
         .catch((err) => {
             console.log(err);
@@ -376,9 +415,11 @@ router.post('/invoice', (req, resp) => {
             policy_end_date: policyEndDate
         });
 
-        workbook.xlsx.writeFile('./uploads/output/report.xlsx')
+        workbook.xlsx.writeFile(path.join(__dirname, "../uploads/output/report.xlsx"))
         .then(() => {
-            resp.render('estimate-print', {data: respData});
+            req.session.estimate_data = respData;
+            resp.redirect('estimate-print');
+            //resp.render('estimate-print', {data: respData});
         })
         .catch((err) => {
             console.log(err);

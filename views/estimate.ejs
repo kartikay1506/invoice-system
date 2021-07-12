@@ -81,7 +81,7 @@
                                     </ul>
                                 </div>
                                 
-                                <form action="/invoice" method="post" id="invoice-form">
+                                <form action="/invoice" method="post" id="invoice-form" target="_blank">
                                     <div class="card-body">
                                         <div class="tab-content" id="custom-tabs-four-tabContent">
                                             <!-- Personal Details Tab -->
@@ -1318,9 +1318,8 @@
         });
     </script>
 
-    <script>
+    <!-- <script>
         $('#invoice-form').on("submit", function(event) {
-            event.preventDefault();
             var formData = $(this).serializeArray();
             var partsTotal = $('#parts_total_preview').text();
             var labourTotal = $('#labour_total_preview').text();
@@ -1332,6 +1331,7 @@
             formData.push({ name: "paint_total", value: paintTotal });
             formData.push({ name: "extras_total", value: extrasTotal });
             formData.push({ name: "estimate_total", value: estimateTotal });
+            return true;
         });
-    </script>
+    </script> -->
 </body>
