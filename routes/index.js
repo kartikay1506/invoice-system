@@ -108,6 +108,7 @@ router.get('/home', authenticate, (req, resp) => {
 });
 
 router.get('/estimate', authenticate, (req, resp) => {
+    req.session.estimate_data = "";
     resp.render('estimate');
 });
 
