@@ -125,7 +125,6 @@ router.get('/parts', authenticate, (req, resp) => {
 
 router.get('/estimate-print', authenticate, (req, resp) => {
     var respData = req.session.estimate_data;
-    console.log(respData);
     resp.render('estimate-print', {data: respData});
 });
 
@@ -310,7 +309,7 @@ router.post('/invoice', (req, resp) => {
 
     var parts_total = labour_total = paint_total = extras_total = estimate_total  = 0;
 
-    if(paint[0] != '') {
+    if(parts[0] != '') {
         JSON.parse(parts).forEach((index) => {
             var amount = index["Amount"].replace(',', '');
             amount = parseFloat(amount);

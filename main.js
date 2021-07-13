@@ -12,6 +12,17 @@ function createWindow() {
     });
 
     window.loadURL("http://localhost:5000/");
+
+    window.webContents.on("did-finish-load", () => {
+        var url = window.webContents.getURL();
+        var route = url.split("/");
+        route = route[route.length - 1];
+        if(route == "estimate-print") {
+            window.webContents.print({}, (status) => {
+                console.log(status);
+            });
+        }
+    });
 }
 
 app.whenReady().then(createWindow);;

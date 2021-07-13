@@ -1,4 +1,9 @@
 <style>
+    @media print{
+    .noprint{
+        display:none;
+    }
+    }
     .estimate-header {
         padding: 2px 0 2px 20px;
         background-color: #d9d9d9;
@@ -17,6 +22,14 @@
 </style>
 <body>
     <div class="wrapper">
+        <div class="noprint mt-3 mb-3">
+            <a href="/estimate">
+                <button class="btn btn-secondary" style="width: 10vw; margin-left: 1vw;"><i class="fas fa-arrow-left"></i></button>
+            </a>
+            <a href="/estimate-print">
+                <button class="btn btn-secondary" style="width: 10vw; margin-right: 1vw; float: right;"><i class="fas fa-print"></i></button>
+            </a>
+        </div>
         <!-- Main content -->
         <section class="invoice">
           <!-- title row -->
@@ -266,4 +279,8 @@
         <!-- /.content -->
       </div>
       <!-- ./wrapper -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 </body>
